@@ -1,0 +1,62 @@
+ACTOR Black
+{
+	Health 4000
+	floatspeed 30
+	Speed 8
+	MONSTER
+	Radius 20
+	Height 32
+	Mass 9999999999999999
+	Painchance 0
+	Scale 0.3
+	+DROPOFF
+	+FLOAT
+	+LOOKALLAROUND
+	+NOGRAVITY
+	+NOTELEOTHER
+	+NOBLOOD
+	MeleeDamage 255
+	ATTACKSOUND "BLACKATK"
+	ACTIVESOUND "BLACKACT"
+	Obituary "%o found the Ghoul"
+	DamageType "Black"
+	States
+	{
+	Spawn:
+		BLAK A 1 A_Look
+		Loop
+	See:
+		BLAK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Chase
+		Loop
+	Melee:
+		BLAK A 0 A_FaceTarget
+		BLAK A 0 A_CustomMissile("Blood", 0,0,random(0,360), 2,0)
+		BLAK A 1 A_MeleeAttack
+		Goto See
+	Death:
+		BLAK A 0 A_SpawnItem("DarknessRing", 1, 32)
+		BLAK A 0 A_Settranslucent(0.5,0)
+		BLAK A 0 A_Die
+		BLAK A 0 A_Fall
+		BLAK A 50 A_Scream
+		BLAK A 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK A 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		BLAK AAAAAAAAAA 5 A_Fadeout(0.1)
+		Stop
+	}
+}
+
+Actor ArenaBlack : Black
+{
+	Obituary "%o darkned by Black."
+}

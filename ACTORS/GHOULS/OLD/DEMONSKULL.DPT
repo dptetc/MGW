@@ -1,0 +1,381 @@
+ACTOR DemonSkull
+{
+	health 4000
+	MONSTER
+	scale 0.8
+	radius 22
+	height 86
+	speed 20
+	painchance 48
+	Mass 9999999999999999
+	+DROPOFF
+	+LOOKALLAROUND
+	+DONTSPLASH
+	+ISMONSTER
+	MeleeDamage 255
+	BloodColor none
+	Obituary "%o found the Ghoul"
+	States
+	{
+	Spawn:
+		DSKL A 0 A_Look
+		DSKL A 1 A_Wander
+		Loop
+	See:
+		DSKL A 1 A_Chase
+		Loop
+	Melee:
+		DSKL A 0 A_FaceTarget
+		DSKL A 1 A_MeleeAttack
+		Goto see
+	Pain:
+		DSKL A 0 A_FaceTarget
+		//DSKL A 0 ThrustThing(random(0,360),12,0,0)
+		//DSKL A 0 ThrustThingZ(0,68,0,0)
+		DSKL B 35
+		Goto see
+	Death:
+		DSKL A 35
+		DSKL B 0 A_PlaySound("DemonskullDeath")
+		DSKL B 35 A_SpawnItem("DarknessRing", 1, 32)
+		DSKL C 35 A_PlaySound("DemonskullDeath")
+		DSKL D 35 A_PlaySound("DemonskullDeath")
+		DSKL E 35 A_PlaySound("DemonskullDeath")
+		DSKL E 0 A_SpawnItemEx("DSPiece1",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece2",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece3",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece4",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece5",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece6",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece7",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece8",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece9",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece10",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece11",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece12",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece13",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece14",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece15",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece16",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece17",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece18",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece19",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece20",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece21",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece22",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece23",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece24",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece25",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		DSKL E 0 A_SpawnItemEx("DSPiece26",random(-16,16),random(-16,16),random(24,56),random(6,18),random(6,18),random(10,22),random(0,360),0,0)
+		TNT1 A 1 A_PlaySound("DemonskullDeath")
+		Stop
+	}
+}
+
+Actor ArenaDemonskull : Demonskull
+{
+	Obituary "%o was eaten by Demonskull"
+}
+
+Actor DSPiece1
+{
+	Radius 10
+	Height 24
+	Mass 80
+	+HEXENBOUNCE
+	BounceFactor 0.42
+	WallBouncefactor 0.46
+	Scale 0.8
+	Projectile
+	-SOLID
+	-NOGRAVITY
+	+WINDTHRUST
+	+DONTSPLASH
+	+MOVEWITHSECTOR
+	-ACTIVATEIMPACT
+	-ACTIVATEPCROSS
+	-MISSILE
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		DP01 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece2 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP02 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece3 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP03 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece4 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP04 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece5 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP05 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece6 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP06 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece7 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP07 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece8 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP08 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece9 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP09 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece10 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP10 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece11 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP11 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece12 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP12 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece13 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP13 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece14 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP14 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece15 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP15 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece16 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP16 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece17 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP17 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece18 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP18 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece19 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP19 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece20 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP20 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece21 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP21 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece22 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP22 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece23 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP23 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece24 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP24 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece25 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP25 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}
+
+Actor DSPiece26 : DSPiece1
+{
+	States
+	{
+	Spawn:
+		DP26 ABCDEFGHIJKLM 4 A_FadeOut(0.02)
+		TNT1 A 1 A_SpawnItem("GhoulFireX",0.01,0,0,0)
+		Stop
+	}
+}

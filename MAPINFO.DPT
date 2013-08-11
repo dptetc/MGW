@@ -1,0 +1,166 @@
+//  **********************************
+// ***		MAPINFO for MGW			***
+// ***		MADE BY DartPower		***
+//  **********************************
+
+gameinfo
+{
+	titlepage = "MGWTITLE"
+	creditpage = "MGWTITLE"
+	titlemusic = "TITLEMUS"
+	mapinfo = "MAPINFO.DPT"
+	intermissionmusic = "INTERMUS"
+}
+
+clearepisodes
+
+episode MAP01
+{
+	name = "Mysterious Ghoul World"
+	key = "M"
+}
+
+clearskills
+
+skill novice
+{
+	ammofactor = 2
+	damagefactor = 0.5
+	aggressiveness = 0.0
+	spawnfilter = 1
+	acsreturn = 0
+	key = "N"
+	name = "Novice"
+	textcolor = GREEN
+}
+
+skill adv
+{
+	ammofactor = 1
+	damagefactor = 0.75
+	aggressiveness = 0.0
+	spawnfilter = 1
+	acsreturn = 1
+	key = "A"
+	name = "Advanced"
+	textcolor = YELLOW
+}
+
+skill pro
+{
+	ammofactor = 1
+	damagefactor = 1
+	aggressiveness = 0.0
+	spawnfilter = 1
+	acsreturn = 2
+	key = "P"
+	name = "Professional"
+	textcolor = WHITE
+}
+
+skill expert
+{
+	ammofactor = 1
+	damagefactor = 1.2
+	aggressiveness = 0.25
+	spawnfilter = 1
+	acsreturn = 3
+	key = "E"
+	name = "Expert"
+	textcolor = RED
+}
+
+skill gslay
+{
+	ammofactor = 0.5
+	damagefactor = 2
+	aggressiveness = 1.0
+	spawnfilter = 1
+	acsreturn = 4
+	key = "G"
+	name = "Ghoul Slayer"
+	fastmonsters 
+	textcolor = BLACK
+}
+
+defaultmap
+{
+	sky1 = "SKYB"
+}
+
+map MAP01 "METRO"
+{
+	next = "MAP02"
+	secretnext = "MAP02"
+	music = "1"
+}
+
+map MAP02 "DEATHFIELD"
+{
+	next = "MAP03"
+	secretnext = "MAP03"
+	music = "2"
+}
+
+map MAP03 "AREA 13"
+{
+	next = "MAP04"
+	secretnext = "MAP04"
+	music = "3"
+}
+
+map MAP04 "DEATH POND"
+{
+	next = "MAP05"
+	secretnext = "MAP05"
+	music = "4"
+}
+
+map MAP05 "DECAYING CRYPT"
+{
+	next = "MAP06"
+	secretnext = "MAP06"
+	music = "5"
+}
+
+map MAP06 "TRIBAL HELL"
+{
+	next = "MAP07"
+	secretnext = "MAP07"
+	music = "6"
+}
+
+map MAP07 "BULL ARENA"
+{
+	next = "MAP08"
+	secretnext = "MAP08"
+	music = "7"
+}
+
+map MAP08 "TOWER OF DEATH"
+{
+	next = "MAP09"
+	secretnext = "MAP09"
+	music = "8"
+}
+
+map MAP09 "NIGHTMARE ARENA"
+{
+	next = "MAP10"
+	secretnext = "MAP10"
+	music = "9"
+}
+
+map MAP10 "DAMNED ISLAND"
+{
+	next = "MAP11"
+	secretnext = "MAP11"
+	music = "10"
+}
+
+map MAP11 "DEATH HEAVEN"
+{
+	next = "MAP12"
+	secretnext = "MAP12"
+	music = "11"
+}

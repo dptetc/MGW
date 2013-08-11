@@ -1,0 +1,183 @@
+
+actor SamaraGhoul
+{
+	Health 1
+	+NOCLIP
+	+DONTSPLASH
+	-SHOOTABLE
+	-SOLID
+	-COUNTKILL
+	Radius 18
+	Height 50
+	Scale 0.3
+	renderstyle translucent
+	Alpha 0.0
+	MONSTER
+	States
+	{
+	Spawn:
+		SAMA ABC 5 bright A_FadeIn(0.20)
+		SAMA D 0 bright A_ChangeFlag("SHOOTABLE", 1)
+		SAMA D 5 bright A_FadeIn(0.20)
+		SAMA E 0 bright A_Wander
+		SAMA E 5 bright A_FadeOut(0.25)
+		SAMA F 0 bright A_ChangeFlag("SHOOTABLE", 0)
+		SAMA FGHI 5 bright A_FadeOut(0.25)
+		Stop
+	Death:
+		SAMA G 0 ACS_Terminate(102,0)
+		SAMA G 0 ACS_Terminate(100,0)
+		SAMA G 0 A_Playsound("samarahit")
+		SAMA G 30 A_SpawnItem("Bloodshotcreate",0,35)
+		SAMA G 0 A_Playsound("samaradie")
+		SAMA G 0 A_RadiusThrust(64, 256, 0)
+		SAMA G 0 SetPlayerProperty(1, 1, 0)
+		SAMA JKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJK 1 bright A_SpawnItem("Samaradeathfire")
+		SAMA JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ 2 A_SpawnItem("Samaradeathfire2")
+		TNT1 A 90 
+		TNT1 A 0 ACS_Execute(103,0)
+		Stop
+	}
+}
+
+ACTOR Samaradeathfire
+{
+	-SOLID
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAA 0 A_CustomMissile("GhoulFirex4",0,0,random(0,360),2,0)
+		TNT1 AAA 0 A_CustomMissile("GhoulFirex3",0,0,random(0,360),2,0)
+		//TNT1 A 0 A_SpawnItem("Bloodshotcreate2",0,35)
+		Stop
+	}
+}
+
+ACTOR Samaradeathfire2
+{
+	-SOLID
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAA 0 A_CustomMissile("GhoulFirex5",0,0,random(0,360),2,random(50,90))
+		TNT1 AAA 0 A_CustomMissile("GhoulFirex3",0,0,random(0,360),2,random(50,90))
+		Stop
+	}
+}
+
+
+actor Bloodshotcreate
+{
+	-SOLID
+	+NOCLIP
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("Bloodshot",0,0,random(0,360),2,random(-20,90))
+		Stop
+	}
+}
+
+actor Bloodshotcreate2
+{
+	-SOLID
+	+NOCLIP
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAA 0 A_CustomMissile("Bloodshot",0,0,random(0,360),2,random(-20,90))
+		Stop
+	}
+}
+
+actor Bloodshot
+{
+	PROJECTILE
+	Damage 0
+	Height 2
+	radius 2
+	-NOGRAVITY
+	Speed 30
+	States
+	{
+	Spawn:
+		BLUD CCCCCCCCCCCCCCCBBBBBBBBAAAAAA 1 A_SpawnItem("BloodFade")
+		Stop
+	Death:
+		BLUD A 1
+		Stop
+	}
+}
+
+actor BloodFade
+{
+	Renderstyle Translucent
+	-SOLID
+	+NOGRAVITY
+	Height 1
+	alpha 0.6
+	Radius 1
+	States
+	{
+	Spawn:
+		BLUD CBA 5
+		Stop
+	}
+}
+
+ACTOR SamaraTargetchecker
+{
+	-SOLID
+	+NOCLIP
+	+NOBLOCKMAP
+	+LOOKALLAROUND
+	MONSTER
+	-COUNTKILL
+	Speed 0
+	-SHOOTABLE
+	States
+	{
+	Spawn:
+		TNT1 A 0 Thing_Hate(0, 1, 4)
+		TNT1 A 1 A_Look
+		Loop
+	See:
+		TNT1 A 1 
+		TNT1 A 1 A_GiveToTarget("SamaraTarget", 1)
+		Stop
+	}
+}
+
+actor SamaraTarget : CustomInventory
+{
+	inventory.pickupmessage ""
+	inventory.pickupsound ""
+	states
+	{
+	Spawn:
+		TNT1 A -1
+		stop
+	Pickup:
+		TNT1 A 0 ACS_Execute(100, 0)
+		stop
+	}
+}
+
+actor makefade : CustomInventory
+{
+	inventory.pickupmessage ""
+	inventory.pickupsound ""
+	states
+	{
+	Spawn:
+		TNT1 A -1
+		stop
+	Pickup:
+		TNT1 A 0 ACS_Execute(105, 0)
+		stop
+	}
+}

@@ -1,0 +1,534 @@
+ACTOR GhoulFireX
+{
+	Speed 5
+	Damage 1
+	+CLIENTSIDEONLY
+	+NOBLOCKMAP
+	+NOCLIP
+	+NOGRAVITY
+	+NOSECTOR
+	+NOINTERACTION
+	+DONTSPLASH
+	damagetype "Fire"
+	States
+	{
+	Spawn:
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("GhoulsFireSFX", 1, 4)
+		Stop
+	}
+}
+
+ACTOR GhoulFireX2 : GhoulFireX
+{
+	Speed 2
+}
+
+ACTOR GhoulFireX3 : GhoulFireX
+{
+	Speed 2
+	States
+	{
+	Spawn:
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("GhoulsFireSFXWhite", 1, 4)
+		Stop
+	}
+}
+
+ACTOR GhoulFireX4 : GhoulFireX
+{
+	Speed 15
+}
+
+ACTOR GhoulFireX5 : GhoulFireX
+{
+	Speed 20
+}
+
+ACTOR GhoulsFireSFX
+{
+	+CLIENTSIDEONLY
+	+NOCLIP
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOSECTOR
+	+NOINTERACTION
+	+DONTSPLASH
+	Damage 1
+	Obituary "%o burned to death"
+	DamageType "FireHD"
+	States
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEx("SmallFlame", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_Jump(216, 2)
+		TNT1 A 1 A_SpawnItemEx("GFlame1A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 0 A_Jump(176, 2)
+		TNT1 A 1 A_SpawnItemEx("GFlame1B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 0 A_Jump(136, 2)
+		TNT1 A 1 A_SpawnItemEx("GFlame2A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 0 A_Jump(96, 2)
+		TNT1 A 1 A_SpawnItemEx("GFlame2B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 0 A_Jump(56, 2)
+		TNT1 A 1 A_SpawnItemEx("GFlame3A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 1 A_SpawnItemEx("GFlame3B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+	Death:
+		TNT1 A -1
+		Stop
+	}
+}
+
+Actor GFlame1A
+{
+	Height 2
+	Radius 1
+	+NoGravity
+	+NoBlockMap
+	+Missile
+	+NoInteraction
+	+ForceXYBillboard
+	+ClientSideOnly
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.35
+	States
+	{
+	Spawn:
+		FLM1 A 0
+		FLM1 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		FLM1 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		FLM1 ABCDE 2 Bright
+		FLM1 F 1 Bright A_SetTranslucent(0.75, 1)
+		FLM1 F 1 Bright A_SetTranslucent(0.7, 1)
+		FLM1 G 1 Bright A_SetTranslucent(0.65, 1)
+		FLM1 G 1 Bright A_SetTranslucent(0.6, 1)
+		FLM1 H 1 Bright A_SetTranslucent(0.55, 1)
+		FLM1 H 1 Bright A_SetTranslucent(0.5, 1)
+		FLM1 I 1 Bright A_SetTranslucent(0.45, 1)
+		FLM1 I 1 Bright A_SetTranslucent(0.4, 1)
+		FLM1 J 1 Bright A_SetTranslucent(0.35, 1)
+		FLM1 J 1 Bright A_SetTranslucent(0.3, 1)
+		FLM1 K 1 Bright A_SetTranslucent(0.25, 1)
+		FLM1 K 1 Bright A_SetTranslucent(0.2, 1)
+		FLM1 L 1 Bright A_SetTranslucent(0.15, 1)
+		FLM1 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor GFlame1B : GFlame1A
+{
+	States
+	{
+	Spawn:
+		FLM2 A 0
+		FLM2 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		FLM2 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		FLM2 ABCDE 2 Bright
+		FLM2 F 1 Bright A_SetTranslucent(0.75, 1)
+		FLM2 F 1 Bright A_SetTranslucent(0.7, 1)
+		FLM2 G 1 Bright A_SetTranslucent(0.65, 1)
+		FLM2 G 1 Bright A_SetTranslucent(0.6, 1)
+		FLM2 H 1 Bright A_SetTranslucent(0.55, 1)
+		FLM2 H 1 Bright A_SetTranslucent(0.5, 1)
+		FLM2 I 1 Bright A_SetTranslucent(0.45, 1)
+		FLM2 I 1 Bright A_SetTranslucent(0.4, 1)
+		FLM2 J 1 Bright A_SetTranslucent(0.35, 1)
+		FLM2 J 1 Bright A_SetTranslucent(0.3, 1)
+		FLM2 K 1 Bright A_SetTranslucent(0.25, 1)
+		FLM2 K 1 Bright A_SetTranslucent(0.2, 1)
+		FLM2 L 1 Bright A_SetTranslucent(0.15, 1)
+		FLM2 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor GFlame2A : GFlame1A
+{
+	States
+	{
+	Spawn:
+		FLM3 A 0
+		FLM3 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		FLM3 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		FLM3 ABCDE 2 Bright
+		FLM3 F 1 Bright A_SetTranslucent(0.75, 1)
+		FLM3 F 1 Bright A_SetTranslucent(0.7, 1)
+		FLM3 G 1 Bright A_SetTranslucent(0.65, 1)
+		FLM3 G 1 Bright A_SetTranslucent(0.6, 1)
+		FLM3 H 1 Bright A_SetTranslucent(0.55, 1)
+		FLM3 H 1 Bright A_SetTranslucent(0.5, 1)
+		FLM3 I 1 Bright A_SetTranslucent(0.45, 1)
+		FLM3 I 1 Bright A_SetTranslucent(0.4, 1)
+		FLM3 J 1 Bright A_SetTranslucent(0.35, 1)
+		FLM3 J 1 Bright A_SetTranslucent(0.3, 1)
+		FLM3 K 1 Bright A_SetTranslucent(0.25, 1)
+		FLM3 K 1 Bright A_SetTranslucent(0.2, 1)
+		FLM3 L 1 Bright A_SetTranslucent(0.15, 1)
+		FLM3 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor GFlame2B : GFlame1A
+{
+	States
+	{
+	Spawn:
+		FLM4 A 0
+		FLM4 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		FLM4 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		FLM4 ABCDE 2 Bright
+		FLM4 F 1 Bright A_SetTranslucent(0.75, 1)
+		FLM4 F 1 Bright A_SetTranslucent(0.7, 1)
+		FLM4 G 1 Bright A_SetTranslucent(0.65, 1)
+		FLM4 G 1 Bright A_SetTranslucent(0.6, 1)
+		FLM4 H 1 Bright A_SetTranslucent(0.55, 1)
+		FLM4 H 1 Bright A_SetTranslucent(0.5, 1)
+		FLM4 I 1 Bright A_SetTranslucent(0.45, 1)
+		FLM4 I 1 Bright A_SetTranslucent(0.4, 1)
+		FLM4 J 1 Bright A_SetTranslucent(0.35, 1)
+		FLM4 J 1 Bright A_SetTranslucent(0.3, 1)
+		FLM4 K 1 Bright A_SetTranslucent(0.25, 1)
+		FLM4 K 1 Bright A_SetTranslucent(0.2, 1)
+		FLM4 L 1 Bright A_SetTranslucent(0.15, 1)
+		FLM4 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor GFlame3A : GFlame1A
+{
+	States
+	{
+	Spawn:
+		FLM5 A 0
+		FLM5 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		FLM5 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		FLM5 ABCDE 2 Bright
+		FLM5 F 1 Bright A_SetTranslucent(0.75, 1)
+		FLM5 F 1 Bright A_SetTranslucent(0.7, 1)
+		FLM5 G 1 Bright A_SetTranslucent(0.65, 1)
+		FLM5 G 1 Bright A_SetTranslucent(0.6, 1)
+		FLM5 H 1 Bright A_SetTranslucent(0.55, 1)
+		FLM5 H 1 Bright A_SetTranslucent(0.5, 1)
+		FLM5 I 1 Bright A_SetTranslucent(0.45, 1)
+		FLM5 I 1 Bright A_SetTranslucent(0.4, 1)
+		FLM5 J 1 Bright A_SetTranslucent(0.35, 1)
+		FLM5 J 1 Bright A_SetTranslucent(0.3, 1)
+		FLM5 K 1 Bright A_SetTranslucent(0.25, 1)
+		FLM5 K 1 Bright A_SetTranslucent(0.2, 1)
+		FLM5 L 1 Bright A_SetTranslucent(0.15, 1)
+		FLM5 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor GFlame3B : GFlame1A
+{
+	States
+	{
+	Spawn:
+		FLM6 A 0
+		FLM6 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		FLM6 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		FLM6 ABCDE 2 Bright
+		FLM6 F 1 Bright A_SetTranslucent(0.75, 1)
+		FLM6 F 1 Bright A_SetTranslucent(0.7, 1)
+		FLM6 G 1 Bright A_SetTranslucent(0.65, 1)
+		FLM6 G 1 Bright A_SetTranslucent(0.6, 1)
+		FLM6 H 1 Bright A_SetTranslucent(0.55, 1)
+		FLM6 H 1 Bright A_SetTranslucent(0.5, 1)
+		FLM6 I 1 Bright A_SetTranslucent(0.45, 1)
+		FLM6 I 1 Bright A_SetTranslucent(0.4, 1)
+		FLM6 J 1 Bright A_SetTranslucent(0.35, 1)
+		FLM6 J 1 Bright A_SetTranslucent(0.3, 1)
+		FLM6 K 1 Bright A_SetTranslucent(0.25, 1)
+		FLM6 K 1 Bright A_SetTranslucent(0.2, 1)
+		FLM6 L 1 Bright A_SetTranslucent(0.15, 1)
+		FLM6 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+ACTOR GhoulsFireSFXWhite
+{
+	+CLIENTSIDEONLY
+	+NOCLIP
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOSECTOR
+	+NOINTERACTION
+	+DONTSPLASH
+	Damage 1
+	Obituary "%o burned to death"
+	States
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEx("SmallWhiteFlame", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_Jump(216, 2)
+		TNT1 A 1 A_SpawnItemEx("WFlame1A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 0 A_Jump(176, 2)
+		TNT1 A 1 A_SpawnItemEx("WFlame1B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 0 A_Jump(136, 2)
+		TNT1 A 1 A_SpawnItemEx("WFlame2A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 0 A_Jump(96, 2)
+		TNT1 A 1 A_SpawnItemEx("WFlame2B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 0 A_Jump(56, 2)
+		TNT1 A 1 A_SpawnItemEx("WFlame3A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+		TNT1 A 1 A_SpawnItemEx("WFlame3B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto death
+	Death:
+		TNT1 A -1
+		Stop
+	}
+}
+
+Actor SmallWhiteFlame
+{
+	+ClientSideOnly
+	+NoClip
+	+NoBlockMap
+	+NoGravity
+	+NoInteraction
+	Damage 1
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor WFlame1A
+{
+	Height 2
+	Radius 1
+	+NoGravity
+	+NoBlockMap
+	+Missile
+	+NoInteraction
+	+ForceXYBillboard
+	+ClientSideOnly
+	RenderStyle Add
+	Alpha 0.8
+	Scale 0.35
+	Damage 1
+	States
+	{
+	Spawn:
+		WLM1 A 0
+		WLM1 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		WLM1 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		WLM1 ABCDE 2 Bright
+		WLM1 F 1 Bright A_SetTranslucent(0.75, 1)
+		WLM1 F 1 Bright A_SetTranslucent(0.7, 1)
+		WLM1 G 1 Bright A_SetTranslucent(0.65, 1)
+		WLM1 G 1 Bright A_SetTranslucent(0.6, 1)
+		WLM1 H 1 Bright A_SetTranslucent(0.55, 1)
+		WLM1 H 1 Bright A_SetTranslucent(0.5, 1)
+		WLM1 I 1 Bright A_SetTranslucent(0.45, 1)
+		WLM1 I 1 Bright A_SetTranslucent(0.4, 1)
+		WLM1 J 1 Bright A_SetTranslucent(0.35, 1)
+		WLM1 J 1 Bright A_SetTranslucent(0.3, 1)
+		WLM1 K 1 Bright A_SetTranslucent(0.25, 1)
+		WLM1 K 1 Bright A_SetTranslucent(0.2, 1)
+		WLM1 L 1 Bright A_SetTranslucent(0.15, 1)
+		WLM1 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor WFlame1B : WFlame1A
+{
+	States
+	{
+	Spawn:
+		WLM2 A 0
+		WLM2 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		WLM2 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		WLM2 ABCDE 2 Bright
+		WLM2 F 1 Bright A_SetTranslucent(0.75, 1)
+		WLM2 F 1 Bright A_SetTranslucent(0.7, 1)
+		WLM2 G 1 Bright A_SetTranslucent(0.65, 1)
+		WLM2 G 1 Bright A_SetTranslucent(0.6, 1)
+		WLM2 H 1 Bright A_SetTranslucent(0.55, 1)
+		WLM2 H 1 Bright A_SetTranslucent(0.5, 1)
+		WLM2 I 1 Bright A_SetTranslucent(0.45, 1)
+		WLM2 I 1 Bright A_SetTranslucent(0.4, 1)
+		WLM2 J 1 Bright A_SetTranslucent(0.35, 1)
+		WLM2 J 1 Bright A_SetTranslucent(0.3, 1)
+		WLM2 K 1 Bright A_SetTranslucent(0.25, 1)
+		WLM2 K 1 Bright A_SetTranslucent(0.2, 1)
+		WLM2 L 1 Bright A_SetTranslucent(0.15, 1)
+		WLM2 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor WFlame2A : WFlame1A
+{
+	States
+	{
+	Spawn:
+		WLM3 A 0
+		WLM3 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		WLM3 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		WLM3 ABCDE 2 Bright
+		WLM3 F 1 Bright A_SetTranslucent(0.75, 1)
+		WLM3 F 1 Bright A_SetTranslucent(0.7, 1)
+		WLM3 G 1 Bright A_SetTranslucent(0.65, 1)
+		WLM3 G 1 Bright A_SetTranslucent(0.6, 1)
+		WLM3 H 1 Bright A_SetTranslucent(0.55, 1)
+		WLM3 H 1 Bright A_SetTranslucent(0.5, 1)
+		WLM3 I 1 Bright A_SetTranslucent(0.45, 1)
+		WLM3 I 1 Bright A_SetTranslucent(0.4, 1)
+		WLM3 J 1 Bright A_SetTranslucent(0.35, 1)
+		WLM3 J 1 Bright A_SetTranslucent(0.3, 1)
+		WLM3 K 1 Bright A_SetTranslucent(0.25, 1)
+		WLM3 K 1 Bright A_SetTranslucent(0.2, 1)
+		WLM3 L 1 Bright A_SetTranslucent(0.15, 1)
+		WLM3 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor WFlame2B : WFlame1A
+{
+	States
+	{
+	Spawn:
+		WLM4 A 0
+		WLM4 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		WLM4 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		WLM4 ABCDE 2 Bright
+		WLM4 F 1 Bright A_SetTranslucent(0.75, 1)
+		WLM4 F 1 Bright A_SetTranslucent(0.7, 1)
+		WLM4 G 1 Bright A_SetTranslucent(0.65, 1)
+		WLM4 G 1 Bright A_SetTranslucent(0.6, 1)
+		WLM4 H 1 Bright A_SetTranslucent(0.55, 1)
+		WLM4 H 1 Bright A_SetTranslucent(0.5, 1)
+		WLM4 I 1 Bright A_SetTranslucent(0.45, 1)
+		WLM4 I 1 Bright A_SetTranslucent(0.4, 1)
+		WLM4 J 1 Bright A_SetTranslucent(0.35, 1)
+		WLM4 J 1 Bright A_SetTranslucent(0.3, 1)
+		WLM4 K 1 Bright A_SetTranslucent(0.25, 1)
+		WLM4 K 1 Bright A_SetTranslucent(0.2, 1)
+		WLM4 L 1 Bright A_SetTranslucent(0.15, 1)
+		WLM4 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor WFlame3A : WFlame1A
+{
+	States
+	{
+	Spawn:
+		WLM5 A 0
+		WLM5 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		WLM5 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		WLM5 ABCDE 2 Bright
+		WLM5 F 1 Bright A_SetTranslucent(0.75, 1)
+		WLM5 F 1 Bright A_SetTranslucent(0.7, 1)
+		WLM5 G 1 Bright A_SetTranslucent(0.65, 1)
+		WLM5 G 1 Bright A_SetTranslucent(0.6, 1)
+		WLM5 H 1 Bright A_SetTranslucent(0.55, 1)
+		WLM5 H 1 Bright A_SetTranslucent(0.5, 1)
+		WLM5 I 1 Bright A_SetTranslucent(0.45, 1)
+		WLM5 I 1 Bright A_SetTranslucent(0.4, 1)
+		WLM5 J 1 Bright A_SetTranslucent(0.35, 1)
+		WLM5 J 1 Bright A_SetTranslucent(0.3, 1)
+		WLM5 K 1 Bright A_SetTranslucent(0.25, 1)
+		WLM5 K 1 Bright A_SetTranslucent(0.2, 1)
+		WLM5 L 1 Bright A_SetTranslucent(0.15, 1)
+		WLM5 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+Actor WFlame3B : WFlame1A
+{
+	States
+	{
+	Spawn:
+		WLM6 A 0
+		WLM6 A 0 ThrustThingZ(0, Random(8, 16), 0, 0)
+		WLM6 A 0 ThrustThing(Random(0, 255), Random(0, 1), 0, 0)
+		WLM6 ABCDE 2 Bright
+		WLM6 F 1 Bright A_SetTranslucent(0.75, 1)
+		WLM6 F 1 Bright A_SetTranslucent(0.7, 1)
+		WLM6 G 1 Bright A_SetTranslucent(0.65, 1)
+		WLM6 G 1 Bright A_SetTranslucent(0.6, 1)
+		WLM6 H 1 Bright A_SetTranslucent(0.55, 1)
+		WLM6 H 1 Bright A_SetTranslucent(0.5, 1)
+		WLM6 I 1 Bright A_SetTranslucent(0.45, 1)
+		WLM6 I 1 Bright A_SetTranslucent(0.4, 1)
+		WLM6 J 1 Bright A_SetTranslucent(0.35, 1)
+		WLM6 J 1 Bright A_SetTranslucent(0.3, 1)
+		WLM6 K 1 Bright A_SetTranslucent(0.25, 1)
+		WLM6 K 1 Bright A_SetTranslucent(0.2, 1)
+		WLM6 L 1 Bright A_SetTranslucent(0.15, 1)
+		WLM6 L 1 Bright A_SetTranslucent(0.1, 1)
+		Stop
+	}
+}
+
+actor Darkness
+{
+	Height 1
+	Radius 1
+	Speed 26
+	PROJECTILE
+	-NOGRAVITY
+	+NOCLIP
+	+DONTSPLASH
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		DAR1 A 7
+		DAR2 A 7
+		DAR3 A 7
+		DAR4 A 7
+		DAR5 A 7
+		DAR6 A 7
+		DAR7 A 7
+		DAR8 A 7
+	Death:
+		TNT1 A 1
+		stop
+	}
+}
+
+actor DarknessRing
+{
+	-SOLID
+	+NOCLIP
+	+DONTSPLASH
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		TNT1 A 0 A_CustomMissile("Darkness",0,0,0,2)
+		TNT1 A 0 A_CustomMissile("Darkness",0,0,45,2)
+		TNT1 A 0 A_CustomMissile("Darkness",0,0,90,2)
+		TNT1 A 0 A_CustomMissile("Darkness",0,0,135,2)
+		TNT1 A 0 A_CustomMissile("Darkness",0,0,180,2)
+		TNT1 A 0 A_CustomMissile("Darkness",0,0,225,2)
+		TNT1 A 0 A_CustomMissile("Darkness",0,0,270,2)
+		TNT1 A 0 A_CustomMissile("Darkness",0,0,315,2)
+		stop
+	}
+}

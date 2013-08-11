@@ -1,0 +1,207 @@
+ACTOR Frostbite
+{
+	health 4000
+	MONSTER
+	+DROPOFF
+	+LOOKALLAROUND
+	+DONTSPLASH
+	BloodColor cyan
+	Scale 0.24
+	radius 25
+	height 75
+	speed 18
+	bloodtype "IceChunkFB2"
+	painchance 255
+	meleedamage 12
+	DamageFactor "ice", 0
+	Obituary "%o found the Ghoul"
+	+ISMONSTER
+	States
+	{
+	Spawn:
+		FROB A 0 A_Look
+		FROB A 1 A_Wander
+		loop
+	See:
+		FROB A 0 A_SetTranslucent(0.50, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.55, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.60, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SpawnItemEx("FrostTwinkle", 0, random(-40,40), random(-40,90),0,0,0,0,32)
+		FROB A 0 A_SetTranslucent(0.65, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.70, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.75, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SpawnItemEx("FrostTwinkle", 0, random(-40,40), random(-40,90),0,0,0,0,32)
+		FROB A 0 A_SetTranslucent(0.80, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.85, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.90, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SpawnItemEx("FrostTwinkle", 0, random(-40,40), random(-40,90),0,0,0,0,32)
+		FROB A 0 A_SetTranslucent(0.95, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(1.0, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.95, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SpawnItemEx("FrostTwinkle", 0, random(-40,40), random(-40,90),0,0,0,0,32)
+		FROB A 0 A_SetTranslucent(0.90, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.85, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.80, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SpawnItemEx("FrostTwinkle", 0, random(-40,40), random(-40,90),0,0,0,0,32)
+		FROB A 0 A_SetTranslucent(0.75, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.70, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.65, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SpawnItemEx("FrostTwinkle", 0, random(-40,40), random(-40,90),0,0,0,0,32)
+		FROB A 0 A_SetTranslucent(0.60, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.55, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SetTranslucent(0.50, 0)
+		FROB AA 1 A_Chase
+		FROB A 0 A_SpawnItemEx("FrostTwinkle", 0, random(-40,40), random(-40,90),0,0,0,0,32)
+		loop
+	Melee:
+		FROB A 0 A_PlaySound("FrostChomp")
+		FROB A 0 A_MeleeAttack
+		FROB BCD 4
+		FROB EFEA 3
+		goto see
+	Missile:
+		FROB A 1 A_PlaySound("FrostBreathMid")
+		FROB AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("ArenaFrozenWind", 40, 0, random(0,360), 2)
+		goto see
+	Death:
+		FROB AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("ArenaFrozenWind", 40, 0, random(0,360), 2)
+		FROB AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Mushroom("ArenaFrozenWind", 5)
+		FROB A 0 A_PlaySound("FrostDeath")
+		FROB A 0 A_Fall
+		FROB A 0 A_SpawnItemEx("LargeBurst",0,0,0,0,0,0,0,32)
+		TNT1 AAAAAAAA 6 A_SpawnItemEx("FrostDeathFX",0,0,32,1,0,2,random(0,360),32)
+		TNT1 A 1
+		stop
+	}
+}
+
+Actor ArenaFrostbite : Frostbite
+{
+	Obituary "%o found the Ghoul"
+	States
+	{
+	Pain:
+		FROB A 1 A_PlaySound("FrostBreathMid")
+		FROB AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("ArenaFrozenWind", 40, 0, random(0,360), 2)
+		goto see
+	}
+}
+
+Actor FrostDeathFX
+{
+	-SOLID
+	+NOGRAVITY
+	renderstyle add
+	alpha 0.9
+	scale 2.5
+	States
+	{
+	Spawn:
+		PLSS JKLMNOP 5 A_FadeOut(0.05)
+		PLSS QRSTUVWX 4 A_FadeOut(0.05)
+		stop
+	}
+}
+
+Actor LargeBurst
+{
+	Radius 40
+	Height 80
+	-SOLID
+	+NOGRAVITY
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySound("FrostBurst")
+		TNT1 A 1 A_Burst("IceChunkFB2") 
+		stop
+	}
+}
+
+Actor IceChunkFB2
+{
+	Radius 3
+	Height 4
+	-SOLID
+	+LOWGRAVITY
+	-NOGRAVITY
+	States
+	{
+	Spawn:
+		ICEC A 0
+		ICEC A 0 ThrustThingZ(0,random(1,15),0,0)
+		ICEC ABCD 30
+		Stop
+	}
+}
+
+actor FrostTwinkle
+{
+	+NOINTERACTION
+	Radius 3
+	Height 3
+	+NOGRAVITY
+	renderstyle add
+	-SOLID
+	States
+	{
+	Spawn:
+		TGLT F 0 bright
+		TGLT F 0 bright A_PlaySound("FrostTwinkle")
+		TGLT FGHIFGHIFGHIFGHI 2 bright A_FadeOut(0.02)
+		stop
+	}
+}
+
+actor FrozenWind
+{
+	PROJECTILE
+	Damage 1
+	Speed 21
+	Radius 12
+	renderstyle add
+	Obituary "%o found the Ghoul"
+	alpha 0.8
+	scale 2.0
+	Height 20
+	+DONTHURTSPECIES
+	+RIPPER
+	+STRIFEDAMAGE
+	+DOOMBOUNCE
+	+BLOODLESSIMPACT
+	States
+	{
+	Spawn:
+		PLSS JJLMNOPQRSTUVWX 5 A_FadeOut(0.05)
+		stop
+	Death:
+		PLSS X 0
+		stop
+	}
+}
+
+actor ArenaFrozenWind : FrozenWind
+{
+	Obituary "%o was freezed by Frostbite"
+}

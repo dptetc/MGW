@@ -1,0 +1,44 @@
+
+DefaultListMenu
+{
+	Font "BigFont", "Untranslated"
+	Selector "M_SKULL1", -32, -5
+	Linespacing 16
+}
+
+ListMenu "MainMenu"
+{
+	StaticPatch 94, 2, "M_DOOM"
+	Position 97, 72
+	IfOption(ReadThis)
+	{
+		Position 97, 64
+	}
+	
+	TextItem "New Game", "s", "PlayerclassMenu"
+	ifOption(SwapMenu)
+	{
+		TextItem "Load Game", "l", "LoadGameMenu"
+		TextItem "Save Game", "s", "SaveGameMenu"
+		TextItem "Options","o", "OptionsMenu"
+	}
+	else
+	{
+		TextItem "Options","o", "OptionsMenu"
+		TextItem "Load Game", "l", "LoadGameMenu"
+		TextItem "Save Game", "s", "SaveGameMenu"
+	}
+	ifOption(ReadThis)
+	{
+		TextItem "Read This!","r", "ReadThisMenu"
+	}
+	
+	TextItem "Exit Game", "e", "QuitMenu"
+}
+
+ListMenu "SkillMenu"
+{
+	StaticText 96, 14, "NEW GAME"
+	StaticText 54, 38, "Choose Skill Level:"
+	Position 48, 63
+}

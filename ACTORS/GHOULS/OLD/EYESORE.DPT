@@ -1,0 +1,162 @@
+ACTOR Eyesore
+{
+	health 4000
+	Radius 18
+	Height 62
+	Speed 15
+	Scale 0.5
+	bloodcolor CCCC00
+	MASS 100000000
+	MONSTER 
+	+FLOORCLIP
+	+DROPOFF
+	+DONTBLAST
+	+LOOKALLAROUND
+	+DONTMORPH
+	+NOICEDEATH
+	+BOSS
+	+DONTSPLASH
+	+ISMONSTER
+	PainChance 255
+	MeleeSound "Freak2"
+	DeathSound "Freak5"
+	ActiveSound "FreakR"
+	PainSound "Freak4"
+	Obituary "%o found the Ghoul"
+	States
+	{
+	Spawn:
+		THIN AAABBB 1 A_Wander
+		THIN A 0 A_Look
+		Loop
+	See:
+		THIN AAABBB 1 A_Chase
+		Loop
+	Melee:
+		THIN A 3 A_CustomMeleeAttack(255,"none","none","none",1)
+		THIN A 1
+		Goto See
+	Pain:
+		THIN A 1
+		Goto Kid
+	Death:
+		THIN A 0 A_SpawnItem("DarknessRing", 1, 32)
+		THIN A 2 A_Scream
+		THIN C 3 A_fall
+		THIN D 3 A_KillChildren
+		THIN E 3
+		THIN F 3
+		THIN H 3 A_PlaySound("vile/firecrkl")
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,0,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,30,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,60,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,90,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,120,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,150,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,180,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,-30,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,-60,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,-90,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,-120,2)
+		FIRE A 0 BRIGHT A_CustomMissile("GhoulFireX",0,0,-150,2)
+		Stop
+	Kid:
+		THIN A 0
+		THIN A 0 A_Spawnitem("arenaEyesorekidinactive")
+		Goto see
+	}
+}
+
+ACTOR Eyesorekid
+{
+	Health 1
+	Radius 16
+	Height 30
+	Speed 15
+	Scale 0.2
+	bloodcolor yellow
+	MASS 100000000
+	MONSTER 
+	+FLOORCLIP
+	+DROPOFF
+	+DONTBLAST
+	+LOOKALLAROUND
+	+DONTMORPH
+	+NOICEDEATH
+	+DONTSPLASH
+	PainChance 255
+	MeleeSound "Freak22"
+	DeathSound "Freak52"
+	ActiveSound "FreakR2"
+	PainSound "Freak42"
+	Obituary "%o found the Ghoul"
+	States
+	{
+	Spawn:
+		THIN AAABBB 1 A_Wander
+		THIN A 0 A_Look
+		Loop
+	See:
+		THIN AAABBB 1 A_Chase
+		Loop
+	Melee:
+		THIN A 1 A_CustomMeleeAttack(10,"none","none","none",1)
+		THIN A 1
+		Goto See
+	Pain:
+		THIN A 1
+		Goto See
+	Death:
+		THIN A 2 A_Scream
+		THIN C 3 A_fall
+		THIN D 3
+		THIN E 3
+		THIN F 3
+		THIN H 3
+		Stop
+	}
+}
+
+ACTOR Eyesorekidinactive
+{
+	Radius 16
+	Height 48
+	+SOLID
+	+NOCLIP
+	Scale 0.2
+	States
+	{
+	Spawn:
+		THIN A 35
+		THIN A 0 A_Spawnitem("Eyesorekid")
+		Stop
+	}
+}
+
+ACTOR ArenaEyesore : Eyesore
+{
+	Obituary "%o was munched by the Eyesore"
+	States
+	{
+	Kid:
+		THIN A 0
+		THIN A 0 A_Spawnitem("arenaEyesorekidinactive")
+		Goto see
+	}
+}
+
+ACTOR ArenaEyesoreKid : EyesoreKid
+{
+	Obituary "%o was munched by a baby Eyesore"
+}
+
+ACTOR arenaEyesorekidinactive : Eyesorekidinactive
+{
+	States
+	{
+	Spawn:
+		THIN A 35
+		THIN A 0 A_SpawnItemEx("Eyesorekid", 1, 1, 1, 0, 0, 0, 0, SXF_SETMASTER, 0) //A_Spawnitem("ArenaEyesorekid")
+		Stop
+	}
+}

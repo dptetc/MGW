@@ -1,0 +1,51 @@
+ACTOR Flashlight : MGW_Weapon 32122
+{
+   +DONTBOB
+   +NOALERT
+   +WIMPY_WEAPON
+   +AXEBLOOD
+   Inventory.PickupMessage "You got the Flash Light!" 
+   Inventory.PickupSound "misc/d3pickup" 
+   Weapon.SelectionOrder 3500 
+   States 
+   { 
+   Spawn: 
+      FLSH A -1 
+      LOOP 
+   Ready: 
+      D3FG A 1 A_FireBullets(0, 0, 1, 0, "Light")
+      D3FG A 0 A_WeaponReady 
+      LOOP 
+   Deselect: 
+      D3FG A 0 A_Light0 
+      D3FG A 1 A_Lower 
+      LOOP 
+   Select: 
+      D3FG A 1 A_Raise 
+      LOOP 
+   Fire: 
+      D3FG A 0 A_Light0
+      D3FG ABCDEEFGHIJK 1
+      D3FG L 1 A_PlaySound("weapons/fistswing")
+      D3FG MNO 1 
+      D3FG P 1 A_CustomPunch(12, 0, 0, "BulletPuff") 
+      D3FG QRST 1 
+      Goto Ready 
+   } 
+}
+
+ACTOR Light : BulletPuff
+{
+   Renderstyle None
+   Alpha 0.5
+   +NOBLOCKMAP
+   +NOGRAVITY
+   +RIPPER
+   - ALLOWPARTICLES
+   states
+   {
+   Spawn:
+     PUFF A 1
+     stop
+   }
+}

@@ -1,0 +1,1380 @@
+
+//***********Wrench***********\\
+
+ACTOR E_Wrench : MGW_Weapon
+{
+	Radius 20
+	Height 12
+	Scale 0.5
+	+WEAPON.MeleeWeapon
+	+WEAPON.NoAutoFire
+	+INVENTORY.UNDROPPABLE
+	Weapon.UpSound "WeaponSelect"
+	States
+	{
+	Spawn:
+		WP10 A -1
+		Stop
+	Select:
+		PIPW A 1 A_Raise
+		Loop
+	Deselect:
+		PIPW A 0 A_TakeInventory("WrenchCountStrike",1)
+		PIPW A 1 A_Lower
+		Loop
+	Ready:
+		PIPW A 25 A_WeaponReady
+		PIPW A 0 A_TakeInventory("WrenchCountStrike",1)
+		Loop
+	Fire:
+		PIPW A 6 A_JumpIfInventory("WrenchCountStrike", 1, "Fire2")
+		PIPW DEF 1
+		PIPW G 1 A_CustomPunch(10,0,0, "WrenchPuff") 
+		PIPW G 0 A_GiveInventory("WrenchCountStrike",1)
+		PIPW HI 3 
+		Goto Select
+	Fire2:
+		PIPW J 1
+		PIPW KL 1
+		PIPW M 1 A_CustomPunch(12,0,0, "WrenchPuff") 
+		PIPW N 0 A_TakeInventory("WrenchCountStrike",1)
+		PIPW NO 3 
+		Goto Select
+	}
+}
+
+actor WrenchPuff
+{
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+PUFFONACTORS
+	+NOEXTREMEDEATH
+	activesound "wrench/swing"
+	attacksound "wrench/hitwall"
+	seesound "wrench/hitbody"
+	states
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1
+		stop
+	Crash:
+		TNT1 A 0
+		TNT1 A 1
+		stop
+	Melee:
+		TNT1 A 0
+		TNT1 A 1
+		stop
+	}
+}
+
+actor WrenchCountStrike : inventory
+{ 
+	Inventory.MaxAmount 1 
+}
+
+//***********Pistol***********\\
+
+Actor E_Pistol : MGW_Weapon
+{
+	Weapon.AmmoUse 1
+	Weapon.AmmoGive 20
+	Weapon.AmmoType "Clip"
+	Weapon.AmmoUse2 1
+	Weapon.AmmoType2 "Clip"
+	States
+	{
+	Ready:
+		LIBG A 1 A_WeaponReady
+		Loop
+	Deselect:
+		LIBG A 0
+		LIBG A 0 A_Lower
+		LIBG A 1 A_Lower
+		Goto Deselect+1
+	Select:
+		LIBG A 0
+		LIBG A 0 A_Raise
+		LIBG A 1 A_Raise
+		Goto Select+1
+	Fire:
+		LIBF A 1
+		LIBF B 2 A_FireBullets (1, 1, 1, 11, "BulletPuff")
+		LIBG A 0 A_PlaySound ("Glock/Fire")
+		LIBG bcd 1
+		LIBG cba 1 A_ReFire
+		Goto Ready
+	AltFire:
+		LIBF A 1
+		LIBF B 2 A_FireBullets (1, 1, 1, 11, "BulletPuff")
+		LIBG A 0 A_PlaySound ("Glock/Fire")
+		LIBF A 1
+		LIBF B 2 A_FireBullets (1, 1, 1, 11, "BulletPuff")
+		LIBG A 0 A_PlaySound ("Glock/Fire")
+		LIBF A 1
+		LIBF B 2 A_FireBullets (1, 1, 1, 11, "BulletPuff")
+		LIBG A 0 A_PlaySound ("Glock/Fire")
+		LIBG bcd 1
+		LIBG cbaaaaaaaaaaaa 1
+		Goto Ready
+	}
+}
+
+//***********Shotgun***********\\
+
+Actor  E_Shotgun : MGW_Weapon
+{
+	Weapon.AmmoType "Shell"
+	Weapon.AmmoGive 8
+	Weapon.AmmoUse 1
+	Weapon.SelectionOrder 6
+	Inventory.PickupSound "misc/w_pkup"
+	Inventory.PickupMessage "You got a Shotgun"
+	Obituary "%o was ripped to shreads by %k's Shotgun."
+	Weapon.UpSound "WeaponSelect"
+	AttackSound "e_shotgun/fire"
+	Scale 0.8
+	States
+	{
+	Ready:
+		SLSS ABCD 1
+		SLSH BCD 4
+		SLSH D 0 A_PlaySound("e_shotgun/use")
+		SLSH BCA 4
+		SLSH A 1 A_WeaponReady
+		Goto ready +11
+	DeSelect:
+		SLSS A 1 A_Lower
+		Loop
+	Select:
+		SLSS A 0 A_Raise
+		Loop
+	Fire:
+		SLSH A 2 A_GunFlash
+		SLSH A 0 A_FireBullets(5, 5, 7, 7, "BulletPuff", 1)
+		SLSH BCD 6
+		SLSH D 0 A_PlaySound("e_shotgun/load")
+		SLSH CBA 6
+		SLSH A 6 
+		Goto Ready +11
+	Flash:
+		SSHF A 3 BRIGHT A_Light2
+		TNT1 A 0 A_light0
+		Goto LightDone
+	}
+}
+
+//***********SSG***********\\
+
+Actor E_SSG : MGW_Weapon
+{
+	Weapon.SelectionOrder 400
+	Weapon.AmmoUse 2
+	Weapon.AmmoGive 8
+	Weapon.AmmoType "Shell"
+	Obituary "$OB_MPSSHOTGUN"
+	Inventory.PickupSound "misc/w_pkup"
+	States
+	{
+	Ready:
+		SHT2 A 1 A_WeaponReady
+		Loop
+	Deselect:
+		SHT2 A 1 A_Lower
+		Loop
+	Select:
+		SHT2 A 1 A_Raise
+		Loop
+	Fire:
+		SHT2 A 3
+		SHT2 A 0 A_FireBullets (11.2, 7.1, 20, 5, "BulletPuff")
+		SHT2 A 0 A_PlaySound ("weapons/sshotf_1", CHAN_WEAPON)
+		SHT2 A 7 A_GunFlash
+		SHT2 B 7
+		SHT2 C 7 A_CheckReload
+		SHT2 D 7 A_PlaySoundEx ("weapons/sshoto_1", "Weapon")
+		SHT2 E 7
+		SHT2 F 7 A_PlaySoundEx ("weapons/sshotl_1", "Weapon")
+		SHT2 G 6
+		SHT2 H 6 A_PlaySoundEx ("weapons/sshotc_1", "Weapon")
+		SHT2 A 5 A_ReFire
+		Goto Ready
+	Flash:
+		SHT2 I 4 Bright A_Light1
+		SHT2 J 3 Bright A_Light2
+		Goto LightDone
+	}
+}
+
+//***********MP5***********\\
+
+Actor E_MP5 : MGW_Weapon
+{
+	AttackSound "LR300_SH"
+	Weapon.KickBack 100
+	Weapon.AmmoType "Clip"
+	Weapon.AmmoType2 "RocketAmmo"
+	Weapon.AmmoUse 1
+	Weapon.AmmoGive 20
+	Weapon.AmmoGive2 1
+	Weapon.AmmoUse2 1
+	Weapon.UpSound "WeaponSelect"
+	states
+	{
+	Ready:
+		G3AR A 1 A_WeaponReady
+		Loop
+	Deselect:
+		G3AR A 1 A_Lower
+		Loop
+	Select:
+		G3AR A 1 A_Raise
+		Loop
+	Fire:
+		G3AR B 2 Bright A_FireBullets (4, 3, 1, 6, "BulletPuff")
+		G3AR B 0 Bright A_GunFlash
+		G3AR C 1 A_SetPitch (pitch-0.8)
+		G3AR DA 1 A_SetPitch (pitch+0.2)
+		G3AR A 0 A_ReFire
+		Goto Ready
+	AltFire:
+		G3AR A 3 OffSet(0,52)
+		G3AR A 1 A_FireCustomMissile("FlareMissile",0,1)
+		G3AR A 3 OffSet(0,43)  
+		G3AR A 3 OffSet(0,32)
+		G3AR A 3 A_PlaySound("weapons/sshotl")
+		G3AR A 3 OffSet(0,22)
+		G3AR A 10 A_ReFire
+		Goto Ready
+	Flash:
+		TNT1 A 1 Bright A_Light1
+		Goto LightDone
+		TNT1 A 1 Bright A_Light1
+		Goto LightDone
+	}
+}
+
+//***********GrenadeLauncher***********\\
+
+Actor E_GrenadeLauncher : MGW_Weapon
+{
+	Weapon.AmmoType "RocketAmmo"
+	Weapon.AmmoGive 2
+	Weapon.AmmoUse 1
+	Weapon.AmmoType2 "RocketAmmo"
+	Weapon.AmmoUse2 1
+	Inventory.PickupMessage "You got the Grenade Launcher!"
+	Inventory.PickupSound "misc/w_pkup"
+	Weapon.UpSound "WeaponSelect"
+	Weapon.SelectionOrder 2600
+	Weapon.Kickback 600
+	States
+	{
+	Select:
+		GLAG A 1 A_Raise
+		Loop
+	Deselect:
+		GLAG A 1 A_Lower
+		Loop
+	Ready:
+		GLAG A 1 A_WeaponReady
+		Loop
+	Fire:
+		GLAG B 0 Bright A_GunFlash
+		GLAG B 0 Bright A_PlaySound("Weapons/GrenadeFire")
+		GLAG B 4 Bright A_FireCustomMissile("E_Grenade", 0, 1, 0, 0)
+		GLAG I 4
+		GLAG A 0 A_CheckReload
+		GLAG C 7
+		GLAG D 5
+		GLAG E 5 A_PlaySound("Weapons/GrenadeOpen")
+		GLAG FG 5
+		GLAG H 5 A_PlaySound("Weapons/GrenadeLoad")
+		GLAG FE 5
+		GLAG D 5 A_PlaySound("Weapons/GrenadeClose")
+		GLAG A 3
+		GLAG A 0 A_Refire
+		Goto Ready
+	Flash:
+		TNT1 A 2 A_Light1
+		TNT1 A 2 A_Light2
+		TNT1 A 0 A_Light0
+		Stop
+	}
+}
+
+Actor E_Grenade
+{
+	Radius 11
+	Height 8
+	Speed 35	
+	Damage (15*random(1,16))
+	PROJECTILE
+	+HEXENBOUNCE 
+	-NOGRAVITY
+	+EXPLODEONWATER
+	Scale 1.1
+	BounceFactor 0.8
+	BounceCount 6
+	ReactionTime 139
+	Seesound "Weapons/GrenadeBounce"
+	Deathsound "Weapons/RockLX"
+	States
+	{
+	Spawn:
+		GRND A 0 A_CountDown		
+		GRND A 1 A_CustomMissile("GrenadePuff", 3, 0, 0, 1)	 
+		Loop
+	Death:
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		MISL C 4 Bright A_Explode(12,15)
+		MISL DEFG 4 Bright A_Explode
+		Stop
+	}
+}
+
+Actor GrenadePuff : BulletPuff
+{
+	States
+	{
+	Spawn:
+		PUFF ABCD 4
+		Stop
+	}
+}
+
+//***********Railgun***********\\
+
+Actor E_Railgun : MGW_Weapon
+{
+	Weapon.SelectionOrder 600
+	Weapon.SlotNumber 6
+	Weapon.UpSound "WeaponSelect"
+	Inventory.PickupSound "misc/w_pkup"
+	Weapon.AmmoType "Cell"
+	Weapon.AmmoUse 10
+	Weapon.AmmoGive 150
+	+WEAPON.NOAUTOFIRE
+	+WEAPON.NOAUTOAIM
+	States
+	{
+	Spawn:
+		WP62 A -1
+		Loop
+	Ready:
+		PRFL ABC 5 A_WeaponReady
+		Loop
+	Deselect:
+		PRFL K 1 A_Lower
+		Loop
+	Select:
+		PRFL K 1 A_Raise
+		Loop
+	Fire:
+		PRFL DEF 1
+		PRFL H 0 A_RailAttack (random(75,150), 0, 0, "Blue", "LightBlue", 1,0,"LAZORPROJECTILE")
+		PRFL H 0 A_PlaySound("GravityGun/Rail")
+		PRFL H 3
+		PRFL E 18
+		Goto Ready
+	}
+}
+
+Actor LAZOR
+{
+	Damage 16
+	Speed 32
+	Radius 4
+	Height 4
+	Projectile
+	+RIPPER
+	+BLOODLESSIMPACT
+	DamageType "LAZOR"
+	States
+	{
+	Spawn:
+		LASR A 10 bright
+		Loop
+	Death:
+		TNT1 A 0
+		Stop
+	}
+}
+
+actor LAZORPROJECTILE : LAZOR
+{
+	Translation "0:255=196:198"
+	Speed 74
+	Damage 100
+	Decal DoomImpBall
+	DamageType Dissolide //DMG_TYPE
+	Seesound "Dalek2"
+	PROJECTILE
+	+RIPPER
+	+BLOODLESSIMPACT
+	+EXTREMEDEATH
+	Scale 11
+	states
+	{
+	Spawn:
+		LASR A 0 bright A_CustomMissile("LAZORTRAIL6",0,0,180)     
+		LASR A 0 bright A_CustomMissile("LAZORTRAIL5",0,0,180)
+		LASR A 0 bright A_CustomMissile("LAZORTRAIL4",0,0,180)
+		LASR A 0 bright A_CustomMissile("LAZORTRAIL3",0,0,180)
+		LASR A 0 bright A_CustomMissile("LAZORTRAIL2",0,0,180)
+		LASR A 1 bright A_CustomMissile("LAZORTRAIL",0,0,180)
+		Loop
+	Death:
+		TNT1 A 1 A_CustomMissile("LAZORTRAIL",0,0,180)
+		Stop
+	}
+}
+
+actor LAZORTRAIL 
+{
+	Speed 1
+	Scale 11
+	PROJECTILE
+	renderstyle add
+	Translation "0:255=196:198"
+	states
+	{
+	Spawn:
+		LASR A 15 bright
+		LASR A 1 A_FadeOut(0.1)
+		stop
+	}
+}
+
+actor lazortrail2 : lazorTrail
+{
+	Speed 3
+}
+
+actor lazortrail3 : lazorTrail
+{
+	Speed 4
+}
+
+actor lazortrail4 : lazorTrail
+{
+	Speed 5
+}
+
+actor lazortrail5 : lazorTrail
+{
+	Speed 6
+}
+
+actor lazortrail6 : lazorTrail
+{
+	Speed 7
+}
+
+//***********Phasegun***********\\
+
+Actor E_PhaseGun : MGW_Weapon
+{
+	Weapon.AmmoUse 1
+	Weapon.AmmoGive 20
+	Weapon.AmmoType "Cell"
+	Obituary "%o was vapourised by %k's raygun."
+	Inventory.Pickupmessage "Picked up a raygun!"
+	Weapon.SlotNumber 2
+	Inventory.PickupSound "Raygun/Pickup"
+	Weapon.UpSound "WeaponSelect"
+	States
+	{
+	Ready:
+		RAYG A 1 A_WeaponReady
+		Loop
+	Deselect:
+		RAYG A 1 A_Lower
+		Loop
+	Select:
+		RAYG A 1 A_Raise
+		Loop
+	Fire:
+		RAYG A 1
+		RAYG B 1 bright A_FireCustomMissile ("RaygunShot")
+		RAYG B 1 bright A_GunFlash
+		RAYG CD 1 bright
+		RAYG EF 1
+		RAYG A 1
+		RAYG A 1 A_ReFire
+		Goto Ready
+	Flash:
+		TNT1 A 2 bright A_Light1
+		TNT1 B 3 bright A_Light2
+		TNT1 A 0 bright A_Light0
+		stop
+	}
+}
+
+actor RaygunShot
+{
+	Radius 6
+	Height 8
+	Speed 30
+	Damage 8
+	DamageType Disintegrate
+	Projectile
+	SeeSound "Raygun/Fire"
+	+RIPPER
+	+BLOODLESSIMPACT
+	+NODAMAGETHRUST
+	+NOEXTREMEDEATH
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 1 A_SpawnItem ("RaygunTrail")
+		loop
+	Death:
+		TNT1 A 1
+		stop
+	}
+}
+
+actor RaygunTrail
+{
+	Radius 2
+	Height 2
+	Renderstyle Add
+	Scale 0.6
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+
+	States
+	{
+	Spawn:
+		RAYL A 3 bright
+		TNT1 A 1 bright A_SpawnItem ("RaygunTrail2")
+		stop
+	}
+}
+
+actor RaygunTrail2 : RaygunTrail
+{
+	Scale 0.5
+
+	States
+	{
+	Spawn:
+		RAYL A 3 bright
+		TNT1 A 1 bright A_SpawnItem ("RaygunTrail3")
+		stop
+	}
+}
+
+actor RaygunTrail3 : RaygunTrail
+{
+	Scale 0.4
+
+	States
+	{
+	Spawn:
+		RAYL A 3 bright
+		TNT1 A 1 bright A_SpawnItem ("RaygunTrail4")
+		stop
+	}
+}
+
+actor RaygunTrail4 : RaygunTrail
+{
+	Scale 0.3
+
+	States
+	{
+	Spawn:
+		RAYL A 3 bright
+		TNT1 A 1 bright A_SpawnItem ("RaygunTrail5")
+		stop
+	}
+}
+
+actor RaygunTrail5 : RaygunTrail
+{
+	Scale 0.2
+
+	States
+	{
+	Spawn:
+		RAYL A 3 bright
+		TNT1 A 1 bright A_SpawnItem ("RaygunTrail6")
+		stop
+	}
+}
+
+actor RaygunTrail6 : RaygunTrail
+{
+	Scale 0.1
+
+	States
+	{
+	Spawn:
+		RAYL A 3 bright
+		stop
+	}
+}
+
+//***********ElectricLauncher***********\\
+
+Actor E_ElectricLauncher : MGW_Weapon
+{
+	Radius 20
+	Height 20
+	Weapon.SelectionOrder 2800
+	Weapon.KickBack 700
+	Weapon.UpSound "WeaponSelect"
+	Weapon.AmmoType1 "Cell"
+	Weapon.AmmoType2 "RocketAmmo"
+	Weapon.AmmoGive 100
+	Weapon.AmmoGive2 10
+	Weapon.AmmoUse 20
+	Weapon.AmmoUse2 1
+	+WEAPON.PRIMARY_USES_BOTH
+	Inventory.PickupMessage "You got the electric rocket launcher."
+	Inventory.PickupSound "misc/w_pkup"
+	States
+	{
+	Ready:
+		BARR A 5 A_WeaponReady
+		Loop
+	Deselect:
+		BARR A 1 A_Lower
+		Loop
+	Select:
+		BARR A 1 A_Raise
+		Loop
+	Fire:
+		BARR B 2 A_PlayWeaponSound("ShockGun/Fire")
+		BARR C 3 A_FireCustomMissile("ShockMissile",0,1,4)
+		BARR CB 12
+		Goto Ready
+	}
+}
+
+Actor ShockMissile 
+{
+	Decal ShockMissileScorchGroup
+	Radius 4
+	DamageType ElectricBomb
+	Speed 66
+	Damage 60
+	RenderStyle Add
+	PROJECTILE
+	+MISSILE
+	+RANDOMIZE
+	Scale 1.6
+	DeathSound "Sparks/Spawn"
+	Alpha 0.75
+	States
+	{
+	Spawn: 
+		NPSB A 1 A_BFGSpray("ShockPuff",7,110)
+		NPSB ABC 2 bright A_CustomMissile("shockpuff",3,0,random(0,360),2,random(0,360))
+		NPSB A 1 A_BFGSpray("ShockPuff",7,110)
+		NPSB DEF 2 bright A_CustomMissile("shockpuff",3,0,random(0,360),2,random(0,360))
+		NPSB A 1 A_BFGSpray("ShockPuff",7,110)
+		NPSB GHIJ 2 bright A_CustomMissile("shockpuff",3,0,random(0,360),2,random(0,360))
+		NPSB A 1 A_BFGSpray("ShockPuff",7,110)
+		Loop
+	Death:
+		TNT1 A 0 A_Explode(65,85)
+		TNT1 A 1 A_Mushroom("ShockPuff",12)
+		TNT1 A 0 A_CustomMissile("shockpuff",3,0,random(0,360),2,random(0,360))
+		TNT1 A 0 A_CustomMissile("shockpuff",3,0,random(0,360),2,random(0,360))
+		TNT1 A 0 A_CustomMissile("shockpuff",3,0,random(0,360),2,random(0,360))
+		TNT1 A 0 A_CustomMissile("shockpuff",3,0,random(0,360),2,random(0,360))
+		FX16 GHIJK 6 bright
+		Stop
+	}
+}
+
+//***********Nailgun***********\\
+
+ACTOR E_NailGun : MGW_Weapon
+{
+	Weapon.KickBack 122
+	Weapon.AmmoUse 2
+	Weapon.AmmoType "Clip"
+	Weapon.AmmoUse2 2
+	Weapon.AmmoType2 "Clip"
+	Weapon.AmmoGive 152
+	Weapon.UpSound "WeaponSelect"
+	Inventory.PickupMessage "Got a nailgun"
+	Obituary "%o had to dodge %K's nails."
+	+WEAPON.NOAUTOFIRE
+	Inventory.PickupSound "misc/w_pkup"
+	States
+	{
+	Ready:
+		NLSG A 7 A_WeaponReady
+		NLSG A 1 A_TakeInventory("NailGunburst",1)
+		Loop
+	Deselect:
+		NLSG A 1 A_Lower
+		Loop
+	Select:
+		NLSG A 1 A_Raise 
+		Loop
+	Fire:
+		NLSG A 2 A_GunFlash 
+		NLSG A 2 A_PlaySound("NailFire")
+		NLSG DDDDD 0 A_FireCustomMissile("NailGunShard",random(5,-5),1,0,random(-1,1))
+		NLSG BC 3 
+		NLSG A 25 A_PlaySound("NailReload")
+		Goto Ready
+	AltFire:
+		NLSG A 0 A_PlaySound("RipperCannonCoolDown")
+		Goto AltHold
+	AltHold: 
+		NLSG A 0 A_JumpIfInventory("NailGunBurst",1,"ActualAltFire")
+		NLSG A 3 A_GiveInventory("NailGunBurst",1)
+		NLSG A 1 A_ReFire
+		Goto Ready
+	ActualAltFire:
+		NLSG A 1 A_GunFlash 
+		NLSG A 2 A_PlaySound("NailFire")
+		NLSG DDD 0 A_FireCustomMissile("NailGunShard2",random(5,-5),1,0,random(-1,1))
+		NLSG BC 2
+		NLSG A 2 A_ReFire
+		Goto Ready
+	}
+}	
+
+actor nailgunburst : inventory
+{
+	inventory.Maxamount 1
+}
+
+actor NailGunShard
+{
+	Speed 46
+	Damage 12
+	Scale 0.7
+	Decal BulletChip
+	PROJECTILE
+	+RIPPER
+	+BLOODSPLATTER
+	states
+	{
+	Spawn:
+		NLPJ A 5 bright A_CustomMissile("BulletPuff",0,0,180)
+		Loop
+	Death:
+		PUFF B 0 A_Explode(35,10)
+		PUFF BCD 4 
+		Stop
+	}
+}
+
+Actor NailGunShard2 : NailGunShard { Damage 4 }
+
+//***********NailBombLauncher***********\\
+
+ACTOR E_NailBombLauncher : MGW_Weapon
+{
+	Weapon.KickBack 111
+	Weapon.AmmoUse 10
+	Weapon.AmmoUse2 1
+	Weapon.AmmoType "Clip"
+	Weapon.AmmoType2 "RocketAmmo"
+	Weapon.AmmoGive1 152
+	Weapon.UpSound "WeaponSelect"
+	Inventory.PickupMessage "Got a NailBomber"
+	Inventory.PickupSound "misc/w_pkup"
+	Obituary "%o didn't see %K's NailBomb."
+	+WEAPON.NOAUTOFIRE
+	States
+	{
+	Ready:
+		PRXL A 1 A_WeaponReady
+		Loop
+	Deselect:
+		PRXL A 1 A_Lower
+		Loop
+	Select:
+		PRXL A 1 A_Raise 
+		Loop
+	Fire:
+		PRXL A 2 A_GunFlash 
+		PRXL B 2 A_PlaySound("NailBombLAuncher")
+		PRXL C 0 A_FireCustomMissile("NailBomb",random(5,-5),1,0,random(-1,1))
+		PRXL DE 4 
+		PRXL A 25 A_PlaySound("NailReload")
+		Goto Ready
+	}
+}
+
+actor NailBomb
+{
+	Speed 34
+	Damage 29
+	Decal Scorch1
+	PROJECTILE
+	+DOOMBOUNCE
+	+CANBOUNCEWATER
+	-NOGRAVITY
+	Gravity 0.5
+	Scale 0.9
+	SeeSound "weapons/grbnce"
+	DeathSound "NailBombExplosion" 
+	states
+	{
+	Spawn:
+		NBMB AB 6 bright 
+		Loop
+	Death:
+		WSMK BBBBBBBBBBBBBBBBB 0 A_CustomMissile("NailGunSHard",0,0,random(0,360))
+		WSMK ABCDE 5
+		Stop
+	}
+}
+
+//***********NuclearBombLauncher***********\\
+
+Actor E_NuclearBombLauncher : MGW_Weapon
+{
+	Weapon.AmmoUse 100
+	Weapon.AmmoType "RocketAmmo"
+	Weapon.AmmoGive 1
+	Weapon.AmmoUse2 200
+	Weapon.AmmoType2 "RocketAmmo"
+	Weapon.AmmoGive2 1
+	Weapon.KickBack 7000
+	Weapon.UpSound "WeaponSelect"
+	Inventory.PickupSound "misc/w_pkup"
+	States
+	{
+	Ready:
+		NKLG A 1 A_WeaponReady
+		Loop
+	Select:
+		NKLG A 2 A_Raise
+		Loop
+	Deselect:
+		NKLG A 1 A_Lower
+		loop
+	Fire:
+		NKLG A 0 A_GunFlash
+		NKLG B 3 A_FireCustomMissile("NukeMissile",0,1,5)
+		NKLG CDDDDCA 5
+		Goto Ready
+	AltFire:
+		NKLG A 0 A_GunFlash
+		NKLG B 3 A_FireCustomMissile("HyperNukeMissile",0,1,5)
+		NKLG CDDDDCA 5
+		Goto Ready
+	Flash:
+		NKLF A 3 bright A_Light0
+		Goto LightDone
+	}
+}
+
+Actor NukeMissile : Rocket
+{
+	Speed 45
+	States
+	{
+	Spawn:
+		NUKM A 1 Bright A_BishopMissileWeave
+		Loop
+	Death:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("Nuke", 0, 2, 0)
+		Stop
+	}
+}
+
+actor NukeNoclipper
+{
+	Radius 24
+	Height 24
+	Speed 40
+	PROJECTILE
+	+NOCLIP
+	+RIPPER
+	+BLOODLESSIMPACT
+	+FLOORCLIP
+	Radius 1
+	Height 1
+	states
+	{
+	Spawn:
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Explode(53,65)
+		Stop 
+	}
+}
+Actor Nuke
+{
+	+NoBlockmap
+	+NoGravity
+	+ForceRadiusDmg
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySoundEx("Nuke/Boom", "Voice", 0, 2)
+		TNT1 A 1 A_Explode(75000, 1024, 1)
+		TNT1 A 0 Radius_Quake(7, 105, 80, 100, 0)
+		TNT1 A 0 A_SpawnItem("NukeFlare", 0, 0, 0)
+		TNT1 A 25 A_SpawnItem("NukeFloor", 0, 0, 0)
+		TNT1 AA 0 A_SpawnItem("NukeSmokeFloor", 0, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukePillar", 0, 0, 0, 0, 0, 10, 0, 0, 0)
+		TNT1 A 105 A_SpawnItemEx("NukeSmokePillar", 0, 0, 0, 0, 0, 10, 0, 0, 0)
+		TNT1 A 0 A_SpawnItem("NukeMushroom", 0, 800, 0)
+		TNT1 AA 0 A_SpawnItem("NukeSmokeMushroom", 0, 800, 0)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,80)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,100)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,120)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,140)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,160)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,180)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,200)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,220)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,240)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,260)
+		TNT1 AAA 0 A_CustomMissile("NukeNoclipper",0,0,280)
+		TNT1 A 1000
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnIteMEx("NukeRadiation1",random(2000,-2000),random(2000,-2000),random(0, 85))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnIteMEx("NukeRadiation2",random(2000,-2000),random(2000,-2000),random(0, 85))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnIteMEx("NukeRadiation3",random(2000,-2000),random(2000,-2000),random(0, 85))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnIteMEx("NukeRadiation4",random(2000,-2000),random(2000,-2000),random(0, 85))
+		Stop
+		Stop
+	}
+}
+
+Actor NukeFire : Nuke
+{
+	RenderStyle Add
+	+NoInteraction
+	Scale 0.75
+	States
+	{
+	Spawn:
+		TNT1 AA 0 A_Jump(196, "Spawn2", "Spawn3", "Spawn4")
+		FLA1 A 1 Bright A_FadeOut(0.005)
+		Wait
+	Spawn2:
+		FLA2 A 1 Bright A_FadeOut(0.005)
+		Wait
+	Spawn3:
+		FLA3 A 1 Bright A_FadeOut(0.005)
+		Wait
+	Spawn4:
+		FLA4 A 1 Bright A_FadeOut(0.005)
+		Wait
+	}
+}
+
+Actor NukeSmoke : Nuke
+{
+	Scale 3.5
+	+NoInteraction
+	Alpha 0.5
+	States
+	{
+	Spawn:
+		TNT1 AA 0 A_Jump(196, "Spawn2", "Spawn3", "Spawn4")
+		SMOK A 5 A_FadeOut(0.005)
+		Wait
+	Spawn2:
+		SMOK B 5 A_FadeOut(0.005)
+		Wait
+	Spawn3:
+		SMOK C 5 A_FadeOut(0.005)
+		Wait
+	Spawn4:
+		SMOK D 5 A_FadeOut(0.005)
+		Wait
+	}
+}
+
+Actor NukeFlare : NukeFire
+{
+	Scale 16
+	+NoInteraction
+	States
+	{
+	Spawn:
+		FLAR A 1 Bright A_FadeOut(0.01)
+		Wait
+	}
+}
+
+Actor NukeFloor : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0, Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeSmokeFloor : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0, Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukePillar : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 100000), 0.00001 * Random(0, 100000), Random(0, -3), Random(0, 359), 128, 0)
+		TNT1 A 0 A_SpawnItem("NukeSmokering", 0, 0, 0)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 100000), 0.00001 * Random(0, 100000), Random(0, -3), Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeSmokePillar : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0.00001 * Random(0, 100000), 0.00001 * Random(0, 100000), 0.00001 * Random(0, -400000), Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeMushroom : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeFire", 0, 0, 0, 0.00001 * Random(0, 250000), 0.00001 * Random(0, 250000), 0.00001 * Random(-100000, 100000), Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeSmokeMushroom : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 0.00001 * Random(0, 250000), 0.00001 * Random(0, 250000), 0.00001 * Random(-100000, 100000), Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeSmokering : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 20, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 40, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 60, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 80, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 100, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 120, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 140, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 160, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 180, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 200, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 220, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 240, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 260, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 280, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 300, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 320, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeSmoke", 0, 0, 0, 4, 0, 0, 340, 0, 0)
+		Stop
+	}
+}
+
+//Hyper nuke=========================================================================================================
+
+Actor HyperNukeMissile : Rocket
+{
+	States
+	{
+	Death:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("HyperNuke", 0, 2, 0)
+		Stop
+	}
+}
+
+Actor HyperNuke : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySoundEx("Nuke/Boom", "Voice", 0, 2)
+		TNT1 A 1 A_Explode(75000, 1750, 1)
+		TNT1 A 0 Radius_Quake(7, 105, 120, 140, 0)
+		TNT1 A 0 A_SpawnItem("NukeHyperFlare", 0, 0, 0)
+		TNT1 A 25 A_SpawnItem("NukeHyperFloor", 0, 0, 0)
+		TNT1 AA 0 A_SpawnItem("NukeHyperSmokeFloor", 0, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperPillar", 0, 0, 0, 0, 0, 40, 0, 0, 0)
+		TNT1 A 105 A_SpawnItemEx("NukeHyperSmokePillar", 0, 0, 0, 0, 0, 40, 0, 0, 0)
+		TNT1 A 0 A_SpawnItem("NukeHyperMushroom", 0, 4000, 0)
+		TNT1 AA 0 A_SpawnItem("NukeHyperSmokeMushroom", 0, 4000, 0)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("NukeNoclipper",3,0,random(0,360),2,random(0,360))
+		TNT1 A 600
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnIteMEx("NukeRadiation1",random(2000,-2000),random(2000,-2000),random(0, 85))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnIteMEx("NukeRadiation2",random(2000,-2000),random(2000,-2000),random(0, 85))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnIteMEx("NukeRadiation3",random(2000,-2000),random(2000,-2000),random(0, 85))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnIteMEx("NukeRadiation4",random(2000,-2000),random(2000,-2000),random(0, 85))
+		Stop
+	}
+}
+
+Actor NukeRadiation1 : CSTAFFMISSILE
+{
+	Radius 12
+	Height 12
+	Damage 12
+	DamageType RadiationQuanity
+	Speed 16
+	Scale 9
+	+NOGRAVITY
+	+RIPPER
+	+BLOODLESSIMPACT
+	+HEXENBOUNCE
+	+FORCEYBILLBOARD
+	Alpha 0.21
+	States
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEX("RadiationAsItem",0)
+		TNT1 A 0 A_SpawnItemEX("RadiationQuanity",100) 
+		SMOK A 170000 A_FadeOut(0.003)
+		Stop
+	}
+}
+
+Actor NukeRadiation2 : NukeRadiation1
+{
+	States
+	{
+	Spawn:
+		SMOK B 170000 A_FadeOut(0.003)
+		Stop
+	}
+}
+
+Actor NukeRadiation3 : NukeRadiation1
+{
+	States
+	{
+	Spawn:
+		SMOK C 170000 A_FadeOut(0.003)
+		Stop
+	}
+}
+
+Actor NukeRadiation4 : NukeRadiation1
+{
+	States
+	{
+	Spawn:
+		SMOK D 170000 A_FadeOut(0.003)
+		Stop
+	}
+}
+
+Actor NukeHyperFire : Nuke
+{
+	RenderStyle Add
+	+NoInteraction
+	Scale 4
+	States
+	{
+	Spawn:
+		TNT1 AA 0 A_Jump(196, "Spawn2", "Spawn3", "Spawn4")
+		FLA1 A 1 Bright A_FadeOut(0.005)
+		Wait
+	Spawn2:
+		FLA2 A 1 Bright A_FadeOut(0.005)
+		Wait
+	Spawn3:
+		FLA3 A 1 Bright A_FadeOut(0.005)
+		Wait
+	Spawn4:
+		FLA4 A 1 Bright A_FadeOut(0.005)
+		Wait
+	}
+}
+
+Actor NukeHyperSmoke : Nuke
+{
+	Scale 19
+	+NoInteraction
+	Alpha 0.5
+	States
+	{
+	Spawn:
+		TNT1 AA 0 A_Jump(196, "Spawn2", "Spawn3", "Spawn4")
+		SMOK A 5 A_FadeOut(0.003)
+		Wait
+	Spawn2:
+		SMOK B 5 A_FadeOut(0.005)
+		Wait
+	Spawn3:
+		SMOK C 5 A_FadeOut(0.005)
+		Wait
+	Spawn4:
+		SMOK D 5 A_FadeOut(0.005)
+		Wait
+	}
+}
+
+Actor NukeHyperFlare : NukeFire
+{
+	Scale 64
+	+NoInteraction
+	States
+	{
+	Spawn:
+		FLAR A 1 Bright A_FadeOut(0.01)
+		Wait
+	}
+}
+
+Actor NukeHyperFloor : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperFire", 0, 0, 0, 0.00001 * Random(0, 900000), 0.00001 * Random(0, 900000), 0, Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeHyperSmokeFloor : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 0.00001 * Random(0, 900000), 0.00001 * Random(0, 900000), 0, Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeHyperPillar : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1  A_SpawnItemEx("NukeHyperFire", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0.00001 * Random(0, -600000), Random(0, 359), 128, 0)
+		TNT1 A 0 A_SpawnItem("NukeHyperSmokering", 0, 0, 0)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperFire", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0.00001 * Random(0, -600000), Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeHyperSmokePillar : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 0.00001 * Random(0, 300000), 0.00001 * Random(0, 300000), 0.00001 * Random(0, -600000), Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeHyperMushroom : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperFire", 0, 0, 0, 0.00001 * Random(0, 600000), 0.00001 * Random(0, 900000), 0.00001 * Random(-400000, 400000), Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeHyperSmokeMushroom : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 0.00001 * Random(0, 600000), 0.00001 * Random(0, 900000), 0.00001 * Random(-400000, 400000), Random(0, 359), 128, 0)
+		Stop
+	}
+}
+
+Actor NukeHyperSmokering : Nuke
+{
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 0, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 20, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 40, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 60, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 80, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 100, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 120, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 140, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 160, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 180, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 200, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 220, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 240, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 260, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 280, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 300, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 320, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 340, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 10, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 30, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 50, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 70, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 90, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 110, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 130, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 150, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 170, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 190, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 210, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 230, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 250, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 270, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 290, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 310, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 330, 0, 0)
+		TNT1 A 0 A_SpawnItemEx("NukeHyperSmoke", 0, 0, 0, 12, 0, 0, 350, 0, 0)
+		Stop
+	}
+}
+
+Actor RadiationQuanity : Ammo
+{
+	Inventory.MaxAmount 100
+	Inventory.Amount 0
+	Ammo.BackPackAmount 0
+	Ammo.BackPackMaxAmount 0
+}

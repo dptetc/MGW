@@ -1,0 +1,562 @@
+
+//***********Melees***********\\
+
+actor Melees : Custominventory 2005
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP10 A 1
+		WP10 A 1 A_BarrelDestroy
+		Wait
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_Chainsaw",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_Wrench",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_Knife",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor MeleesSpawner replaces Chainsaw
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("Melees", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********Shotguns***********\\
+
+actor Shotguns : Custominventory 2001
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP31 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_Shotgun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_Shotgun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_Shotgun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor ShotgunSpawner replaces Shotgun
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("Shotguns", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********DoubleShotguns***********\\
+
+actor DoubleShotguns : Custominventory 82
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP31 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_SSG",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_SSG",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_SSG",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor SSG_Spawner replaces SuperShotgun
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("DoubleShotguns", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********Chainguns***********\\
+
+actor Chainguns : Custominventory 2002
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP41 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_Machinegun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_MP5",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_UZI",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor ChaingunSpawner replaces Chaingun 
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("Chainguns", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********Miniguns***********\\
+
+actor Miniguns : Custominventory 5014
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP42 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_Chaingun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_NailGun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_Ripper",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor MinigunSpawner 
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("Miniguns", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********RocketLaunchers***********\\
+
+actor RocketLaunchers : Custominventory 2003
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP52 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_Rocketlauncher",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_NailBombLauncher",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_FlareGun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor RocketLauncherSpawner replaces RocketLauncher
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("RocketLaunchers", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********GrenadeLaunchers**********\\
+
+actor GrenadeLaunchers : Custominventory 5011
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP52 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_GrenadeLauncher",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_GrenadeLauncher",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_Grenades",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor GrenadeLauncherSpawner
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("GrenadeLaunchers", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********PlasmaRifles***********\\
+
+actor PlasmaRifles : Custominventory 2004
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP61 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_PlasmaRifle",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_RailGun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_Shockgun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor PlasmaRifleSpawner replaces PlasmaRifle
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("PlasmaRifles", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********RAILGUNS********\\
+
+Actor Railguns : CustomInventory 5012
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP71 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_ZeroGun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_PhaseGun",1) 
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_Protogun",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor RailgunSpawner
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("Railguns", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********BFG9KS***********\\
+
+Actor BFG9KS : CustomInventory 2006
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP71 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_BFG9000",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_ElectricLauncher",1) 
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_HealingCannon",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	}
+}
+
+Actor BFG9KSpawner replaces BFG9000
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("BFG9KS", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}
+
+//***********BFG10KS***********\\
+
+Actor BFG10KS : CustomInventory 5013
+{
+	//$Category "Weapon Givers"
+	states
+	{ 
+	Spawn: 
+		WP72 A -1 
+		Stop
+	Pickup:
+		BPAK A 0 A_JumpIfInventory("IsDoomer",1,"Pickup2")
+		BPAK A 0 A_JumpIfInventory("IsEngineer",1,"Pickup3")
+		BPAK A 0 A_JumpIfInventory("IsHealer",1,"Pickup4")
+	Pickup2:
+		BPAK A 1 A_GiveInventory("D_BFG10K",1)
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup3:
+		BPAK A 1 A_GiveInventory("E_NuclearBombLauncher",1) 
+		BPAK A 1 A_GiveInventory("Backpack",1)
+		Stop
+	Pickup4:
+		BPAK A 1 A_GiveInventory("H_ArchvileSpawner",1)
+		BPAK A 1 A_GiveInventory("Backpack",1) 
+		Stop
+	}
+}
+
+Actor BFG10KSpawner
+{
+	//$Category "Weapon Spawners"
+	Radius 0.01
+	Height 0.01
+	+SOLID
+	-SHOOTABLE
+	+NONSHOOTABLE
+	+NoBLOCKMAP
+	+FLOORHUGGER
+	+FLOORCLIP
+	states
+	{
+	Spawn:
+		TNT1 A 1000
+		TNT1 A 0 A_SpawnItemEx("BFG10KS", 0) 
+		TNT1 A 0 A_SpawnItemEx("ItemFog", 0)
+		TNT1 A 0 A_PlaySound("misc/spawn")
+		Loop
+	}
+}

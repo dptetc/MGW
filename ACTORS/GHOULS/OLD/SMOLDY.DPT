@@ -1,0 +1,159 @@
+Actor Smoldy
+{
+	health 4000
+	radius 28
+	height 56
+	speed 15
+	scale 0.8
+	MeleeDamage 255
+	PainChance 255
+	BloodColor none
+	Obituary "%o found the Ghoul"
+	MONSTER
+	+LOOKALLAROUND
+	+DONTSPLASH
+	+DROPOFF
+	+ISMONSTER
+	States
+	{
+	Spawn:
+		SMLD A 1 A_Wander
+		SMLD A 0 A_Look
+		Loop
+	See:
+		TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+		SMLD A 0 A_SpawnItem("SmoldyFire3",0.1,96,0,0)
+		SMLD A 1 A_Chase
+		Loop
+	Melee:
+		TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+		SMLD A 0 A_FaceTarget
+		SMLD A 1 A_MeleeAttack
+		TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+		Goto see
+	Pain:
+		TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+		SMLD ABCD 2
+		SMLD D 3
+		SMLD DDDDDDDDDDD 0 A_CustomMissile("SmoldyFire1",20,0,random(0,360))
+		SMLD D 35 A_CustomMissile("SmoldyFire1",0,0,random(0,360))
+		SMLD D 0 A_Jump(255,"Explode","Explode2")
+		Goto see
+	Explode:
+		SMLD D 0 A_ChangeFlag("INVULNERABLE",1)
+		SMLD D 32 Radius_Quake(6,32,0,32,0)
+		SMLD DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD 2 A_CustomMissile("SmoldyFire2",64,0,random(0,360),2,random(0,72))
+		SMLD D 0 A_ChangeFlag("INVULNERABLE",0)
+		Goto see
+	Explode2:
+		SMLD D 0 A_ChangeFlag("INVULNERABLE",1)
+		SMLD D 32 Radius_Quake(6,32,0,32,0)
+		SMLD DDDDDDDDDDDDDDDDDDDDD 0 A_CustomMissile("SmoldyFire2",64,0,random(0,360),2,random(0,72))
+		SMLD D 35 A_CustomMissile("SmoldyFire2",64,0,random(0,360),2,random(0,72))
+		SMLD D 0 A_ChangeFlag("INVULNERABLE",0)
+		Goto see
+	Death:
+		SMLD A 0 A_SpawnItem("DarknessRing", 1, 32)
+		SMLD A 0 A_NoBlocking
+		SMLD DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD 1 A_CustomMissile("GhoulFireX2", 2, 0, random(0,360), 2,0)
+		SMLD DDDDDDDDDD 5 A_FadeOut(0.1)
+		TNT1 A 1
+		Stop
+	}
+}
+
+actor ArenaSmoldy : Smoldy
+{
+	Obituary "%o burned up by the Smoldy"
+}
+
+actor SmoldyFire1
+{
+	Radius 12
+	Height 24
+	Speed 22
+	Damage 8
+	Mass 120
+	SeeSound "juggy/shoot"
+	DeathSound "imp/shotx"
+	Decal "Scorch"
+	Projectile
+	+RANDOMIZE
+	states
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEx("SmallFlame", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_Jump(216, 3)
+		TNT1 A 1 A_SpawnItemEx("Flame1A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 0 A_Jump(176, 2)
+		TNT1 A 1 A_SpawnItemEx("Flame1B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 0 A_Jump(136, 2)
+		TNT1 A 1 A_SpawnItemEx("Flame2A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 0 A_Jump(96, 2)
+		TNT1 A 1 A_SpawnItemEx("Flame2B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 0 A_Jump(56, 2)
+		TNT1 A 1 A_SpawnItemEx("Flame3A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 1 A_SpawnItemEx("Flame3B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+	Death:
+		TNT1 A 0 A_Explode(16, 56)
+		TNT1 A 1
+		Stop
+	}
+}
+
+actor SmoldyFire2
+{
+	Radius 12
+	Height 24
+	Speed 26
+	Damage 8
+	Mass 150
+	SeeSound "juggy/shoot"
+	DeathSound "imp/shotx"
+	Decal "Scorch"
+	+MISSILE
+	+NOTELEPORT
+	states
+	{
+	Spawn:
+		TNT1 A 0 A_SpawnItemEx("SmallFlame", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_Jump(216, 3)
+		TNT1 A 1 A_SpawnItemEx("Flame1A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 0 A_Jump(176, 2)
+		TNT1 A 1 A_SpawnItemEx("Flame1B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 0 A_Jump(136, 2)
+		TNT1 A 1 A_SpawnItemEx("Flame2A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 0 A_Jump(96, 2)
+		TNT1 A 1 A_SpawnItemEx("Flame2B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 0 A_Jump(56, 2)
+		TNT1 A 1 A_SpawnItemEx("Flame3A", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+		TNT1 A 1 A_SpawnItemEx("Flame3B", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+	Death:
+		TNT1 A 0 A_Explode(16, 56)
+		TNT1 A 1
+		Stop
+	}
+}
+
+actor SmoldyFire3 : GhoulFireX
+{
+	Speed 0
+	States
+	{
+	Spawn:
+		TNT1 AAA 1 A_SpawnItemEx("GhoulsFireSFX", 1, 4)
+		Stop
+	}
+}

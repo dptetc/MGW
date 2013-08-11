@@ -1,0 +1,25 @@
+ClearPlayerClasses
+AddPlayerClass "Doomer"
+AddPlayerClass "Engineer"
+AddPlayerClass "Healer"
+
+weaponsection MGW_Weapons
+
+setslot 0 H_HealthPack "Curing Cannon"
+setslot 1 Fists D_Chainsaw E_Wrench H_Knife
+setslot 2 D_Pistol E_Pistol H_PhaseGun
+setslot 3 D_Shotgun E_Shotgun H_Shotgun D_SSG E_SSG H_SSG
+setslot 4 D_Machinegun E_MP5 H_UZI D_Chaingun E_NailGun H_Ripper
+setslot 5 D_Rocketlauncher E_NailBombLauncher H_FlareGun D_GrenadeLauncher E_GrenadeLauncher H_Grenades
+setslot 6 D_PlasmaRifle E_RailGun H_Shockgun D_ZeroGun E_PhaseGun H_Protogun
+setslot 7 D_BFG9000 E_ElectricLauncher H_HealingCannon D_BFG10K E_NuclearBombLauncher H_ArchvileSpawner
+setslot 8 Lighter FlashLight
+
+alias Zoom "fov 10; m_pitch .125;m_yaw .2; set autoaim 0; crosshairgrow 10; echo Zoom in; rebind Zoom_out;"
+alias Zoom_out "fov 90; m_pitch 1;m_yaw 1; set autoaim 5000; crosshairgrow 1; echo Zoom out; rebind Zoom;"
+
+defaultbind f "use Flashlight"
+
+addkeysection "Mysterious Ghoul World" MGW_Weapons
+addmenukey "Flashlight" "use Flashlight"
+addmenukey "Zoom" "Zoom"

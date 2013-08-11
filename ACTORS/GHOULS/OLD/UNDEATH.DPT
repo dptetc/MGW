@@ -1,0 +1,84 @@
+ACTOR Undeath
+{
+	health 4000
+	MONSTER
+	+DROPOFF
+	+LOOKALLAROUND
+	+DONTSPLASH
+	+ISMONSTER
+	RenderStyle Translucent
+	Alpha 0
+	BloodColor 64 32 32
+	Radius 30
+	Height 100
+	Speed 24
+	scale 0.63
+	meleedamage 255
+	painchance 255
+	ActiveSound "undeathactive"
+	SeeSound "undeathsee"
+	+FULLVOLACTIVE
+	Obituary "%o found the Ghoul"
+	States
+	{
+	Spawn:
+		UNDH A 0 A_Look
+		UNDH A 0 A_ChangeFlag("NOCLIP", 0)
+		UNDH A 1 A_Wander
+		Loop
+	See:
+		UNDH A 0 A_ChangeFlag("FRIGHTENED", 0)
+		UNDH A 0 A_LoopActiveSound
+		UNDH A 0 A_SetTranslucent(0.8, 0)
+		UNDH A 0 A_ChangeFlag("NOCLIP", 0)
+		UNDH A 0 A_ChangeFlag("SHOOTABLE", 1)
+		UNDH AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Chase
+		UNDH A 0 A_ChangeFlag("NOCLIP", 1)
+		UNDH A 0 A_ChangeFlag("SHOOTABLE", 0)
+		UNDH A 2 A_SetTranslucent(0.7, 0)
+		UNDH A 2 A_SetTranslucent(0.6, 0)
+		UNDH A 2 A_SetTranslucent(0.5, 0)
+		UNDH A 2 A_SetTranslucent(0.4, 0)
+		UNDH A 2 A_SetTranslucent(0.3, 0)
+		UNDH A 2 A_SetTranslucent(0.2, 0)
+		UNDH A 2 A_SetTranslucent(0.1, 0)
+		UNDH A 2 A_SetTranslucent(0.0, 0)
+		UNDH AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Chase
+		UNDH A 2 A_SetTranslucent(0.1, 0)
+		UNDH A 2 A_SetTranslucent(0.2, 0)
+		UNDH A 2 A_SetTranslucent(0.3, 0)
+		UNDH A 2 A_SetTranslucent(0.4, 0)
+		UNDH A 2 A_SetTranslucent(0.5, 0)
+		UNDH A 2 A_SetTranslucent(0.6, 0)
+		UNDH A 2 A_SetTranslucent(0.7, 0)
+	Melee:
+		UNDH A 0 A_SetTranslucent(0.8, 0)
+		UNDH A 0 A_FaceTarget
+		UNDH A 0 A_PlaySound("undeathattack")
+		UNDH A 1 A_MeleeAttack
+		Goto See
+	Pain:
+		UNDH A 1 A_SetTranslucent(0, 0)
+		UNDH A 0 A_ChangeFlag("FRIGHTENED", 1)
+		UNDH A 0 A_ChangeFlag("SHOOTABLE", 0)
+		UNDH A 0 A_ChangeFlag("NOCLIP" ,1)
+		UNDH AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Chase
+		Goto See
+	Death:
+		UNDH A 0 A_SpawnItem("DarknessRing", 1, 32)
+		UNDH A 28 A_SetTranslucent(0.8, 0)
+		UNDH B 6 A_SetTranslucent(0.7, 0)
+		UNDH C 6 A_SetTranslucent(0.6, 0)
+		UNDH D 6 A_SetTranslucent(0.5, 0)
+		UNDH E 6 A_SetTranslucent(0.4, 0)
+		UNDH F 6 A_SetTranslucent(0.3, 0)
+		UNDH G 6 A_SetTranslucent(0.2, 0)
+		UNDH H 6 A_SetTranslucent(0.1, 0)
+		Stop
+	}
+}
+
+ACTOR ArenaUndeath : Undeath
+{
+	Obituary "%o got too close to Undeath"
+}

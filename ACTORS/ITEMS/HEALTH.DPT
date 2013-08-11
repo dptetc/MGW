@@ -1,0 +1,13 @@
+Actor Medipack : Health 10394
+{
+  Game Doom
+  Inventory.Amount 40
+  Inventory.PickupMessage "Picked up a medipack"
+  Health.LowMessage 20, "Picked up a medipack that you REALLY need!"
+  States
+  {
+    Spawn:
+    MEDP A -1
+    Stop
+  }
+}

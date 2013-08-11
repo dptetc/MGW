@@ -1,0 +1,114 @@
+Actor Clowny
+{
+	health 4000
+	radius 31
+	height 120
+	Speed 18
+	scale 0.5
+	mass 99999999
+	RENDERSTYLE Add
+	Activesound "ghoul2/laugh"
+	Deathsound "ghoul2/death"
+	MONSTER
+	+LOOKALLAROUND
+	-SHOOTABLE
+	+NOGRAVITY
+	+FLOAT
+	+DROPOFF
+	+ISMONSTER
+	Painchance 255
+	Obituary "%o found the Ghoul"
+	States
+	{
+	Spawn:
+		GHL2 A 0 A_Changeflag("SHOOTABLE", 0)
+		GHL2 A 0 A_Settranslucent(0,0)
+		GHL2 A 0 A_SkullAttack
+		GHL2 A 1 A_Look
+		GHL2 AAAAAAAAAA 4 A_Wander
+		GHL2 A 0 A_Changeflag("SHOOTABLE", 1)
+		GHL2 B 0 A_Settranslucent(0.5,0)
+		GHL2 A 1 A_Look
+		GHL2 B 2 A_Wander
+		GHL2 B 0 A_Settranslucent(0.6,0)
+		GHL2 A 1 A_Look
+		GHL2 B 2 A_Wander
+		GHL2 B 0 A_Settranslucent(0.7,0)
+		GHL2 A 1 A_Look
+		GHL2 B 2 A_Wander
+		GHL2 B 0 A_Settranslucent(0.8,0)
+		GHL2 A 1 A_Look
+		GHL2 A 2 A_Wander
+		GHL2 A 0 A_Settranslucent(0.7,0)
+		GHL2 A 1 A_Look
+		GHL2 A 2 A_Wander
+		GHL2 A 0 A_Settranslucent(0.6,0)
+		GHL2 A 1 A_Look
+		GHL2 A 2 A_Wander
+		GHL2 A 0 A_Settranslucent(0.5,0)
+		GHL2 A 1 A_Look
+		GHL2 A 2 A_Wander
+		loop
+	See:
+		GHL2 A 0 A_Changeflag("SHOOTABLE", 0)
+		GHL2 A 0 A_Settranslucent(0,0)
+		GHL2 A 0 A_LoopActiveSound
+		GHL2 AAAAAAAAAA 4 A_Chase
+		GHL2 A 0 A_Changeflag("SHOOTABLE", 1)
+		GHL2 B 0 A_Settranslucent(0.5,0)
+		GHL2 B 2 A_Chase
+		GHL2 B 0 A_Settranslucent(0.6,0)
+		GHL2 B 2 A_Chase
+		GHL2 B 0 A_Settranslucent(0.7,0)
+		GHL2 B 2 A_Chase
+		GHL2 B 0 A_Settranslucent(0.8,0)
+		GHL2 A 0 A_SkullAttack
+		GHL2 A 70 A_Chase
+		GHL2 A 0 A_Settranslucent(0.7,0)
+		GHL2 A 2 A_Chase
+		GHL2 A 0 A_Settranslucent(0.6,0)
+		GHL2 A 2 A_Chase
+		GHL2 A 0 A_Settranslucent(0.5,0)
+		GHL2 A 2 A_Chase
+		loop
+	Melee:
+		GHL2 A 0 A_PlaySound("ghoul2/laugh")
+		GHL2 A 0 A_Settranslucent(0,0)
+		GHL2 A 0 A_Facetarget
+		GHL2 A 0 A_SkullAttack
+		GHL2 A 0 A_CustomMeleeAttack(255,"none","none","none",1)
+		TNT1 A 20
+		goto see
+	Pain:
+		GHL2 A 0 A_Changeflag("FRIGHTENED", 1)
+		GHL2 A 0 A_Settranslucent(0.0,0)
+		GHL2 AAAAAAA 5 A_Chase
+		GHL2 A 0 A_Changeflag("FRIGHTENED", 0)
+		goto see
+	Death:
+		GHL2 C 0 A_SpawnItem("DarknessRing", 1, 32)
+		GHL2 C 0 A_Settranslucent(0.5,0)
+		GHL2 C 0 A_Die
+		GHL2 C 0 A_Fall
+		GHL2 C 50 A_Scream
+		GHL2 C 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 4 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 C 2 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		GHL2 CCCCCCCCCC 5 A_Fadeout(0.1)
+		stop
+	}
+}
+
+Actor ArenaClowny : Clowny
+{
+	Obituary "%o thought he saw Clowny"
+}

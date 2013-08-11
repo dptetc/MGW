@@ -1,0 +1,70 @@
+#include "zcommon.acs"
+
+int ghouls[25]  = { "ArenaChoke",
+	"ArenaClowny",
+	"ArenaCreeper",
+	"ArenaCybervampire",
+	"ArenaCyberzoid",
+	"ArenaDemonskull",
+	"ArenaEyesore",
+	"ArenaFirelord",
+	"ArenaFrostbite",
+	"ArenaHellskull",
+	"ArenaJitterskull",
+	"ArenaJugulum",
+	"ArenaMisty",
+	"ArenaNightmare",
+	"ArenaReaper",
+	"ArenaSjas",
+	"ArenaSmoldy",
+	"ArenaSoulHarvester",
+	"ArenaTerror",
+	"ArenaUndeath",
+	"ArenaBND",
+	"ArenaBlack",
+	"ArenaBull",
+	"ArenaTAG",
+	"ArenaChain",
+};
+int gtemp;
+int ntk = 25;
+
+script 1 OPEN CLIENTSIDE
+{
+	int currentPosition = 0.0;
+
+	// Draw everything on a 640x480 scale.
+	SetHudSize( 640, 480, 0 );
+
+	// Switch to the cameras.
+	Thing_Activate( 15 );
+	ChangeCamera( 15, 0, 0 );
+
+	// Fade in from black.
+	FadeRange (0, 0, 0, 1.0, 0, 0, 0, 0.0, 4.0);
+	delay(35 * 2);
+	while ( true )
+	{
+		currentPosition -= 1.0;
+		SetFont("bigfont");
+		HudMessageBold(s:"Mysterious Ghoul World"; HUDMSG_PLAIN, 1,  CR_GRAY,  320.0,    200.0  + currentPosition, 0.0);
+	}
+}
+
+script 2 OPEN CLIENTSIDE
+{
+	for (int i=0; i<ntk; i++)
+	{
+		While (!ThingCount(T_NONE, 10)) {
+			SpawnSpot(ghouls[gtemp], random(101, 108), 10, 0);
+		}
+		Thing_Hate(10, 10, 4);
+	}
+}
+
+function int round (int fixednum) {
+	int retamount = fixednum >> 16;
+	if (fixednum % 65536 > 32767)
+	retamount++;
+	return retamount;
+}

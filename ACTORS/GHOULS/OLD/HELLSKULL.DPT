@@ -1,0 +1,74 @@
+Actor HellSkull
+{
+	health 4000
+	Radius 26
+	Height 60
+	Speed 15
+	Scale 0.55
+	PainChance 255
+	MeleeDamage 255
+	RenderStyle Translucent
+	BloodColor none
+	Monster
+	+DROPOFF
+	+TELESTOMP
+	+LOOKALLAROUND
+	+DONTSPLASH
+	+NODAMAGETHRUST
+	+ISMONSTER
+	Obituary "%o found the Ghoul"
+	States
+	{
+	Spawn:
+		HSKL A 1 A_Wander
+		HSKL A 0 A_Look
+		Loop
+	See:
+		HSKL A 0 A_ChangeFlag("FRIGHTENED",0)
+		HSKL A 0 A_SetTranslucent(1.0,0)
+		HSKL AAAAAAAAAA 1 A_Chase
+		HSKL A 0 ThrustThing(random(0,360),18,0,0)
+		Loop
+	Melee:
+		HSKL A 0 A_SetTranslucent(1.0,0)
+		HSKL A 0 A_FaceTarget
+		HSKL A 1 A_MeleeAttack
+		Goto see
+	Pain:
+		HSKL A 0 A_SetTranslucent(0,0)
+		HSKL A 0 A_ChangeFlag("FRIGHTENED",1)
+		HSKL AAAAAAAA 0 A_Chase
+		HSKL A 0 A_SetTranslucent(0.1,0)
+		HSKL A 0 A_ChangeFlag("FRIGHTENED",0)
+		HSKL AA 1 A_Chase
+		HSKL A 0 A_SetTranslucent(0.2,0)
+		HSKL AA 1 A_Chase
+		HSKL A 0 A_SetTranslucent(0.3,0)
+		HSKL AA 1 A_Chase
+		HSKL A 0 A_SetTranslucent(0.4,0)
+		HSKL AA 1 A_Chase
+		HSKL A 0 A_SetTranslucent(0.5,0)
+		HSKL AA 1 A_Chase
+		HSKL A 0 A_SetTranslucent(0.6,0)
+		HSKL AA 1 A_Chase
+		HSKL A 0 A_SetTranslucent(0.7,0)
+		HSKL AA 1 A_Chase
+		HSKL A 0 A_SetTranslucent(0.8,0)
+		HSKL AA 1 A_Chase
+		HSKL A 0 A_SetTranslucent(0.9,0)
+		HSKL AA 1 A_Chase
+		HSKL A 0 A_SetTranslucent(1.0,0)
+		Goto see
+	Death:
+		HSKL A 0 A_SetTranslucent(1,0)
+		HSKL A 0 A_SpawnItem("DarknessRing",1,32)
+		HSKL AAAAAAAAAAAAAAAAAAAAAAAAA 2 A_CustomMissile("GhoulFireX2",0,0,random(0,360),2,0)
+		HSKL AAAAAAAAAA 5 A_FadeOut(0.1)
+		stop
+	}
+}
+
+Actor ArenaHellskull : Hellskull
+{
+	Obituary "%o found the Hell's Skull"
+}

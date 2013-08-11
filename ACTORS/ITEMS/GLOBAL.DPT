@@ -1,0 +1,214 @@
+//***********Common***********\\
+
+actor MGW_Weapon : Weapon replaces DoomWeapon
+{
+	+NO_AUTO_SWITCH
+	+NOAUTOAIM
+	+INVENTORY.UNDROPPABLE
+	Weapon.Kickback 50
+	weapon.selectionorder 9999
+	states 
+	{
+	DeselectDie:
+		TNT1 A 0 A_Lower
+		TNT1 A 1 A_Lower
+		loop
+	Flash:
+		TNT1 A 2 A_Light1
+		TNT1 A 2 A_Light2
+		TNT1 A 0 A_Light0
+		stop
+	LightDone:
+		TNT1 A 0 A_Light0
+		Stop
+	}
+}
+
+//***********Fists***********\\
+
+ACTOR Fists : MGW_Weapon
+{
+	Weapon.SelectionOrder 3700
+	Weapon.Kickback 20
+	+WEAPON.NOAUTOFIRE
+	States
+	{
+	Spawn:
+	Ready:
+		PUNG A 11 A_WeaponReady
+		PUNG A 0 A_TakeInventory("StrikeCount",1)
+		LOOP
+	Deselect:
+		PUNG A 1 A_Lower
+		LOOP
+	Select:
+		PUNG A 1 A_Raise
+		LOOP
+	Fire: 
+		TNT1 A 0 A_JumpIfInventory("StrikeCount",1,"Fire2")
+		PUNG E 2 A_GiveInventory("StrikeCount",1)
+		PUNG F 2
+		PUNG G 2 A_CustomPunch(6, 0, 0, "BulletPuff")
+		PUNG F 2
+		PUNG E 2
+		PUNG E 12
+		Goto Ready
+	Fire2:
+		PUNG B 2  A_TakeInventory("StrikeCount",1)
+		PUNG C 2
+		PUNG D 2 A_CustomPunch(6, 0, 0, "BulletPuff")
+		PUNG C 2 
+		PUNG B 2 
+		PUNG E 12
+		Goto Ready
+	AltFire:
+		PUNG H 5 A_TakeInventory("StrikeCount",1)
+		PUNG J 5 A_CustomPunch(8, 0, 0, "BulletPuff")
+		PUNG H 5
+		Goto Ready
+	}
+}
+
+actor StrikeCount : inventory
+{
+	Inventory.MaxAmount 1 
+}
+
+actor isDoomer : inventory
+{
+	Inventory.MaxAmount 1 
+}
+
+actor isEngineer : inventory 
+{
+	Inventory.MaxAmount 1 
+}
+
+actor isHealer : inventory 
+{
+	Inventory.MaxAmount 1 
+}
+
+actor NewRocket : Rocket replaces rocket
+{
+	+DONTHURTSPECIES
+	-ROCKETTRAIL
+	scale 1.5
+	states
+	{
+	Spawn:
+		MISL A 1 Bright A_CustomMissile("NewRocketTrail",random(-12,12),0,0)
+		Loop
+	Death:
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
+		MISL C 4 Bright A_Explode(12,15)
+		MISL C 0 Bright Radius_Quake (5,2,3,3,0)
+		MISL DEFG 4 Bright A_Explode
+		Stop
+	}
+}
+
+Actor RocketExplosion
+{ 
+	Speed 2.1
+	Height 3
+	Radius 4
+	Alpha 0.74
+	Scale 1.2
+	Renderstyle Add
+	PROJECTILE
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+NOTDMATCH
+	States
+	{
+	Spawn:
+		EXS1 ABCDEFGH 3 A_FadeOut(0.02)
+		stop
+	}
+}  
+
+Actor NewRocketTrail
+{ 
+	Speed 1.1
+	Height 3
+	Radius 4
+	Alpha 0.74
+	Scale 1.24
+	Renderstyle Add
+	PROJECTILE
+	+CLIENTSIDEONLY
+	+NOINTERACTION
+	+NOTDMATCH
+	States
+	{
+	Spawn:
+		WPXS ABCDEFGHIJKLMNOPQRSTUVWXYZ 1 A_FadeOut(0.08)
+		stop
+	}
+}
+
+actor Tracerpiece : RevenantTracerSmoke
+{
+	-NOGRAVITY
+	+NOTDMATCH
+	+CLIENTSIDEONLY
+	Radius 5
+	height 5
+	Speed 5
+	Gravity 0.05
+	states
+	{
+	Spawn:
+		PUFF ABABABABABABABABABABABABABABAB 5 bright
+		Stop
+	}
+}
+
+actor MiniMissile 
+{
+	Game Doom
+	Radius 8
+	Height 8
+	Speed 12
+	Damage 10
+	Scale 0.35
+	Decal MiniMissileScorch
+	Projectile
+	+NOGRAVITY
+	+RANDOMIZE
+	+SEEKERMISSILE
+	SeeSound "Sentry/RocketFire"
+	DeathSound "Sentry/RocketHit"
+	States
+	{
+	Spawn:
+		MISL A 1 A_SeekerMissile(15,10)
+		MISL A 1 A_BishopMissileWeave
+		Loop
+	Death:
+		EXP1 A 4 bright A_Explode(45,65)
+		EXP1 BCDEF 3 bright
+		stop
+	}
+}
+
+Actor revenantTracerSmoke1 : RevenantTracerSmoke replaces RevenantTracerSmoke
+{
+	Speed 4.5
+}
+
+actor Pumped : CustomInventory
+{
+	Inventory.MaxAmount 1
+}
+
+actor RadiationAsItem : CustomInventory
+{
+	Inventory.MaxAmount 100
+	Inventory.Amount 100
+}

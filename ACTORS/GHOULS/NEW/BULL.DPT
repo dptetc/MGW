@@ -1,0 +1,89 @@
+ACTOR Bull
+{
+	health 4000
+	MONSTER
+	+DROPOFF
+	+LOOKALLAROUND
+	+DONTSPLASH
+	+ISMONSTER
+	BloodColor None
+	RenderStyle Translucent
+	Speed 21
+	Height 64
+	Radius 25
+	Scale 0.9
+	MeleeDamage 255
+	PainChance 255
+	Obituary "%o found the Ghoul"
+	AttackSound "bull/attack"
+	SeeSound "bull/see"
+	DamageType "Bull"
+	States
+	{
+	Spawn:
+		BULL A 0 A_Look
+		BULL A 0 A_PlaySound("bull/act")
+		BULL A 1 A_Wander
+		Loop
+	See:
+		BULL A 0 A_PlaySound("bull/fly")
+		BULL AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Chase
+		BULL A 0 A_SpawnItemEx("FakeBull", 1, 1, 1, 0, 0, 0, 0, SXF_SETMASTER, 112)
+		Loop
+	Melee:
+		BULL A 0 A_FaceTarget
+		BULL A 1 A_MeleeAttack
+		Goto see
+	Pain:
+		BULL A 0 A_PlaySound("bull/pain")
+		BULL AA 1 A_SpawnItemEx("FakeBull", 1, 1, 1, 0, 0, 0, 0, SXF_SETMASTER, 0)
+		Goto see
+	Death:
+		BULL A 0 A_PlaySound("bull/die")
+		BULL A 35 A_Fall
+		BULL A 35 A_KillChildren
+		BULL AAAAAAAAAA 1 A_FadeOut(0.1)
+		TNT1 A 1
+		stop
+	}
+}
+
+ACTOR FakeBull
+{
+	+DROPOFF
+	+LOOKALLAROUND
+	+DONTSPLASH
+	+NOCLIP
+	+SHOOTABLE
+	BloodColor none
+	RenderStyle Translucent
+	alpha 0.7
+	Speed 18
+	Height 64
+	Radius 25
+	Scale 0.9
+	MeleeDamage 0
+	Health 1
+	States
+	{
+	Spawn:
+		BULL A 0 A_Look
+		BULL A 1 A_Wander
+		loop
+	See:
+		BULL A 1 A_Chase
+		Loop
+	Melee:
+		BULL A 1
+		Goto death
+	Death:
+		BULL AAAAAAAAAAAAAAAAAAAA 1 A_FadeOut(0.1)
+		TNT1 A 1
+		stop
+	}
+}
+
+ACTOR ArenaBull : Bull
+{
+	Obituary "%o was fucked by Bull"
+}

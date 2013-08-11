@@ -1,0 +1,63 @@
+ACTOR Choke
+{
+	health 4000
+	Radius 28
+	Height 56
+	Speed 25
+	PainChance 64
+	MeleeDamage 4
+	Renderstyle Translucent
+	alpha 0.7
+	MONSTER 
+	+FLOORCLIP
+	+NODAMAGETHRUST
+	+TELESTOMP
+	+DONTMORPH
+	+DONTBLAST
+	+DONTGIB
+	+DONTSPLASH
+	+DROPOFF
+	+LOOKALLAROUND
+	+ISMONSTER
+	SeeSound choke1
+	PainSound choke2
+	ActiveSound choke3
+	MeleeSound choke4
+	DeathSound choke5
+	Obituary "%o found the Ghoul"
+	States
+	{
+	Spawn:
+		GHOU E 1 A_Wander
+		GHOU E 0 A_Look
+		Loop
+	See:
+		GHOU E 0 A_SetTranslucent(0.8,0)
+		GHOU E 1 A_Chase
+		GHOU E 0 A_SetTranslucent(0.4,0)
+		GHOU E 1 A_Chase
+		Loop
+	Pain:
+		GHOU E 1 A_SetTranslucent(1,0)
+		GHOU E 3 A_Pain
+		Goto See
+	Melee:
+		GHOU E   1 A_MeleeAttack
+		GHOU FG  1
+		Goto See
+	Death:
+		GHOU M 0 A_SpawnItem("DarknessRing", 1, 32)
+		GHOU H 5
+		GHOU I 10 A_Scream
+		GHOU J 10 A_Fall
+		GHOU K 10
+		GHOU L 10
+		GHOU M 10
+		Stop
+	}
+}
+
+Actor ArenaChoke : Choke
+{
+	Obituary "%o was devoured by the Choke"
+}

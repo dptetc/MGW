@@ -1,0 +1,64 @@
+ACTOR CyberVampire
+{
+	health 4000
+	MONSTER
+	+DROPOFF
+	+LOOKALLAROUND
+	+DONTSPLASH
+	+FLOAT
+	+ISMONSTER
+	BloodColor 0 72 0
+	Scale 0.9
+	Radius 25
+	Height 64
+	Speed 26
+	Damage 255
+	PainChance 255
+	MinMissileChance 0
+	Obituary "%o found the Ghoul"
+	States
+	{
+	Spawn:
+		CVMP A 1 A_Look
+		Loop
+	See:
+		CVMP A 0 A_SetTranslucent(0.8,0)
+		CVMP ABCBA 1 A_Chase
+		CVMP A 0 A_SetTranslucent(0.4,0)
+		CVMP ABCBA 1 A_Chase
+		Loop
+	Melee:
+		CVMP AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SkullAttack(19)
+		CVMP BB 1 A_SkullAttack(19)
+		CVMP A 0 A_PlaySound("ChompR")
+		CVMP CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC 1 A_SkullAttack(19)
+		CVMP BB 1 A_SkullAttack(19)
+		Loop
+	Pain:
+		CVMP A 0 A_Chase
+		Goto see
+	Death:
+		CVMP A 70 A_SpawnItem("DarknessRing", 1, 32)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,0,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,30,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,60,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,90,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,120,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,150,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,180,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,210,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,240,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,270,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,300,2)
+		CVMP A 0 A_CustomMissile("GhoulFireX",0,0,330,2)
+		CVMP A 35
+		CVMP AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_CustomMissile("GhoulFireX2", 0, 0, random(0,360),2,10)
+		CVMP AAAAAAAAAA 5 A_FadeOut(0.1)
+		stop
+	}
+}
+
+Actor ArenaCybervampire : CyberVampire
+{
+	Obituary "%o failed to avoid Cybervampire"
+}

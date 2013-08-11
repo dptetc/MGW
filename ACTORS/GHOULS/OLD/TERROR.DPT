@@ -1,0 +1,119 @@
+ACTOR Terror
+{
+	health 4000
+	MONSTER
+	+DROPOFF
+	+LOOKALLAROUND
+	+DONTSPLASH
+	BloodColor black
+	Radius 31
+	Height 128
+	Speed 48
+	Scale 0.85
+	RenderStyle Translucent
+	meleedamage 3
+	painchance 16
+	Obituary "%o found the Ghoul"
+	+ISMONSTER
+	States
+	{
+	Spawn:
+		TERR A 0 A_Look
+		TERR A 0 A_ChangeFlag("NOCLIP", 0)
+		TERR A 1 A_Wander
+		Loop
+	See:
+		TERR A 0 A_ChangeFlag("SHOOTABLE", 0)
+		TERR A 0 A_ChangeFlag("NOCLIP", 1) 
+		TERR A 0 A_SetTranslucent(0.95,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.9,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.85,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.8,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.75,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.7,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.65,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.6,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.55,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.5,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.45,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.4,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.35,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.3,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Chase
+		TERR A 0 A_SetTranslucent(0.35,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.4,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.45,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.5,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.55,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.6,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.65,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.7,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.75,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.8,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.85,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.9,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(0.95,0)
+		TERR A 1 A_Chase("Melee", "Melee", CHF_FASTCHASE)
+		TERR A 0 A_SetTranslucent(1.0,0)
+		TERR A 0 A_ChangeFlag("SHOOTABLE", 1)
+		TERR A 0 A_ChangeFlag("NOCLIP", 0)
+		TERR AAAAAAAA 2 A_Chase
+		TERR AAAA 4 A_Chase
+		TERR AA 8 A_Chase
+		TERR A 16 A_Chase
+		TERR AA 8 A_Chase
+		TERR AAAA 4 A_Chase
+		TERR AAAAAAAA 2 A_Chase
+		Loop
+	Melee:
+		TERR A 1
+		TERR B 1
+		TERR C 1
+		TERR A 1 A_MeleeAttack
+		Goto See
+	Pain:
+		TERR A 16
+		Goto See
+	Death:
+		TERR A 0 A_SpawnItem("DarknessRing", 1, 32)
+		TERR A 0 A_SetTranslucent(1.0,0)
+		TERR D 70
+		TERR DEDEDEDEDEDEDEDEDEDEDEDEDE 1
+		TERR E 35
+		TERR EFEFEFEFEFEFEFEFEFEFEFEFEF 1
+		TERR FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF 1 A_CustomMissile("GhoulFireX", 0, 0, random(0, 360))
+		TERR FFFFFFFFFF 5 A_FadeOut(0.1)
+		Stop
+	}
+}
+
+Actor ArenaTerror : Terror
+{
+	Obituary "%o met Terror's rage"
+}

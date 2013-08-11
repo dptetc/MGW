@@ -1,0 +1,150 @@
+Actor Misty
+{
+	health 4000
+	radius 31
+	height 64
+	Speed 15
+	RENDERSTYLE TRANSLUCENT
+	Alpha 0.40
+	Painsound "Misty/painy"
+	Deathsound "Misty/death"
+	Activesound "Misty/idley"
+	scale 0.15
+	mass 100000000
+	Obituary "%o found the Ghoul"
+	MONSTER
+	bloodcolor gray
+	+LOOKALLAROUND
+	+DROPOFF
+	+DONTSPLASH
+	+ISMONSTER
+	Painchance 255
+	States
+	{
+	Spawn:
+		MIST A 0 A_LoopActiveSound
+		MIST A 1 A_Look
+		MIST A 1 A_Wander
+		MIST A 0 A_SpawnItemEx("mistspawner",0,0,0,0,0,0,0,16)
+		MIST A 0 A_SpawnItemEx("trailsmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+		MIST A 1 A_Look
+		MIST A 1 A_Wander
+		MIST A 0 A_SpawnItemEx("mistspawner",0,0,0,0,0,0,0,16)
+		MIST A 0 A_SpawnItemEx("trailsmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+		MIST A 1 A_Look
+		MIST A 1 A_Wander
+		MIST A 0 A_SpawnItemEx("mistspawner",0,0,0,0,0,0,0,16)
+		MIST A 0 A_SpawnItemEx("trailsmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+		MIST A 1 A_Look
+		MIST A 1 A_Wander
+		MIST A 0 A_SpawnItemEx("mistspawner",0,0,0,0,0,0,0,16)
+		MIST A 0 A_SpawnItemEx("trailsmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+		loop
+	See:
+		MIST A 0 A_LoopActiveSound
+		MIST A 1 A_Chase
+		MIST A 0 A_SpawnItemEx("mistspawner",0,0,0,0,0,0,0,16)
+		MIST A 0 A_SpawnItemEx("trailsmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+		MIST A 1 A_Chase
+		MIST A 0 A_SpawnItemEx("mistspawner",0,0,0,0,0,0,0,16)
+		MIST A 0 A_SpawnItemEx("trailsmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+		MIST A 1 A_Chase
+		MIST A 0 A_SpawnItemEx("mistspawner",0,0,0,0,0,0,0,16)
+		MIST A 0 A_SpawnItemEx("trailsmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+		MIST A 1 A_Chase
+		MIST A 0 A_SpawnItemEx("mistspawner",0,0,0,0,0,0,0,16)
+		MIST A 0 A_SpawnItemEx("trailsmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+		loop
+	Melee:
+		MIST A 0 A_PlaySound("Misty/activ")
+		MIST A 1 A_CustomMeleeAttack(255,"none","none","none",1)
+		goto see
+	Pain:
+		MIST A 0 A_Pain
+		MIST A 1 A_FaceTarget
+		MIST A 0 A_SkullAttack
+		MIST AAAAAAAA 0 A_SpawnItemEx("mistspawner",0,0,0,0,0,0,0,16)
+		MIST A 100 ThrustThing(random(0,255), 30, 0)
+		goto see
+	Death:
+		MIST A 0 A_Stopsound
+		MIST A 1 A_Fall
+		MIST A 0 A_Scream
+		MIST A 1 A_CustomMissile("Trailsmoke3", 0, 0, 0)
+		MIST A 0 A_CustomMissile("Trailsmoke3", 0, 0, 45)
+		MIST A 0 A_CustomMissile("Trailsmoke3", 0, 0, -45)
+		MIST A 0 A_CustomMissile("Trailsmoke3", 0, 0, 90)
+		MIST A 0 A_CustomMissile("Trailsmoke3", 0, 0, -90)
+		MIST A 0 A_CustomMissile("Trailsmoke3", 0, 0, 135)
+		MIST A 0 A_CustomMissile("Trailsmoke3", 0, 0, -135)
+		MIST A 0 A_CustomMissile("Trailsmoke3", 0, 0, 180)
+		MIST A 10 A_SpawnItem("DarknessRing", 1, 32)
+		MIST AAAAAAAAAAAA 4 A_CustomMissile("GhoulFireX2", 0, 0, random(0,360), 0)
+		MIST A 1 Radius_Quake(6,32,0,32,0)
+		MIST AAAAAAAAAAAA 4 A_CustomMissile("GhoulFireX2", 0, 0, random(0,360), 0)
+		MIST A 1 Radius_Quake(6,32,0,32,0)
+		MIST AAAAAAAAAAAA 4 A_CustomMissile("GhoulFireX2", 0, 0, random(0,360), 0)
+		MIST A 1 Radius_Quake(6,32,0,32,0)
+		MIST AAAAAAAAAAAA 4 A_CustomMissile("GhoulFireX2", 0, 0, random(0,360), 0)
+		MIST A 1 Radius_Quake(6,32,0,32,0)
+		TNT1 A 0 A_KillChildren
+		MIST AAAAAAAAAA 5 A_FadeOut(0.1)
+		TNT1 A 1
+		stop
+	}
+}
+
+Actor Trailsmoke
+{
+	Height 1
+	Radius 1
+	Speed 2
+	Renderstyle Translucent
+	Alpha 0.40
+	PROJECTILE
+	-NOCLIP
+	-NOGRAVITY
+	+CLIENTSIDEONLY
+	+DONTSPLASH
+	+FORCEXYBILLBOARD
+	States
+	{
+	Spawn:
+		SMIS A 50
+		SMIS ABCDEFGIJK 5 A_Fadeout(0.1)
+	}
+}
+
+Actor Trailsmoke2 : Trailsmoke
+{
+	Speed 6
+}
+
+Actor Trailsmoke3 : Trailsmoke2
+{
+	Speed 12
+	Scale 2.0
+	Alpha 0.75
+}
+
+Actor Mistspawner
+{
+	Height 1
+	Radius 1
+	Speed 0
+	PROJECTILE
+	+NOCLIP
+	+DONTSPLASH
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		TNT1 AAAA 1 A_CustomMissile("trailsmoke2",0,0,random(0,360))
+		stop
+	}
+}
+
+Actor ArenaMisty : Misty
+{
+	Obituary "%o was lost in the mist"
+}

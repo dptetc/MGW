@@ -1,0 +1,92 @@
+Actor Firelord
+{
+	health 4000
+	PainChance 0
+	MeleeDamage 255
+	Damage 255
+	Speed 18
+	Radius 24
+	Height 64
+	BloodColor darkyellow
+	Obituary "%o found the Ghoul"
+	HitObituary "%o found the Ghoul"
+	Monster
+	+LOOKALLAROUND
+	+DONTSPLASH
+	+DROPOFF
+	+TELESTOMP
+	+ISMONSTER
+	States
+	{
+	Spawn:
+		FLRD A 1 A_Wander
+		FLRD A 0 A_Look
+		Loop
+	See:
+		FLRD A 1 A_Chase("Melee",0)
+		FLRD A 0 A_JumpIfCloser(160,"Melee")
+		FLRD A 0 A_JumpIfCloser(512,"Missile")
+		Loop
+	Missile:
+		FLRD ABCD 1 A_Chase("Melee",0)
+		FLRD D 1 A_CustomMissile("FirelordFire",32,0,random(-26,26))
+		FLRD A 0 A_Chase("Melee",0)
+		FLRD A 0 A_JumpIfCloser(512,1)
+		Goto see
+		FLRD A 0 A_JumpIfCloser(160,"Melee")
+		Goto Missile+4
+	Melee:
+		FLRD ABCD 1 A_Chase("Melee",0)
+		FLRD D 1 A_SkullAttack(28)
+		FLRD DDDDDDDDDDDDDDDDDDDDDDDDDDDDD 1
+		FLRD E 35 A_Stop
+		Goto see
+	Death:
+		FLRD D 0 A_PlaySound("firelord/pain")
+		FLRD D 60 A_SpawnItem("DarknessRing", 1, 32)
+		FLRD DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD 1 A_CustomMissile("GhoulFireX2", 0, 0, random(0,360), 0)
+		FLRD DDDDDDDDDD 3 A_FadeOut(0.1)
+		Stop
+	}
+}
+
+actor FirelordFire : DoomImpFireBall
+{
+	Radius 12
+	Height 24
+	Speed 22
+	Damage 2
+	RenderStyle Translucent
+	Scale 0.35
+	Alpha 0.8
+	Projectile
+	SeeSound "firelord/attack"
+	+RIPPER
+	States
+	{
+	Spawn:
+		FLM3 LKJIH 2 Bright
+		FLM3 G 1 Bright A_SetTranslucent(0.75,1)
+		FLM3 G 1 Bright A_SetTranslucent(0.7,1)
+		FLM3 F 1 Bright A_SetTranslucent(0.65,1)
+		FLM3 F 1 Bright A_SetTranslucent(0.6,1)
+		FLM3 E 1 Bright A_SetTranslucent(0.55,1)
+		FLM3 E 1 Bright A_SetTranslucent(0.5,1)
+		FLM3 D 1 Bright A_SetTranslucent(0.45,1)
+		FLM3 D 1 Bright A_SetTranslucent(0.4,1)
+		FLM3 C 1 Bright A_SetTranslucent(0.35,1)
+	Death:
+		FLM3 C 1 Bright A_SetTranslucent(0.3,1)
+		FLM3 B 1 Bright A_SetTranslucent(0.25,1)
+		FLM3 B 1 Bright A_SetTranslucent(0.2,1)
+		FLM3 A 1 Bright A_SetTranslucent(0.15,1)
+		FLM3 A 1 Bright A_SetTranslucent(0.1,1)
+		Stop
+	}
+}
+
+Actor ArenaFirelord : Firelord
+{
+	Obituary "%o was eaten by the Firelord"
+	HitObituary "%o was cooked by the Firelord"
+}

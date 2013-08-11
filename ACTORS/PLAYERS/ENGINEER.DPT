@@ -1,0 +1,184 @@
+ACTOR Engineer : PlayerPawn
+{
+  Speed 0.75
+  Health 100
+  Radius 16
+  Height 56
+  Mass 100
+  PainChance 255
+  Player.DisplayName "Engineer"
+  Player.StartItem "isEngineer"
+  Player.StartItem "E_Wrench"
+  Player.StartItem "E_Pistol"
+  Player.StartItem "Fists"
+  Player.StartItem "Clip", 50
+  Player.ColorRange 112, 127
+  DamageFactor "Normal", 2
+  DamageFactor "Slime", 0
+  DamageFactor "ice", 0.2
+  +NOSKIN
+  Player.SoundClass "doomer"
+  States
+  {
+  Spawn:
+    GO99 A 90 A_PlaySound("HEART")
+    Loop
+	Spawn2:
+	GO99 A 90
+	Loop
+  See:
+    TNT1 A 0 A_JumpIfInventory("Step",1,4)
+    GO99 A 6 A_SpawnItem("Footstep",30,0.001)
+    GO99 B 6
+    TNT1 A 0 A_GiveInventory("Step",1)
+    goto spawn2
+    GO99 C 6 A_SpawnItem("Footstep",30,0.001)
+    GO99 D 6
+    TNT1 A 0 A_TakeInventory("Step",1)
+    goto spawn2
+  Missile:
+    GO99 E 12 
+    Goto Spawn2
+  Melee:
+    GO99 F 6 BRIGHT
+    Goto Missile
+  Pain:
+    GO99 G 4 
+    GO99 G 4 A_Pain
+    Goto Spawn2
+  Death:
+    GO99 H 10
+    GO99 I 10 A_PlayerScream
+    GO99 J 10 A_NoBlocking
+    GO99 KLM 10
+	GO99 N 1 A_FadeOut(0.02)
+	GO99 N 0 A_SpawnItemEx("EngineerCorpse", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+	GO99 N 1
+    GO99 N -1
+    Stop
+  XDeath:
+    TNT1 A 0 //A_SpawnItemEx("MarineXDeath", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+    GO99 O 5
+    GO99 P 5 A_XScream
+    GO99 Q 5 A_NoBlocking
+    GO99 RSTUV 5
+	GO99 W -1
+    Stop
+    Death.Burn:
+        BURN A 3 Bright //A_ItBurnsItBurns
+        BURN B 3 Bright //A_DropFire
+        BURN C 3 Bright A_Wander
+        BURN D 3 Bright A_NoBlocking
+        BURN E 5 Bright //A_DropFire
+        BURN FGH 5 Bright A_Wander
+        BURN I 5 Bright //A_DropFire
+        BURN JKL 5 Bright A_Wander
+        BURN M 5 Bright //A_DropFire
+        BURN N 5 Bright //A_CrispyPlayer
+        BURN OPQPQ 5 Bright
+        BURN RSTU 7 Bright
+        BURN V -1
+        Stop
+    Death.Dissolide:
+        DISR A 5 //A_PlaySoundEx("misc/disruptordeath", "Voice")
+        DISR BC 5
+        DISR D 5 A_NoBlocking
+        DISR EF 5
+        DISR GHIJ 4
+        MEAT D -1
+        Stop
+  }
+}
+
+Actor EngineerCorpse
+{
+	Radius 16
+	Height 56
+	health 100
+	speed 12
+	painchance 0
+	MONSTER
+	MeleeDamage 255
+	states
+	{
+	Spawn:
+		TNT1 A 0 
+		TNT1 A 1 A_Wander
+		TNT1 A 1 Thing_Damage(0,255,23)
+		Loop
+	See:
+		GO99 A 2 ThrustThingZ(0,33,4,0) 
+		GO99 AAAABBBB 1 A_FastChase
+		GO99 CCCCDDDD 1 A_FastChase
+		GO99 AAAABBBB 1 A_FastChase
+		TNT1 A 0 A_Jump(127, "JumpForward", "JumpBackward")
+		Loop
+	JumpForWard:
+		GO99 A 0 A_Recoil(0.554) 
+		GO99 A 0 ThrustThingZ(0,33,4,0)
+		GO99 A 0 A_Recoil(0.554)
+		GO99 A 1 A_Recoil(0.554)
+		Loop
+	JumpBackward:
+		GO99 A 0 A_Recoil(-0.554)
+		GO99 A 0 ThrustThingZ(1,33,5,0)
+		GO99 A 0 A_Recoil(-0.554)
+		GO99 A 1 A_Recoil(-0.554)
+		Loop
+	Missile:
+		GO99 E 6 A_FaceTarget
+		GO99 F 6 A_CustomBulletAttack(2,1,1,127,"ShockPuff")
+		Goto See
+	Melee:
+		GO99 E 6 A_FaceTarget
+		GO99 F 6 A_MeleeAttack
+		Goto See
+	Death.Railgun:
+	XDeath.Railgun:
+		GO99 W 1
+		GO99 W 1 A_NoBlocking
+		GO99 W -1
+		stop
+	XDeath: 
+	Death:
+		TNT1 A 0 //A_SpawnItemEx("MarineXDeath", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+		GO99 H 10
+		GO99 I 10 A_Scream
+		GO99 J 10 A_NoBlocking
+		GO99 KLM 10
+		GO99 N 0
+		Stop
+	Raise:
+		GO99 NMLKJIH 3
+		goto See
+    Burn:
+        BURN A 3 Bright //A_ItBurnsItBurns
+        BURN B 3 Bright //A_DropFire
+        BURN C 3 Bright A_Wander
+        BURN D 3 Bright A_NoBlocking
+        BURN E 5 Bright //A_DropFire
+        BURN FGH 5 Bright A_Wander
+        BURN I 5 Bright //A_DropFire
+        BURN JKL 5 Bright A_Wander
+        BURN M 5 Bright //A_DropFire
+        BURN N 5 Bright //A_CrispyPlayer
+        BURN OPQPQ 5 Bright
+        BURN RSTU 7 Bright
+        BURN V -1
+        Stop
+    Disintegrate:
+        DISR A 5 //A_PlaySoundEx("misc/disruptordeath", "Voice")
+        DISR BC 5
+        DISR D 5 A_NoBlocking
+        DISR EF 5
+        DISR GHIJ 4
+        MEAT D -1
+        Stop
+    Firehands:
+        WAVE ABCD 3
+        Loop
+    Firehandslower:
+        WAVE ABCD 3 //A_HandLower
+        Loop
+	}
+}

@@ -1,0 +1,81 @@
+#library "MAPS"
+
+#include "zcommon.acs"
+
+int ghouls[25]  = { "ArenaChoke",
+	"ArenaClowny",
+	"ArenaCreeper",
+	"ArenaCybervampire",
+	"ArenaCyberzoid",
+	"ArenaDemonskull",
+	"ArenaEyesore",
+	"ArenaFirelord",
+	"ArenaFrostbite",
+	"ArenaHellskull",
+	"ArenaJitterskull",
+	"ArenaJugulum",
+	"ArenaMisty",
+	"ArenaNightmare",
+	"ArenaReaper",
+	"ArenaSjas",
+	"ArenaSmoldy",
+	"ArenaSoulHarvester",
+	"ArenaTerror",
+	"ArenaUndeath",
+	"ArenaBND",
+	"ArenaBlack",
+	"ArenaBull",
+	"ArenaTAG",
+	"ArenaChain",
+};
+int killed[25];
+int ghoulskilled;
+int gtemp;
+int ntk = 25;
+
+script 900 OPEN {
+	SetHudSize(640,480,1);
+	SetFont("BIGFONT");
+	HudMessageBold(s:"Ghouls defeated: 0/",d: ntk;HUDMSG_PLAIN, 1, CR_RED, 8.1, 392.2, 0);
+
+	if(GameSkill() < 4) { delay(random(35*15,35*25)); }
+	delay(5);
+
+	for (int i=0; i<ntk; i++) {
+		do {
+			gtemp = random(0, 24);
+			//   delay(1);
+		} while (killed[gtemp]);
+
+		While (!ThingCount(T_NONE, 10)) {
+			SpawnSpot(ghouls[gtemp], random(1, 6), 10, 0);
+			//   delay(5);
+		}
+
+		Thing_Hate(10, 1, 4);
+
+		while (ThingCount(T_NONE, 10)) {
+			delay(5);
+			random(0,1);
+		}
+
+		killed[gtemp] = true;
+		ghoulskilled++;
+		SetHudSize(640,480,1);
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Ghouls defeated: ", d:ghoulskilled, s:"/", d:ntk;HUDMSG_PLAIN, 1, CR_RED, 8.1, 392.2, 0);
+		if(GameSkill() < 4) { delay(random(35*10,35*20)); }
+	}
+
+	// All ghouls killed
+	Delay(35*10);
+	Exit_Normal(0);
+}
+
+script 901 ENTER {
+	HudMessageBold(s:"Ghouls defeated: ", d:ghoulskilled, s:"/", d:ntk;HUDMSG_PLAIN, 1, CR_RED, 8.1, 392.2, 0);
+}
+
+script 902 RESPAWN {
+	HudMessageBold(s:"Ghouls defeated: ", d:ghoulskilled, s:"/", d:ntk;HUDMSG_PLAIN, 1, CR_RED, 8.1, 392.2, 0);
+}

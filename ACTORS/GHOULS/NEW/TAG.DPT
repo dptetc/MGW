@@ -1,0 +1,76 @@
+ACTOR Tag
+{
+	floatspeed 30
+	Speed 30
+	MONSTER
+	Health 1560
+	Radius 48
+	Height 48
+	Mass 9999999999999
+	Painchance 0
+	Scale 0.5
+	+DROPOFF
+	+FLOAT
+	+LOOKALLAROUND
+	+NOGRAVITY
+	+NOTELEOTHER
+	+MISSILEMORE
+	+MISSILEEVENMORE
+	BLOODCOLOR ORANGE
+	MeleeDamage 255
+	Obituary "%o found the Ghoul"
+	AttackSound "TAGATK"
+	DeathSound  "TAGDIE"
+	ActiveSound "TAGACT"
+	DamageType "Tag"
+	States
+	{
+	Spawn:
+		TAGG A 1 A_Look
+		Loop
+	See:
+		TAGG A 0 A_SpawnItemEx("Tagten1",0)
+		TAGG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Chase
+		TAGG A 0 A_SpawnItemEx("Tagten1",0)
+		TAGG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Chase
+		Loop
+	Melee:
+		TAGG A 10 A_FaceTarget
+		TAGG A 1 A_SpawnItemEx("Tagten2",0)
+		TAGG AB 1 A_MeleeAttack
+		Goto See
+	Death:
+		TAGG B 90 A_Fadeout(0.1)
+		TAGG A 0 A_Fall
+		Stop
+	}
+}
+
+Actor TAGTen1
+{
+	Scale 0.5
+	PROJECTILE
+	States
+	{
+	Spawn: 
+		TAGG A 10 A_FadeOut(0.02)
+		Stop
+	}
+}
+
+Actor TAGTen2
+{
+	Scale 0.5
+	PROJECTILE
+	States
+	{
+	Spawn: 
+		TAGG B 10 A_FadeOut(0.02)
+		Stop
+	}
+}
+
+Actor ArenaTAG : TAG
+{
+	Obituary "%o supposed to die by the TAG."
+}

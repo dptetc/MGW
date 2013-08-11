@@ -1,0 +1,176 @@
+#library "Global"
+#include "zcommon.acs"
+
+int FireOn, FireOff;
+int BeatCounter;
+#define FadeOutHID	1016
+
+// Scary images
+#DEFINE NUM_GORE 22
+
+str Gore[NUM_GORE] = { 
+	"SCARY1",
+	"SCARY2",
+	"SCARY3",
+	"SCARY4",
+	"SCARY5",
+	"SCARY6",
+	"SCARY7",
+	"SCARY8",
+	"SCARY9",
+	"SCARY10",
+	"SCARY11",
+	"SCARY12",
+	"SCARY13",
+	"SCARY14",
+	"SCARY15",
+	"SCARY16",
+	"SCARY17",
+	"SCARY18",
+	"SCARY19",
+	"SCARY20",
+	"SCARY21",
+	"SCARY22"
+};
+
+script 101 (void) { // Death script
+	int temp, last = -1;	
+
+    // Scream 
+    LocalAmbientSound("superscream", 127); 
+
+    // Scary graphics 
+    SetHudSize(520, 340, 0); 
+      
+    for (int i=0; i<10; i++) { 
+		do {
+			temp = random(0, (NUM_GORE-1));
+		} while (temp == last);
+		
+		last = temp;
+		SetFont(Gore[temp]); 
+        HudMessage(s:"A"; HUDMSG_FADEOUT, 666, CR_UNTRANSLATED, 0.5, 0.5, 0.5, 0.2); 
+        delay(3);
+    } 
+
+    // Blank screen 
+    FadeTo (0, 0, 0, 1.0, 0); 
+    // Kill player 
+    DamageThing(0);
+    delay(35); 
+
+    // Fade in? 
+    FadeTo(0, 0, 0, 0, 7.0); 
+	
+	// Spawn another checker (for multiplayer)
+	delay(500);
+	
+	SpawnSpot("SamaraTargetchecker", random(7, 9), 10, 0);
+}
+
+// These are the min and max coords that the ghoul can spawn at.  Use these to avoid spawning
+// the ghoul outside the map.
+// Note that this WILL cause the spawn script to be terminated as a runaway if the player moves
+// too far outside these bounds (using noclip or whatever), because no valid spot will ever be
+// found to spawn the ghoul at.
+#define XMIN -4806 * 1.0
+#define XMAX 5168 * 1.0
+#define YMIN -4864 * 1.0
+#define YMAX 5096 * 1.0
+
+// The DISTANCEFACTOR is how much to multiply the BeatCounter by to get the distance
+// from the player we want to spawn the ghoul
+#define DISTANCEFACTOR 50
+
+// MINDISTACE specifies how close we let the ghoul get
+#define MINDISTANCE 150
+
+script 102 (void) { // Heartbeat
+   int x1, y1, x2, y2, angle, dist;
+
+   if (--BeatCounter > 0) {
+      AmbientSound("heartbeat", 127);
+   } else {	  
+   	  // Wait a few seconds 
+	  delay(random(50, 120)); 
+	  
+	  // Death
+      ACS_Execute(101, 0, 0, 0, 0);	
+   }
+
+   // Get player coords
+   x1 = GetActorX(0);
+   y1 = GetActorY(0);
+   dist = (BeatCounter * DISTANCEFACTOR);
+   if (dist < MINDISTANCE) dist = MINDISTANCE;
+
+   do { // Try this until we get a valid coordinate
+      // Pick a random angle and spawn the monster the specified distance in that
+      // direction from the player
+      angle = 1.0 * random(0, 359) / 360;
+      x2 = x1 + dist * cos (angle);
+      y2 = y1 + dist * sin (angle);
+
+   // Check bounds
+   } while (x2 < XMIN || x2 > XMAX || y2 < YMIN || y2 > YMAX);
+
+   // Note: The angle is now included and the ghoul will now always face the player
+   // upon spawning.
+   Spawn("SamaraGhoul", x2, y2, 0, 0, (angle + 0.5)>>8);
+}
+
+script 103 (void)
+{
+if(GameType()!= 0){ // CO-OP goes straight to the stats screen and restarts the map.
+Exit_Normal(0);
+Terminate;
+}
+
+FireOff += 70;
+FireOn += 70;
+
+GiveActorInventory(1, "makefade", 1);
+Delay(4*35);
+Sector_SetFade(0, 250,250,250);
+Sector_SetFade(1, 250,250,250);
+Sector_SetFade(2, 250,250,250);
+Sector_SetFade(3, 250,250,250);
+Light_RaiseByValue(0, 70);	
+Light_RaiseByValue(1, 70);	
+Light_RaiseByValue(2, 70);	
+Light_RaiseByValue(3, 70);	
+ChangeCamera(20,1,0); // Swirly Camera Start
+Thing_Activate(20);
+SetMusic("ORGAN");
+TeleportOther(1, 19, 0);
+SetPlayerProperty(1, 1, PROP_TOTALLYFROZEN);
+ACS_Execute(104,0);
+}
+
+script 800 (int speed)
+{
+ SetActorProperty(0, APROP_Speed, speed);
+}
+
+script 801 (void) {
+ SetHudSize(1280, 1024, 1);
+ SetFont("CREEC0");
+ LocalAmbientsound("creeperattack",127);
+ for (int y = 3072; y > 1620; y -= 150) {         
+  HudMessage(s:"A"; HUDMSG_FADEOUT, 2, CR_UNTRANSLATED, 1100.0, (y*1.0), 0.2, 0.2);
+  delay(1);
+ }
+ 
+ SetHudSize(640,480,1);
+ SetFont("SMALLFONT");
+}
+
+function void ScreenFadeOut (int inTime) // time is a float value in seconds
+{
+	SetFont("BLACK");
+	SetHudSize(4,4,1);
+	HudMessageBold (s:"a"; HUDMSG_FADEINOUT, FadeOutHID, CR_UNTRANSLATED,
+			2.0, 2.0,
+			1000.0, inTime, 1.0);	// holdTime, inTime, outTime
+	SetHudSize(0,0,0);
+}

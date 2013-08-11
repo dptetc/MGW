@@ -1,0 +1,39 @@
+height 0;
+monospacefonts true, "0";
+
+statusbar fullscreen, forcescaled
+{
+	aspectratio "4:3"
+	{
+		drawimage "MarineH", 0, 0;
+	}
+	aspectratio "5:4"
+	{
+		drawimage "Marine5", 0, -16;
+	}
+	aspectratio "16:10"
+	{
+		drawimage "MarineW", -54, 0;
+	}
+	aspectratio "16:9"
+	{
+		drawimage "MarineW", -54, 0;
+	}
+	drawimage "MarinHB", 0, 180;
+	drawimage "MarinAB", 255, 183;
+	drawimage armoricon, 5, 190;
+	drawimage ammoicon1, 295, 189;
+	drawnumber 3, MarineHpFont, green, health, 68, 187,1;
+	drawnumber 3, MarineArFont, green, armor, 30, 189,0;
+	drawnumber 3, MarineAmmoFont, cyan, ammo1, 283, 188,1;
+	gamemode cooperative, singleplayer
+	{
+		drawswitchableimage BlueCard, "nullimage", "STKEYS0", 308, 2;
+		drawswitchableimage YellowCard, "nullimage", "STKEYS1", 308, 12;
+		drawswitchableimage RedCard, "nullimage", "STKEYS2", 308, 22;
+		drawswitchableimage BlueSkull, "nullimage", "STKEYS3", 298, 2;
+		drawswitchableimage YellowSkull, "nullimage", "STKEYS4", 298, 12;
+		drawswitchableimage RedSkull, "nullimage", "STKEYS5", 298, 22;
+	}
+	drawselectedinventory centerbottom, drawshadow, alwaysshowcounter, HUDFONT_DOOM, -14, -10, -26, -25, untranslated;
+}

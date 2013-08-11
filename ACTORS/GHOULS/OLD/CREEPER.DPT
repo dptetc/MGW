@@ -1,0 +1,96 @@
+ACTOR CreeperGhoul
+{
+	health 4000
+	MONSTER
+	+NOBLOCKMONST
+	+LOOKALLAROUND
+	BloodColor white
+	-SOLID
+	Speed 16
+	+DROPOFF
+	+DONTSPLASH
+	+ISMONSTER
+	Height 16
+	Radius 13
+	xscale 0.8
+	yscale 0.1
+	MeleeDamage 255
+	painchance 255
+	Obituary "%o found the Ghoul"
+	+LOOKALLAROUND
+	States
+	{
+	Spawn:
+		CREE A 0 A_Look
+		CREE A 0 A_ChangeFlag("NOCLIP", 0)
+		CREE AAAABBBBAAAABBBBAAAABBBBAAAABBBBAAAABBBBAAAABBBB 3 A_Wander
+		Loop
+	See:
+		CREE A 0 A_ChangeFlag("NOCLIP", 1)
+		CREE A 0 A_ChangeFlag("FRIGHTENED", 0)
+		CREE A 0 A_Playsound("creeperact")
+		CREE AAAABBBBAAAABBBBAAAABBBBAAAABBBBAAAABBBBAAAABBBB 3 A_Chase
+		Loop
+	Melee:
+		TNT1 A 0 A_ChangeFlag("NOPAIN",1)
+		TNT1 A 0 A_GiveToTarget("Creeperactivate", 1)
+		TNT1 A 0 A_MeleeAttack
+		TNT1 A 0 A_FaceTarget
+		TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+		Goto See
+	Pain:
+		CREE A 0 A_PlaySound("Creeperpain")
+		CREE A 0 A_ChangeFlag("FRIGHTENED", 0)
+		CREE BABABABABA 1 A_Chase
+		CREE A 0 A_ChangeFlag("FRIGHTENED", 1)
+		CREE BABABABABABABABABABABAB 1 A_Chase
+		CREE ABABABABABAB 2 A_Chase
+		CREE ABABABABABAB 3 A_Chase
+		CREE A 0 A_ChangeFlag("FRIGHTENED", 0)
+		Goto See
+	Death:
+		TNT1 A 20 A_SpawnItem("Creeperdeath")
+		TNT1 A 1 A_Fall
+		Stop
+	}
+}
+
+actor Creeperactivate : CustomInventory
+{
+	inventory.pickupmessage ""
+	inventory.pickupsound ""
+	states
+	{
+	Spawn:
+		TNT1 A -1
+		stop
+	Pickup:
+		TNT1 A 0 ACS_Execute(801, 0)
+		stop
+	}
+}
+
+ACTOR Creeperdeath
+{
+	Height 10
+	Radius 10
+	-SOLID
+	Scale 0.06
+	Speed 4
+	renderstyle translucent
+	States
+	{
+	Spawn:
+		CREE D 0
+		CREE D 0 A_Playsound("creeperdie")
+		CREE D 1 A_FadeOut(0.01)
+		CREE D 0 A_CustomMissile("GhoulFireX3", 0,0,random(0,360), 2,0)
+		CREE D 0 A_Wander
+		Goto spawn+2
+	}
+}
+
+ACTOR ArenaCreeper : CreeperGhoul
+{
+	Obituary "%o was creeped up on by the Creeper"
+}
