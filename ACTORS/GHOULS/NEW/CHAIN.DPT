@@ -3,7 +3,7 @@ ACTOR Chain
 	floatspeed 12
 	Speed 12
 	MONSTER
-	Health 1600
+	Health 650
 	RENDERSTYLE TRANSLUCENT
 	Alpha 0.5
 	Radius 20
@@ -40,7 +40,6 @@ ACTOR Chain
 		Stop
 	}
 }
-
 Actor ArenaChain : Chain
 {
 	Obituary "%o Through THE SAW OF CHAIN!"

@@ -1,6 +1,6 @@
 Actor Reaper
 {
-	health 4000
+	health 920
 	Radius 34
 	Height 72
 	Speed 18
@@ -60,12 +60,10 @@ Actor Reaper
 		Stop
 	}
 }
-
 actor ArenaReaper : Reaper
 {
 	Obituary "%o crap from the Reaper"
 }
-
 actor ReaperProj
 {
 	Radius 12

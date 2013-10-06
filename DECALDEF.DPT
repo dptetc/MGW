@@ -7,7 +7,6 @@ decal MiniMissileScorch
 	y-scale 0.1
 	animator Clean
 }
-
 decal ShockGunScorchLower1
 {
 	pic DTFXE0
@@ -17,7 +16,6 @@ decal ShockGunScorchLower1
 	randomflipx
 	randomflipy
 }
-
 decal ShockGunScorch1
 {
 	pic DTFXE0
@@ -26,7 +24,6 @@ decal ShockGunScorch1
 	animator GoAway
 	lowerdecal ShockGunScorchLower1
 }
-
 decal ShockGunScorchLower2
 {
 	pic DTFXC0
@@ -36,7 +33,6 @@ decal ShockGunScorchLower2
 	randomflipx
 	randomflipy
 }
-
 decal ShockGunScorch2
 {
 	pic DTFXC0
@@ -45,43 +41,37 @@ decal ShockGunScorch2
 	animator GoAway
 	lowerdecal ShockGunScorchLower2
 }
-
 decalgroup ShockGunScorchLower
 {
 	ShockGunScorchLower1	1
 	ShockGunScorchLower2	1
 }
-
 decalgroup ShockGunScorch
 {
 	ShockGunScorch1	1
 	ShockGunScorch2	1
 }
-
 decal ShockMissileScorch
 {
- pic FX16H0
- add 1.0
- fullbright
- x-scale 1.6
- y-scale 1.6
- animator GoAway
- lowerdecal ShockMissileScorchlower
+	pic FX16H0
+	add 1.0
+	fullbright
+	x-scale 1.6
+	y-scale 1.6
+	animator GoAway
+	lowerdecal ShockMissileScorchlower
 }
-
 decal ShockMissileScorchlower
 {
- pic FX16H0
- shade "00 00 00"
- x-scale 1.6
- y-scale 1.6
- randomflipx
- randomflipy
+	pic FX16H0
+	shade "00 00 00"
+	x-scale 1.6
+	y-scale 1.6
+	randomflipx
+	randomflipy
 }
-
-
 decalgroup ShockMissileScorchGroup
 {
- ShockMissileScorch 1
- ShockMissileScorchlower 1
+	ShockMissileScorch 1
+	ShockMissileScorchlower 1
 }

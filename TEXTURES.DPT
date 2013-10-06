@@ -1,0 +1,6 @@
+graphic HUD_OVE1, 121, 32 {
+	patch HUDGRA1, 0, 0 {}
+}
+graphic HUD_OVE2, 121, 32 {
+	patch HUDGRA2, 0, 0 {}
+}

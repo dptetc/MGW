@@ -1,464 +1,435 @@
 Actor SHTorchSpawner : SwitchableDecoration 32456
 {
-  +NoBlockMap
-  +NoGravity
-  +NoInteraction
-  +NoClip
-  +ClientSideOnly
-  States
-  {
-  Spawn:
-  Active:
-    TNT1 A 0
-    TNT1 A 0 A_JumpIf(Args[2] > 0, 3)
-    TNT1 A 0 A_PlaySoundEx("SFX/TorchStart", "SoundSlot7", 0)
-    TNT1 A 0 A_PlaySoundEx("SFX/TorchLoop", "SoundSlot6", 1)
-    TNT1 A 0 A_JumpIf(Args[0] == 1, "Blue")
-    TNT1 A 0 A_JumpIf(Args[0] == 2, "Green")
-    TNT1 A 0 A_JumpIf(Args[0] == 3, "Yellow")
-    TNT1 A 0 A_JumpIf(Args[0] == 4, "Blood")
-    TNT1 A 0 A_JumpIf(Args[0] == 5, "Purple")
-    TNT1 A 0 A_JumpIf(Args[0] == 6, "White")
-    TNT1 A 0 A_JumpIf(Args[0] > 6, "Cyan")
-    Goto Red
-  Red:
-    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigRed")
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHRedTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHRedTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
-    Goto Red+1
-    TNT1 A 1 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto Red+1
-  BigRed:
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHRedTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHRedTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHRedTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
-    Goto BigRed
-    TNT1 A 1 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto BigRed
-  Blue:
-    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigBlue")
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHBlueTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHBlueTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHBlueTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
-    Goto Blue+1
-    TNT1 A 1 A_SpawnItemEx("SHBlueTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto Blue+1
-  BigBlue:
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHBlueTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHBlueTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHBlueTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
-    Goto BigBlue
-    TNT1 A 1 A_SpawnItemEx("SHBlueTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto BigBlue
-  Green:
-    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigGreen")
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHGreenTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHGreenTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHGreenTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
-    Goto Green+1
-    TNT1 A 1 A_SpawnItemEx("SHGreenTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto Green+1
-  BigGreen:
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHGreenTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHGreenTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHGreenTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
-    Goto BigGreen
-    TNT1 A 1 A_SpawnItemEx("SHGreenTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto BigGreen
-  Yellow:
-    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigYellow")
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHYellowTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHYellowTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHYellowTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
-    Goto Yellow+1
-    TNT1 A 1 A_SpawnItemEx("SHYellowTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto Yellow+1
-  BigYellow:
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHYellowTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHYellowTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHYellowTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
-    Goto BigYellow
-    TNT1 A 1 A_SpawnItemEx("SHYellowTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto BigYellow
-  Blood:
-    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigBlood")
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHBloodTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHBloodTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHBloodTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
-    Goto Blood+1
-    TNT1 A 1 A_SpawnItemEx("SHBloodTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto Blood+1
-  BigBlood:
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHBloodTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHBloodTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHBloodTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
-    Goto BigBlood
-    TNT1 A 1 A_SpawnItemEx("SHBloodTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto BigBlood
-  Purple:
-    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigPurple")
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
-    Goto Purple+1
-    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto Purple+1
-  BigPurple:
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHPurpleTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
-    Goto BigPurple
-    TNT1 A 1 A_SpawnItemEx("SHPurpleTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto BigPurple
-  White:
-    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigWhite")
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
-    Goto White+1
-    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto White+1
-  BigWhite:
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHWhiteTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
-    Goto BigWhite
-    TNT1 A 1 A_SpawnItemEx("SHWhiteTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto BigWhite
-  Cyan:
-    TNT1 A 0 A_JumpIf(Args[1] > 0, "BigCyan")
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHCyanTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHCyanTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHCyanTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
-    Goto Cyan+1
-    TNT1 A 1 A_SpawnItemEx("SHCyanTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto Cyan+1
-  BigCyan:
-    TNT1 A 0 A_CheckSight(4)
-    TNT1 A 0 A_SpawnItemEx("SHCyanTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    TNT1 A 0 A_SpawnItemEx("SHCyanTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
-    TNT1 A 1 A_SpawnItemEx("SHCyanTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
-    Goto BigCyan
-    TNT1 A 1 A_SpawnItemEx("SHCyanTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
-    Goto BigCyan
-  Inactive:
-    TNT1 A 0 A_JumpIf(Args[2] > 0, 2)
-    TNT1 A 0 A_PlaySoundEx("SFX/TorchDie", "SoundSlot7", 0)
-    TNT1 A 0 A_StopSoundEx("SoundSlot6")
-    TNT1 A -1
-    Goto Inactive+3
-  }
+	+NoBlockMap
+	+NoGravity
+	+NoInteraction
+	+NoClip
+	+ClientSideOnly
+	States
+	{
+	Spawn:
+	Active:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(Args[2] > 0, 3)
+		TNT1 A 0 A_PlaySoundEx("SFX/TorchStart", "SoundSlot7", 0)
+		TNT1 A 0 A_PlaySoundEx("SFX/TorchLoop", "SoundSlot6", 1)
+		TNT1 A 0 A_JumpIf(Args[0] == 1, "Blue")
+		TNT1 A 0 A_JumpIf(Args[0] == 2, "Green")
+		TNT1 A 0 A_JumpIf(Args[0] == 3, "Yellow")
+		TNT1 A 0 A_JumpIf(Args[0] == 4, "Blood")
+		TNT1 A 0 A_JumpIf(Args[0] == 5, "Purple")
+		TNT1 A 0 A_JumpIf(Args[0] == 6, "White")
+		TNT1 A 0 A_JumpIf(Args[0] > 6, "Cyan")
+		Goto Red
+	Red:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "BigRed")
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHRedTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHRedTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+		Goto Red+1
+		TNT1 A 1 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto Red+1
+	BigRed:
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHRedTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHRedTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHRedTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+		Goto BigRed
+		TNT1 A 1 A_SpawnItemEx("SHRedTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto BigRed
+	Blue:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "BigBlue")
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHBlueTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHBlueTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHBlueTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+		Goto Blue+1
+		TNT1 A 1 A_SpawnItemEx("SHBlueTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto Blue+1
+	BigBlue:
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHBlueTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHBlueTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHBlueTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+		Goto BigBlue
+		TNT1 A 1 A_SpawnItemEx("SHBlueTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto BigBlue
+	Green:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "BigGreen")
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHGreenTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHGreenTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHGreenTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+		Goto Green+1
+		TNT1 A 1 A_SpawnItemEx("SHGreenTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto Green+1
+	BigGreen:
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHGreenTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHGreenTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHGreenTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+		Goto BigGreen
+		TNT1 A 1 A_SpawnItemEx("SHGreenTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto BigGreen
+	Yellow:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "BigYellow")
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHYellowTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHYellowTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHYellowTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+		Goto Yellow+1
+		TNT1 A 1 A_SpawnItemEx("SHYellowTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto Yellow+1
+	BigYellow:
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHYellowTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHYellowTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHYellowTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+		Goto BigYellow
+		TNT1 A 1 A_SpawnItemEx("SHYellowTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto BigYellow
+	Blood:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "BigBlood")
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHBloodTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHBloodTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHBloodTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+		Goto Blood+1
+		TNT1 A 1 A_SpawnItemEx("SHBloodTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto Blood+1
+	BigBlood:
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHBloodTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHBloodTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHBloodTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+		Goto BigBlood
+		TNT1 A 1 A_SpawnItemEx("SHBloodTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto BigBlood
+	Purple:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "BigPurple")
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHPurpleTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHPurpleTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHPurpleTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+		Goto Purple+1
+		TNT1 A 1 A_SpawnItemEx("SHPurpleTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto Purple+1
+	BigPurple:
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHPurpleTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHPurpleTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHPurpleTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+		Goto BigPurple
+		TNT1 A 1 A_SpawnItemEx("SHPurpleTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto BigPurple
+	White:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "BigWhite")
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHWhiteTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHWhiteTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHWhiteTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+		Goto White+1
+		TNT1 A 1 A_SpawnItemEx("SHWhiteTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto White+1
+	BigWhite:
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHWhiteTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHWhiteTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHWhiteTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+		Goto BigWhite
+		TNT1 A 1 A_SpawnItemEx("SHWhiteTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto BigWhite
+	Cyan:
+		TNT1 A 0 A_JumpIf(Args[1] > 0, "BigCyan")
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHCyanTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHCyanTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHCyanTorchFireSmall", Random(-2, 2), Random(-2, 2), Random(5, 7), (0.001)*Random(10, 200), (0.001)*Random(10, 200), (0.001)*Random(1000, 2000), 0, 128)
+		Goto Cyan+1
+		TNT1 A 1 A_SpawnItemEx("SHCyanTorchSmallLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto Cyan+1
+	BigCyan:
+		TNT1 A 0 A_CheckSight(4)
+		TNT1 A 0 A_SpawnItemEx("SHCyanTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		TNT1 A 0 A_SpawnItemEx("SHCyanTorchFlare", 0, 0, 6, 0, 0, 0, 0, 176)
+		TNT1 A 1 A_SpawnItemEx("SHCyanTorchFireLarge", Random(-2, 2), Random(-2, 2), Random(7, 9), (0.001)*Random(10, 400), (0.001)*Random(10, 400), (0.001)*Random(1500, 3000), 0, 128)
+		Goto BigCyan
+		TNT1 A 1 A_SpawnItemEx("SHCyanTorchLargeLight", 0, 0, 0, 0, 0, 0, 0, 128)
+		Goto BigCyan
+	Inactive:
+		TNT1 A 0 A_JumpIf(Args[2] > 0, 2)
+		TNT1 A 0 A_PlaySoundEx("SFX/TorchDie", "SoundSlot7", 0)
+		TNT1 A 0 A_StopSoundEx("SoundSlot6")
+		TNT1 A -1
+		Goto Inactive+3
+	}
 }
-
 //Flare actors
-
 Actor SHRedTorchFlare
 {
-  +NoGravity
-  +NoInteraction
-  +NoBlockmap
-  +ForceXYBillboard
-  RenderStyle Add
-  Scale 0.4
-  Alpha 0.6
-  States
-  {
-  Spawn:
-    RFLR A 2 Bright
-    Stop
-  }
+	+NoGravity
+	+NoInteraction
+	+NoBlockmap
+	+ForceXYBillboard
+	RenderStyle Add
+	Scale 0.4
+	Alpha 0.6
+	States
+	{
+	Spawn:
+		RFLR A 2 Bright
+		Stop
+	}
 }
-
 Actor SHBlueTorchFlare : SHRedTorchFlare
 {
-  States
-  {
-  Spawn:
-    BFLR A 2 Bright
-    Stop
-  }
+	States
+	{
+	Spawn:
+		BFLR A 2 Bright
+		Stop
+	}
 }
-
 Actor SHGreenTorchFlare : SHRedTorchFlare
 {
-  States
-  {
-  Spawn:
-    GFLR A 2 Bright
-    Stop
-  }
+	States
+	{
+	Spawn:
+		GFLR A 2 Bright
+		Stop
+	}
 }
-
 Actor SHYellowTorchFlare : SHRedTorchFlare
 {
-  States
-  {
-  Spawn:
-    YFLR A 2 Bright
-    Stop
-  }
+	States
+	{
+	Spawn:
+		YFLR A 2 Bright
+		Stop
+	}
 }
-
 Actor SHBloodTorchFlare : SHRedTorchFlare
 {
-  States
-  {
-  Spawn:
-    XFLR A 2 Bright
-    Stop
-  }
+	States
+	{
+	Spawn:
+		XFLR A 2 Bright
+		Stop
+	}
 }
-
 Actor SHPurpleTorchFlare : SHRedTorchFlare
 {
-  States
-  {
-  Spawn:
-    XFLR A 2 Bright
-    Stop
-  }
+	States
+	{
+	Spawn:
+		XFLR A 2 Bright
+		Stop
+	}
 }
-
 Actor SHWhiteTorchFlare : SHRedTorchFlare
 {
-  States
-  {
-  Spawn:
-    WFLR A 2 Bright
-    Stop
-  }
+	States
+	{
+	Spawn:
+		WFLR A 2 Bright
+		Stop
+	}
 }
-
 Actor SHCyanTorchFlare : SHRedTorchFlare
 {
-  States
-  {
-  Spawn:
-    CFLR A 2 Bright
-    Stop
-  }
+	States
+	{
+	Spawn:
+		CFLR A 2 Bright
+		Stop
+	}
 }
-
 //Flame actors
-
 Actor SHRedTorchFireSmall
 {
-  +NoGravity
-  +NoInteraction
-  +NoBlockmap
-  +NoTeleport
-  +ForceXYBillboard
-  Radius 0
-  Height 0
-  RenderStyle Add
-  Scale 0.175
-  States
-  {
-  Spawn:
-    FIR1 A 0
-    FIR1 A 0 A_Jump(128, "Spawn2")
-    FIR1 ABCDEFG 1 Bright
-    FIR1 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  Spawn2:
-    FIR2 ABCDEFG 1 Bright
-    FIR2 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  }
+	+NoGravity
+	+NoInteraction
+	+NoBlockmap
+	+NoTeleport
+	+ForceXYBillboard
+	Radius 0
+	Height 0
+	RenderStyle Add
+	Scale 0.175
+	States
+	{
+	Spawn:
+		FIR1 A 0
+		FIR1 A 0 A_Jump(128, "Spawn2")
+		FIR1 ABCDEFG 1 Bright
+		FIR1 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	Spawn2:
+		FIR2 ABCDEFG 1 Bright
+		FIR2 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	}
 }
-
 Actor SHRedTorchFireLarge : SHRedTorchFireSmall
 {
-  Scale 0.25
+	Scale 0.25
 }
-
 Actor SHBlueTorchFireSmall : SHRedTorchFireSmall
 {
-  States
-  {
-  Spawn:
-    FIB1 A 0
-    FIB1 A 0 A_Jump(128, "Spawn2")
-    FIB1 ABCDEFG 1 Bright
-    FIB1 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  Spawn2:
-    FIB2 ABCDEFG 1 Bright
-    FIB2 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  }
+	States
+	{
+	Spawn:
+		FIB1 A 0
+		FIB1 A 0 A_Jump(128, "Spawn2")
+		FIB1 ABCDEFG 1 Bright
+		FIB1 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	Spawn2:
+		FIB2 ABCDEFG 1 Bright
+		FIB2 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	}
 }
-
 Actor SHBlueTorchFireLarge : SHBlueTorchFireSmall
 {
-  Scale 0.25
+	Scale 0.25
 }
-
 Actor SHGreenTorchFireSmall : SHRedTorchFireSmall
 {
-  States
-  {
-  Spawn:
-    FIG1 A 0
-    FIG1 A 0 A_Jump(128, "Spawn2")
-    FIG1 ABCDEFG 1 Bright
-    FIG1 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  Spawn2:
-    FIG2 ABCDEFG 1 Bright
-    FIG2 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  }
+	States
+	{
+	Spawn:
+		FIG1 A 0
+		FIG1 A 0 A_Jump(128, "Spawn2")
+		FIG1 ABCDEFG 1 Bright
+		FIG1 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	Spawn2:
+		FIG2 ABCDEFG 1 Bright
+		FIG2 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	}
 }
-
 Actor SHGreenTorchFireLarge : SHGreenTorchFireSmall
 {
-  Scale 0.25
+	Scale 0.25
 }
-
 Actor SHYellowTorchFireSmall : SHRedTorchFireSmall
 {
-  States
-  {
-  Spawn:
-    FIY1 A 0
-    FIY1 A 0 A_Jump(128, "Spawn2")
-    FIY1 ABCDEFG 1 Bright
-    FIY1 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  Spawn2:
-    FIY2 ABCDEFG 1 Bright
-    FIY2 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  }
+	States
+	{
+	Spawn:
+		FIY1 A 0
+		FIY1 A 0 A_Jump(128, "Spawn2")
+		FIY1 ABCDEFG 1 Bright
+		FIY1 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	Spawn2:
+		FIY2 ABCDEFG 1 Bright
+		FIY2 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	}
 }
-
 Actor SHYellowTorchFireLarge : SHYellowTorchFireSmall
 {
-  Scale 0.25
+	Scale 0.25
 }
-
 Actor SHBloodTorchFireSmall : SHRedTorchFireSmall
 {
-  States
-  {
-  Spawn:
-    FIX1 A 0
-    FIX1 A 0 A_Jump(128, "Spawn2")
-    FIX1 ABCDEFG 1 Bright
-    FIX1 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  Spawn2:
-    FIX2 ABCDEFG 1 Bright
-    FIX2 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  }
+	States
+	{
+	Spawn:
+		FIX1 A 0
+		FIX1 A 0 A_Jump(128, "Spawn2")
+		FIX1 ABCDEFG 1 Bright
+		FIX1 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	Spawn2:
+		FIX2 ABCDEFG 1 Bright
+		FIX2 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	}
 }
-
 Actor SHBloodTorchFireLarge : SHBloodTorchFireSmall
 {
-  Scale 0.25
+	Scale 0.25
 }
-
 Actor SHPurpleTorchFireSmall : SHRedTorchFireSmall
 {
-  States
-  {
-  Spawn:
-    FIP1 A 0
-    FIP1 A 0 A_Jump(128, "Spawn2")
-    FIP1 ABCDEFG 1 Bright
-    FIP1 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  Spawn2:
-    FIP2 ABCDEFG 1 Bright
-    FIP2 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  }
+	States
+	{
+	Spawn:
+		FIP1 A 0
+		FIP1 A 0 A_Jump(128, "Spawn2")
+		FIP1 ABCDEFG 1 Bright
+		FIP1 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	Spawn2:
+		FIP2 ABCDEFG 1 Bright
+		FIP2 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	}
 }
-
 Actor SHPurpleTorchFireLarge : SHPurpleTorchFireSmall
 {
-  Scale 0.25
+	Scale 0.25
 }
-
 Actor SHWhiteTorchFireSmall : SHRedTorchFireSmall
 {
-  States
-  {
-  Spawn:
-    FIW1 A 0
-    FIW1 A 0 A_Jump(128, "Spawn2")
-    FIW1 ABCDEFG 1 Bright
-    FIW1 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  Spawn2:
-    FIW2 ABCDEFG 1 Bright
-    FIW2 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  }
+	States
+	{
+	Spawn:
+		FIW1 A 0
+		FIW1 A 0 A_Jump(128, "Spawn2")
+		FIW1 ABCDEFG 1 Bright
+		FIW1 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	Spawn2:
+		FIW2 ABCDEFG 1 Bright
+		FIW2 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	}
 }
-
 Actor SHWhiteTorchFireLarge : SHWhiteTorchFireSmall
 {
-  Scale 0.25
+	Scale 0.25
 }
-
 Actor SHCyanTorchFireSmall : SHRedTorchFireSmall
 {
-  States
-  {
-  Spawn:
-    FIC1 A 0
-    FIC1 A 0 A_Jump(128, "Spawn2")
-    FIC1 ABCDEFG 1 Bright
-    FIC1 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  Spawn2:
-    FIC2 ABCDEFG 1 Bright
-    FIC2 HIJKL 1 Bright A_FadeOut(0.15)
-    Stop
-  }
+	States
+	{
+	Spawn:
+		FIC1 A 0
+		FIC1 A 0 A_Jump(128, "Spawn2")
+		FIC1 ABCDEFG 1 Bright
+		FIC1 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	Spawn2:
+		FIC2 ABCDEFG 1 Bright
+		FIC2 HIJKL 1 Bright A_FadeOut(0.15)
+		Stop
+	}
 }
-
 Actor SHCyanTorchFireLarge : SHCyanTorchFireSmall
 {
-  Scale 0.25
+	Scale 0.25
 }
-
 //Dynamic Light actors
-
 Actor SHRedTorchSmallLight
 {
-  +ClientSideOnly
-  +NoClip
-  +NoBlockMap
-  +NoGravity
-  +NoInteraction
-  States
-  {
-  Spawn:
-   TNT1 A 1
-   Stop
-  }
+	+ClientSideOnly
+	+NoClip
+	+NoBlockMap
+	+NoGravity
+	+NoInteraction
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Stop
+	}
 }
-
 Actor SHBlueTorchSmallLight : SHRedTorchSmallLight {}
 Actor SHGreenTorchSmallLight : SHRedTorchSmallLight {}
 Actor SHYellowTorchSmallLight : SHRedTorchSmallLight {}

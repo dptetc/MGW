@@ -1,6 +1,6 @@
 ACTOR Cyberzoid
 {
-	health 4000
+	health 480
 	MONSTER
 	+DROPOFF
 	+LOOKALLAROUND
@@ -42,7 +42,6 @@ ACTOR Cyberzoid
 		stop
 	}
 }
-
 ACTOR FakeCyberzoid
 {
 	+DROPOFF
@@ -77,7 +76,6 @@ ACTOR FakeCyberzoid
 		stop
 	}
 }
-
 ACTOR ArenaCyberzoid : Cyberzoid
 {
 	Obituary "%o was disassembled by Cyberzoid"

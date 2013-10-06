@@ -1,12 +1,10 @@
-//***********Common***********\\
-
+ACTOR FullHealth : Inventory {}
 actor MGW_Weapon : Weapon replaces DoomWeapon
 {
 	+NO_AUTO_SWITCH
 	+NOAUTOAIM
 	+INVENTORY.UNDROPPABLE
 	Weapon.Kickback 50
-	weapon.selectionorder 9999
 	states 
 	{
 	DeselectDie:
@@ -23,12 +21,8 @@ actor MGW_Weapon : Weapon replaces DoomWeapon
 		Stop
 	}
 }
-
-//***********Fists***********\\
-
 ACTOR Fists : MGW_Weapon
 {
-	Weapon.SelectionOrder 3700
 	Weapon.Kickback 20
 	+WEAPON.NOAUTOFIRE
 	States
@@ -68,27 +62,22 @@ ACTOR Fists : MGW_Weapon
 		Goto Ready
 	}
 }
-
 actor StrikeCount : inventory
 {
 	Inventory.MaxAmount 1 
 }
-
 actor isDoomer : inventory
 {
 	Inventory.MaxAmount 1 
 }
-
 actor isEngineer : inventory 
 {
 	Inventory.MaxAmount 1 
 }
-
 actor isHealer : inventory 
 {
 	Inventory.MaxAmount 1 
 }
-
 actor NewRocket : Rocket replaces rocket
 {
 	+DONTHURTSPECIES
@@ -111,7 +100,6 @@ actor NewRocket : Rocket replaces rocket
 		Stop
 	}
 }
-
 Actor RocketExplosion
 { 
 	Speed 2.1
@@ -131,7 +119,6 @@ Actor RocketExplosion
 		stop
 	}
 }  
-
 Actor NewRocketTrail
 { 
 	Speed 1.1
@@ -151,7 +138,6 @@ Actor NewRocketTrail
 		stop
 	}
 }
-
 actor Tracerpiece : RevenantTracerSmoke
 {
 	-NOGRAVITY
@@ -168,10 +154,8 @@ actor Tracerpiece : RevenantTracerSmoke
 		Stop
 	}
 }
-
 actor MiniMissile 
 {
-	Game Doom
 	Radius 8
 	Height 8
 	Speed 12
@@ -196,17 +180,14 @@ actor MiniMissile
 		stop
 	}
 }
-
 Actor revenantTracerSmoke1 : RevenantTracerSmoke replaces RevenantTracerSmoke
 {
 	Speed 4.5
 }
-
 actor Pumped : CustomInventory
 {
 	Inventory.MaxAmount 1
 }
-
 actor RadiationAsItem : CustomInventory
 {
 	Inventory.MaxAmount 100

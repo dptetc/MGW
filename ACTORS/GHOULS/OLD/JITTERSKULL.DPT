@@ -1,6 +1,6 @@
 ACTOR Jitterskull
 {
-	health 4000
+	health 800
 	Height 70
 	Radius 22
 	Speed 19
@@ -64,7 +64,6 @@ ACTOR Jitterskull
 		Stop
 	}
 }
-
 Actor ArenaJitterskull : Jitterskull
 {
 	Obituary "%o was eaten by the Jitterskull"

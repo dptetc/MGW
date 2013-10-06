@@ -1,6 +1,6 @@
 Actor SoulHarvester
 {
-	health 4000
+	health 1500
 	PainChance 255
 	radius 24
 	height 70
@@ -60,7 +60,6 @@ Actor SoulHarvester
 		stop
 	}
 }
-
 Actor ArenaSoulHarvester : SoulHarvester
 {
 	Obituary "%o's soul was sucked out by the Soul Harvester."

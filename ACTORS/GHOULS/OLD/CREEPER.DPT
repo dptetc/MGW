@@ -1,6 +1,6 @@
 ACTOR CreeperGhoul
 {
-	health 4000
+	health 220
 	MONSTER
 	+NOBLOCKMONST
 	+LOOKALLAROUND
@@ -54,7 +54,6 @@ ACTOR CreeperGhoul
 		Stop
 	}
 }
-
 actor Creeperactivate : CustomInventory
 {
 	inventory.pickupmessage ""
@@ -69,7 +68,6 @@ actor Creeperactivate : CustomInventory
 		stop
 	}
 }
-
 ACTOR Creeperdeath
 {
 	Height 10
@@ -89,7 +87,6 @@ ACTOR Creeperdeath
 		Goto spawn+2
 	}
 }
-
 ACTOR ArenaCreeper : CreeperGhoul
 {
 	Obituary "%o was creeped up on by the Creeper"

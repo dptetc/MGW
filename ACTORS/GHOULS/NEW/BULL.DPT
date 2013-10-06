@@ -1,6 +1,6 @@
 ACTOR Bull
 {
-	health 4000
+	health 900
 	MONSTER
 	+DROPOFF
 	+LOOKALLAROUND
@@ -47,7 +47,6 @@ ACTOR Bull
 		stop
 	}
 }
-
 ACTOR FakeBull
 {
 	+DROPOFF
@@ -82,7 +81,6 @@ ACTOR FakeBull
 		stop
 	}
 }
-
 ACTOR ArenaBull : Bull
 {
 	Obituary "%o was fucked by Bull"

@@ -1,9 +1,5 @@
-
-//***********Melees***********\\
-
 actor Melees : Custominventory 2005
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -28,10 +24,8 @@ actor Melees : Custominventory 2005
 		Stop
 	}
 }
-
 Actor MeleesSpawner replaces Chainsaw
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -50,12 +44,8 @@ Actor MeleesSpawner replaces Chainsaw
 		Loop
 	}
 }
-
-//***********Shotguns***********\\
-
 actor Shotguns : Custominventory 2001
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -79,10 +69,8 @@ actor Shotguns : Custominventory 2001
 		Stop
 	}
 }
-
 Actor ShotgunSpawner replaces Shotgun
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -101,12 +89,8 @@ Actor ShotgunSpawner replaces Shotgun
 		Loop
 	}
 }
-
-//***********DoubleShotguns***********\\
-
 actor DoubleShotguns : Custominventory 82
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -130,10 +114,8 @@ actor DoubleShotguns : Custominventory 82
 		Stop
 	}
 }
-
 Actor SSG_Spawner replaces SuperShotgun
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -152,12 +134,8 @@ Actor SSG_Spawner replaces SuperShotgun
 		Loop
 	}
 }
-
-//***********Chainguns***********\\
-
 actor Chainguns : Custominventory 2002
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -181,10 +159,8 @@ actor Chainguns : Custominventory 2002
 		Stop
 	}
 }
-
 Actor ChaingunSpawner replaces Chaingun 
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -203,12 +179,8 @@ Actor ChaingunSpawner replaces Chaingun
 		Loop
 	}
 }
-
-//***********Miniguns***********\\
-
 actor Miniguns : Custominventory 5014
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -232,10 +204,8 @@ actor Miniguns : Custominventory 5014
 		Stop
 	}
 }
-
 Actor MinigunSpawner 
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -254,12 +224,8 @@ Actor MinigunSpawner
 		Loop
 	}
 }
-
-//***********RocketLaunchers***********\\
-
 actor RocketLaunchers : Custominventory 2003
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -283,10 +249,8 @@ actor RocketLaunchers : Custominventory 2003
 		Stop
 	}
 }
-
 Actor RocketLauncherSpawner replaces RocketLauncher
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -305,12 +269,8 @@ Actor RocketLauncherSpawner replaces RocketLauncher
 		Loop
 	}
 }
-
-//***********GrenadeLaunchers**********\\
-
 actor GrenadeLaunchers : Custominventory 5011
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -334,10 +294,8 @@ actor GrenadeLaunchers : Custominventory 5011
 		Stop
 	}
 }
-
 Actor GrenadeLauncherSpawner
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -356,12 +314,8 @@ Actor GrenadeLauncherSpawner
 		Loop
 	}
 }
-
-//***********PlasmaRifles***********\\
-
 actor PlasmaRifles : Custominventory 2004
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -385,10 +339,8 @@ actor PlasmaRifles : Custominventory 2004
 		Stop
 	}
 }
-
 Actor PlasmaRifleSpawner replaces PlasmaRifle
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -407,12 +359,8 @@ Actor PlasmaRifleSpawner replaces PlasmaRifle
 		Loop
 	}
 }
-
-//***********RAILGUNS********\\
-
 Actor Railguns : CustomInventory 5012
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -436,10 +384,8 @@ Actor Railguns : CustomInventory 5012
 		Stop
 	}
 }
-
 Actor RailgunSpawner
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -458,12 +404,8 @@ Actor RailgunSpawner
 		Loop
 	}
 }
-
-//***********BFG9KS***********\\
-
 Actor BFG9KS : CustomInventory 2006
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -487,10 +429,8 @@ Actor BFG9KS : CustomInventory 2006
 		Stop
 	}
 }
-
 Actor BFG9KSpawner replaces BFG9000
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID
@@ -509,12 +449,8 @@ Actor BFG9KSpawner replaces BFG9000
 		Loop
 	}
 }
-
-//***********BFG10KS***********\\
-
 Actor BFG10KS : CustomInventory 5013
 {
-	//$Category "Weapon Givers"
 	states
 	{ 
 	Spawn: 
@@ -538,10 +474,8 @@ Actor BFG10KS : CustomInventory 5013
 		Stop
 	}
 }
-
 Actor BFG10KSpawner
 {
-	//$Category "Weapon Spawners"
 	Radius 0.01
 	Height 0.01
 	+SOLID

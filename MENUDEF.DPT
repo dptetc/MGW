@@ -1,11 +1,9 @@
-
 DefaultListMenu
 {
 	Font "BigFont", "Untranslated"
 	Selector "M_SKULL1", -32, -5
 	Linespacing 16
 }
-
 ListMenu "MainMenu"
 {
 	StaticPatch 94, 2, "M_DOOM"
@@ -14,7 +12,6 @@ ListMenu "MainMenu"
 	{
 		Position 97, 64
 	}
-	
 	TextItem "New Game", "s", "PlayerclassMenu"
 	ifOption(SwapMenu)
 	{
@@ -32,10 +29,8 @@ ListMenu "MainMenu"
 	{
 		TextItem "Read This!","r", "ReadThisMenu"
 	}
-	
 	TextItem "Exit Game", "e", "QuitMenu"
 }
-
 ListMenu "SkillMenu"
 {
 	StaticText 96, 14, "NEW GAME"

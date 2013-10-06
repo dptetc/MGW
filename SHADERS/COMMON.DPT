@@ -1,0 +1,582 @@
+//Skybox Night
+skybox SKYB
+{ 
+	SKYB_N
+	SKYB_E
+	SKYB_S
+	SKYB_W
+	SKYB_T
+	SKYB_B
+}
+Pointlight WhiteSparkFlare
+{
+	Color 1.0 1.0 1.0
+	Size 12
+}
+Pointlight RedSparkFlare
+{
+	Color 0.4 0.0 0.0
+	Size 12
+}
+Pointlight OrangeSparkFlare
+{
+	Color 0.8 0.4 0.0
+	Size 12
+}
+Pointlight YellowSparkFlare
+{
+	Color 1.0 1.0 0.0
+	Size 12
+}
+Pointlight GreenSparkFlare
+{
+	Color 0.0 1.0 0.0
+	Size 12
+}
+Pointlight BlueSparkFlare
+{
+	Color 0.0 0.0 0.8
+	Size 12
+}
+Pointlight PurpleSparkFlare
+{
+	Color 0.5 0.0 0.5
+	Size 12
+}
+Object SparkFlare_W1 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W2 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W3 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W4 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W5 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_W6 { Frame SPKW { Light WhiteSparkFlare } }
+Object SparkFlare_R1 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R2 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R3 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R4 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R5 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_R6 { Frame SPKR { Light RedSparkFlare } }
+Object SparkFlare_O1 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O2 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O3 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O4 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O5 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_O6 { Frame SPKO { Light OrangeSparkFlare } }
+Object SparkFlare_Y1 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y2 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y3 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y4 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y5 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_Y6 { Frame SPKY { Light YellowSparkFlare } }
+Object SparkFlare_G1 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G2 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G3 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G4 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G5 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_G6 { Frame SPKG { Light GreenSparkFlare } }
+Object SparkFlare_B1 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B2 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B3 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B4 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B5 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_B6 { Frame SPKB { Light BlueSparkFlare } }
+Object SparkFlare_P1 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P2 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P3 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P4 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P5 { Frame SPKP { Light PurpleSparkFlare } }
+Object SparkFlare_P6 { Frame SPKP { Light PurpleSparkFlare } }
+//Lighter
+flickerlight LighterProjectile
+{
+	color 0.5 0.5 0.0
+	size 64
+	secondarySize 104
+	chance 0.6
+}
+object LighterProjectile
+{
+	frame TNT1A { light LighterProjectile }
+}
+//Flashlight
+flickerlight FlashGL
+{
+	color 0.06 0.06 0.06
+	size 72
+	offset 0 0 0
+}
+object Light
+{
+	frame PUFFA { light CANDLE }
+}
+// Candle
+pointlight CANDLE
+{
+	color 1.0 1.0 0.0
+	size 32
+	offset 0 16 0
+}
+//Darkness
+PointLight Darkness1
+{
+	Color 1.0 1.0 1.0
+	Subtractive 1
+	Size 72
+	Offset 0 20 0
+}
+PointLight Darkness2
+{
+	Color 0.875 0.875 0.875
+	Subtractive 1
+	Size 72
+	Offset 0 20 0
+}
+PointLight Darkness3
+{
+	Color 0.75 0.75 0.75
+	Subtractive 1
+	Size 72
+	Offset 0 20 0
+}
+PointLight Darkness4
+{
+	Color 0.625 0.625 0.625
+	Subtractive 1
+	Size 72
+	Offset 0 20 0
+}
+PointLight Darkness5
+{
+	Color 0.5 0.5 0.5
+	Subtractive 1
+	Size 72
+	Offset 0 20 0
+}
+PointLight Darkness6
+{
+	Color 0.375 0.375 0.375
+	Subtractive 1
+	Size 72
+	Offset 0 20 0
+}
+PointLight Darkness7
+{
+	Color 0.25 0.25 0.25
+	Subtractive 1
+	Size 72
+	Offset 0 20 0
+}
+PointLight Darkness8
+{
+	Color 0.125 0.125 0.125
+	Subtractive 1
+	Size 72
+	Offset 0 20 0
+}
+Object Darkness
+{
+	Frame DAR1 { Light Darkness1 }
+	Frame DAR2 { Light Darkness2 }
+	Frame DAR3 { Light Darkness3 }
+	Frame DAR4 { Light Darkness4 }
+	Frame DAR5 { Light Darkness5 }
+	Frame DAR6 { Light Darkness6 }
+	Frame DAR7 { Light Darkness7 }
+	Frame DAR8 { Light Darkness8 }
+}
+//Torches lights
+Pointlight SmallRedTorch
+{
+	Color 0.8 0.2 0.0
+	Size 32
+	Offset 0 8 0
+}
+Pointlight SmallBlueTorch
+{
+	Color 0.4 0.4 1.0
+	Size 32
+	Offset 0 8 0
+}
+Pointlight SmallGreenTorch
+{
+	Color 0.4 1.0 0.4
+	Size 32
+	Offset 0 8 0
+}
+Pointlight SmallYellowTorch
+{
+	Color 0.7 0.7 0.0
+	Size 32
+	Offset 0 8 0
+}
+Pointlight SmallBloodTorch
+{
+	Color 1.0 0.0 0.0
+	Size 32
+	Offset 0 8 0
+}
+Pointlight SmallPurpleTorch
+{
+	Color 0.8 0.0 0.8
+	Size 32
+	Offset 0 8 0
+}
+Pointlight SmallWhiteTorch
+{
+	Color 1.0 1.0 1.0
+	Size 32
+	Offset 0 8 0
+}
+Pointlight SmallCyanTorch
+{
+	Color 0.0 1.0 1.0
+	Size 32
+	Offset 0 8 0
+}
+Pointlight LargeRedTorch
+{
+	Color 0.8 0.2 0.0
+	Size 48
+	Offset 0 16 0
+}
+Pointlight LargeBlueTorch
+{
+	Color 0.4 0.4 1.0
+	Size 48
+	Offset 0 16 0
+}
+Pointlight LargeGreenTorch
+{
+	Color 0.4 1.0 0.4
+	Size 48
+	Offset 0 16 0
+}
+Pointlight LargeYellowTorch
+{
+	Color 0.7 0.7 0.7
+	Size 48
+	Offset 0 16 0
+}
+Pointlight LargeBloodTorch
+{
+	Color 1.0 0.0 0.0
+	Size 48
+	Offset 0 16 0
+}
+Pointlight LargePurpleTorch
+{
+	Color 0.8 0.0 0.8
+	Size 48
+	Offset 0 16 0
+}
+Pointlight LargeWhiteTorch
+{
+	Color 1.0 1.0 1.0
+	Size 48
+	Offset 0 16 0
+}
+Pointlight LargeCyanTorch
+{
+	Color 0.0 1.0 1.0
+	Size 48
+	Offset 0 16 0
+}
+Object SHRedTorchSmallLight { Frame TNT1 { Light SmallRedTorch } }
+Object SHBlueTorchSmallLight { Frame TNT1 { Light SmallBlueTorch } }
+Object SHGreenTorchSmallLight { Frame TNT1 { Light SmallGreenTorch } }
+Object SHYellowTorchSmallLight { Frame TNT1 { Light SmallYellowTorch } }
+Object SHBloodTorchSmallLight { Frame TNT1 { Light SmallBloodTorch } }
+Object SHPurpleTorchSmallLight { Frame TNT1 { Light SmallPurpleTorch } }
+Object SHWhiteTorchSmallLight { Frame TNT1 { Light SmallWhiteTorch } }
+Object SHCyanTorchSmallLight { Frame TNT1 { Light SmallCyanTorch } }
+Object SHRedTorchLargeLight { Frame TNT1 { Light LargeRedTorch } }
+Object SHBlueTorchLargeLight { Frame TNT1 { Light LargeBlueTorch } }
+Object SHGreenTorchLargeLight { Frame TNT1 { Light LargeGreenTorch } }
+Object SHYellowTorchLargeLight { Frame TNT1 { Light LargeYellowTorch } }
+Object SHBloodTorchLargeLight { Frame TNT1 { Light LargeBloodTorch } }
+Object SHPurpleTorchLargeLight { Frame TNT1 { Light LargePurpleTorch } }
+Object SHWhiteTorchLargeLight { Frame TNT1 { Light LargeWhiteTorch } }
+Object SHCyanTorchLargeLight { Frame TNT1 { Light LargeCyanTorch } }
+//Fire lights
+Flickerlight FireSpawnerSmall
+{
+	Color 1.0 0.6 0.0
+	Size 128
+	SecondarySize 160
+	Chance 0.6
+}
+Flickerlight FireSpawnerMedium
+{
+	Color 1.0 0.6 0.0
+	Size 192
+	SecondarySize 224
+	Chance 0.6
+}
+Flickerlight FireSpawnerLarge
+{
+	Color 1.0 0.6 0.0
+	Size 256
+	SecondarySize 288
+	Chance 0.6
+}
+Flickerlight WhiteFireSpawnerSmall
+{
+	Color 1.0 1.0 1.0
+	Size 128
+	SecondarySize 160
+	Chance 0.6
+}
+Object SmallFlame { Frame TNT1 { Light FireSpawnerSmall } }
+Object MediumFlame { Frame TNT1 { Light FireSpawnerMedium } }
+Object LargeFlame { Frame TNT1 { Light FireSpawnerLarge } }
+Object SmallWhiteFlame { Frame TNT1 { Light WhiteFireSpawnerSmall } }
+object MiniMissile
+{
+	frame XPL1A { light SMALLREDTORCH }
+	frame XPL1B { light SMALLREDTORCH }
+	frame XPL1C { light BIGREDTORCH }
+	frame XPL1D { light BIGREDTORCH }
+	frame XPL1E { light BIGREDTORCH }
+	frame XPL1F { light BIGREDTORCH }
+}
+object ShockMissile
+{
+	frame NPSBA { light SMALLBLUETORCH }
+	frame NPSBB { light BIGBLUETORCH }
+	frame NPSBC { light SMALLBLUETORCH }
+	frame NPSBD { light BIGBLUETORCH }
+	frame NPSBE { light SMALLBLUETORCH }
+	frame NPSBF { light BIGBLUETORCH }
+	frame NPSBG { light SMALLBLUETORCH }
+	frame NPSBH { light BIGBLUETORCH }
+	frame NPSBI { light SMALLBLUETORCH }
+	frame NPSBJ { light BIGBLUETORCH }
+	frame NPSBK { light SMALLBLUETORCH }
+	frame NPSBL { light BIGBLUETORCH }
+	frame NPSBN { light SMALLBLUETORCH }
+}
+pointlight RedBFGGL1
+{
+	color 0.99 0.0 0.0
+	size 31
+}
+pointlight RedBFGGL2
+{
+	color 0.99 0.0 0.0
+	size 38
+}
+pointlight RedBFGGL3
+{
+	color 0.99 0.0 0.0
+	size 43
+}
+pointlight RedBFGGL4
+{
+	color 0.99 0.0 0.0
+	size 49
+}
+object BFGBALL1
+{
+	frame BFS1A { light BIGREDTORCH }
+	frame BFS1B { light BIGREDTORCH }
+	frame PR1EA { light SMALLREDTORCH }
+	frame PR1EB { light SMALLREDTORCH }
+	frame PR1EC { light BIGREDTORCH }
+	frame PR1ED { light BIGREDTORCH }
+	frame PR1EE { light RedBFGGL1 }
+	frame PR1EF { light RedBFGGL1 }
+	frame PR1EG { light RedBFGGL2 }
+	frame PR1EH { light RedBFGGL2 }
+	frame PR1EI { light RedBFGGL3 }
+	frame PR1EJ { light RedBFGGL3 }
+	frame PR1EK { light RedBFGGL4 }
+}
+pointlight Nail
+{
+	color 1.0 0.9 0.0
+	size 5
+}
+pointlight RipperPuff1
+{
+	color 1.0 0.9 0.0
+	size 3
+}
+pointlight RipperPuff2
+{
+	color 1.0 0.94 0.0
+	size 5
+}
+pointlight RipperPuff3
+{
+	color 1.0 1.0 0.0
+	size 7
+}
+object NailGunShard
+{
+	frame PUFFB { light RipperPuff1 }
+	frame PUFFC { light RipperPuff2 }
+	frame PUFFD { light RipperPuff3 }
+}
+object RipperPuff
+{
+	frame FX57A { light RipperPuff1 }
+	frame FX57B { light RipperPuff1 }
+	frame FX57C { light RipperPuff1 }
+	frame FX57D { light RipperPuff2 }
+	frame FX57E { light RipperPuff2 }
+	frame FX57F { light RipperPuff2 }
+	frame FX57G { light RipperPuff3 }
+	frame FX57H { light RipperPuff3 }
+	frame FX57I { light RipperPuff3 }
+	frame FX57J { light BIGYELLOWTORCH }
+}
+object TurningMissile
+{
+	frame CPFXA { light REDMISSILE }
+	frame CPFXB { light REDMISSILE }
+	frame CPFXC { light REDMISSILE }
+	frame CPFXD { light REDMISSILE }
+	frame CPFXE { light REDMISSILE2 }
+	frame CPFXF { light REDMISSILE3 }
+	frame CPFXG { light REDMISSILE3 }
+	frame CPFXH { light REDMISSILE4 }
+	frame CPFXI { light BIGREDTORCH }
+}
+object SpawnerModule
+{
+	frame CPFXA { light REDMISSILE }
+	frame CPFXB { light REDMISSILE }
+	frame CPFXC { light REDMISSILE }
+	frame CPFXD { light REDMISSILE }
+	frame CPFXE { light REDMISSILE2 }
+	frame CPFXF { light REDMISSILE3 }
+	frame CPFXG { light REDMISSILE3 }
+	frame CPFXH { light REDMISSILE4 }
+	frame CPFXI { light BIGREDTORCH }
+}
+pointlight NuclearExplosion
+{
+	color 1.0 0.41 0.0
+	size 25
+}
+pointlight NuclearExplosion2
+{
+	color 1.0 0.4 0.0
+	size 36
+}
+pointlight NuclearExplosion3
+{
+	color 1.0 0.3 0.0
+	size 46
+}
+pointlight NuclearExplosion4
+{
+	color 1.0 0.28 0.0
+	size 48
+}
+pointlight NuclearExplosion5
+{
+	color 1.0 0.15 0.0
+	size 54
+}
+pointlight REDMISSILE
+{
+	color 1.0 0.0 0.0
+	size 18
+}
+pointlight REDMISSILE2
+{
+	color 1.0 0.1 0.0
+	size 24
+}
+pointlight REDMISSILE3
+{
+	color 1.0 0.05 0.0
+	size 27
+}
+pointlight REDMISSILE4
+{
+	color 1.0 0.03 0.0
+	size 30
+}
+pointlight RAYGUNLIGHT
+{
+	color 0.0 1.0 0.0
+	size 56
+}
+object RAYGUNSHOT
+{
+	frame TNT1 { light RAYGUNLIGHT }
+}
+PointLight IonBall1
+{
+	Color 0.4 0.4 1.0
+	Size 24
+}
+PointLight IonBall2
+{
+	Color 0.0 0.0 1.0
+	Size 24
+}
+PointLight IonBall3
+{
+	Color 0.0 0.0 0.85
+	Size 20
+}
+PointLight IonBall4
+{
+	Color 0.0 0.0 0.7
+	Size 16
+}
+PointLight IonBall5
+{
+	Color 0.0 0.0 0.5
+	Size 12
+}
+Object IonBall
+{
+	Frame IONBA { Light IonBall1 }
+	Frame IONBB { Light IonBall1 }
+	Frame IONBC { Light IonBall1 }
+	Frame IONBD { Light IonBall1 }
+	Frame IONBE { Light IonBall1 }
+	Frame IONBF { Light IonBall1 }
+	Frame IONBG { Light IonBall1 }
+	Frame IONBH { Light IonBall1 }
+	Frame IONBI { Light IonBall2 }
+	Frame IONBJ { Light IonBall3 }
+	Frame IONBK { Light IonBall4 }
+	Frame IONBL { Light IonBall5 }
+}
+PointLight Grenade1
+{
+	Color 0.6 0.6 0.0
+	Size 32
+}
+FlickerLight Grenade2
+{
+	Color 1.0 0.7 0.0
+	Size 64
+	SecondarySize 72
+	Chance 0.3
+}
+FlickerLight Grenade3
+{
+	Color 0.5 0.1 0.0
+	Size 80
+	SecondarySize 88
+	Chance 0.3
+}
+FlickerLight Grenade4
+{
+	Color 0.3 0.0 0.0
+	Size 96
+	SecondarySize 104
+	Chance 0.3
+}
+Object Grenade
+{
+	Frame GRND { Light Grenade1 }
+	Frame MISLB { Light Grenade2 }
+	Frame MISLC { Light Grenade3 }
+	Frame MISLD { Light Grenade4 }
+}

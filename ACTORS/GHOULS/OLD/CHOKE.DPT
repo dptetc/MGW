@@ -1,6 +1,6 @@
 ACTOR Choke
 {
-	health 4000
+	health 470
 	Radius 28
 	Height 56
 	Speed 25
@@ -56,7 +56,6 @@ ACTOR Choke
 		Stop
 	}
 }
-
 Actor ArenaChoke : Choke
 {
 	Obituary "%o was devoured by the Choke"

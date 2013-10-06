@@ -1,6 +1,6 @@
 Actor Firelord
 {
-	health 4000
+	health 820
 	PainChance 0
 	MeleeDamage 255
 	Damage 255
@@ -49,7 +49,6 @@ Actor Firelord
 		Stop
 	}
 }
-
 actor FirelordFire : DoomImpFireBall
 {
 	Radius 12
@@ -84,7 +83,6 @@ actor FirelordFire : DoomImpFireBall
 		Stop
 	}
 }
-
 Actor ArenaFirelord : Firelord
 {
 	Obituary "%o was eaten by the Firelord"

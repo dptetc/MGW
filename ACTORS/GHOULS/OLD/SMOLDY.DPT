@@ -1,6 +1,6 @@
 Actor Smoldy
 {
-	health 4000
+	health 860
 	radius 28
 	height 56
 	speed 15
@@ -61,12 +61,10 @@ Actor Smoldy
 		Stop
 	}
 }
-
 actor ArenaSmoldy : Smoldy
 {
 	Obituary "%o burned up by the Smoldy"
 }
-
 actor SmoldyFire1
 {
 	Radius 12
@@ -106,7 +104,6 @@ actor SmoldyFire1
 		Stop
 	}
 }
-
 actor SmoldyFire2
 {
 	Radius 12
@@ -146,7 +143,6 @@ actor SmoldyFire2
 		Stop
 	}
 }
-
 actor SmoldyFire3 : GhoulFireX
 {
 	Speed 0

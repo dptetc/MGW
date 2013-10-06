@@ -1,6 +1,6 @@
 ACTOR Nightmare
 {
-	health 4000
+	health 780
 	MONSTER
 	+DROPOFF
 	+FLOAT
@@ -96,7 +96,6 @@ ACTOR Nightmare
 		Stop
 	}
 }
-
 ACTOR FakeTerror
 {
 	+NOCLIP
@@ -165,7 +164,6 @@ ACTOR FakeTerror
 		Stop
 	}
 }
-
 ACTOR FakeUndeath
 {
 	+NOCLIP
@@ -235,7 +233,6 @@ ACTOR FakeUndeath
 		Stop
 	}
 }
-
 ACTOR FakeSjas
 {
 	+NOCLIP
@@ -306,7 +303,6 @@ ACTOR FakeSjas
 		Stop
 	}
 }
-
 ACTOR FakeEyesore
 {
 	+NOCLIP
@@ -376,7 +372,6 @@ ACTOR FakeEyesore
 		Stop
 	}
 }
-
 ACTOR FakeJugulum
 {
 	+NOCLIP
@@ -448,7 +443,6 @@ ACTOR FakeJugulum
 		Stop
 	}
 }
-
 ACTOR FakeSoulHarvester
 {
 	+NOCLIP
@@ -517,7 +511,6 @@ ACTOR FakeSoulHarvester
 		Stop
 	}
 }
-
 ACTOR FakeChoke
 {
 	+NOCLIP
@@ -586,7 +579,6 @@ ACTOR FakeChoke
 		Stop
 	}
 }
-
 ACTOR FakeDemonskull
 {
 	+NOCLIP
@@ -655,7 +647,6 @@ ACTOR FakeDemonskull
 		Stop
 	}
 }
-
 ACTOR NightmareFX1
 {
 	+NOCLIP
@@ -673,7 +664,6 @@ ACTOR NightmareFX1
 		Stop
 	}
 }
-
 ACTOR ArenaNightmare : Nightmare
 {
 	Obituary "%o saw %p worst Nightmare"

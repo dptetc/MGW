@@ -3,7 +3,7 @@ ACTOR Tag
 	floatspeed 30
 	Speed 30
 	MONSTER
-	Health 1560
+	Health 560
 	Radius 48
 	Height 48
 	Mass 9999999999999
@@ -45,7 +45,6 @@ ACTOR Tag
 		Stop
 	}
 }
-
 Actor TAGTen1
 {
 	Scale 0.5
@@ -57,7 +56,6 @@ Actor TAGTen1
 		Stop
 	}
 }
-
 Actor TAGTen2
 {
 	Scale 0.5
@@ -69,7 +67,6 @@ Actor TAGTen2
 		Stop
 	}
 }
-
 Actor ArenaTAG : TAG
 {
 	Obituary "%o supposed to die by the TAG."

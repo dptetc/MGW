@@ -1,6 +1,6 @@
 ACTOR Frostbite
 {
-	health 4000
+	health 780
 	MONSTER
 	+DROPOFF
 	+LOOKALLAROUND
@@ -94,7 +94,6 @@ ACTOR Frostbite
 		stop
 	}
 }
-
 Actor ArenaFrostbite : Frostbite
 {
 	Obituary "%o found the Ghoul"
@@ -106,7 +105,6 @@ Actor ArenaFrostbite : Frostbite
 		goto see
 	}
 }
-
 Actor FrostDeathFX
 {
 	-SOLID
@@ -122,7 +120,6 @@ Actor FrostDeathFX
 		stop
 	}
 }
-
 Actor LargeBurst
 {
 	Radius 40
@@ -138,7 +135,6 @@ Actor LargeBurst
 		stop
 	}
 }
-
 Actor IceChunkFB2
 {
 	Radius 3
@@ -155,7 +151,6 @@ Actor IceChunkFB2
 		Stop
 	}
 }
-
 actor FrostTwinkle
 {
 	+NOINTERACTION
@@ -173,7 +168,6 @@ actor FrostTwinkle
 		stop
 	}
 }
-
 actor FrozenWind
 {
 	PROJECTILE
@@ -200,7 +194,6 @@ actor FrozenWind
 		stop
 	}
 }
-
 actor ArenaFrozenWind : FrozenWind
 {
 	Obituary "%o was freezed by Frostbite"

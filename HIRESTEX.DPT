@@ -9,7 +9,6 @@ define GLASS 256 128
 define SECBANDE 128 16
 define CARREAUX 64 64
 define METRLINE 256 96
-
 define SKYB_N 512 512
 define SKYB_E 512 512
 define SKYB_S 512 512

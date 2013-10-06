@@ -17,12 +17,10 @@ ACTOR GhoulFireX
 		Stop
 	}
 }
-
 ACTOR GhoulFireX2 : GhoulFireX
 {
 	Speed 2
 }
-
 ACTOR GhoulFireX3 : GhoulFireX
 {
 	Speed 2
@@ -33,17 +31,14 @@ ACTOR GhoulFireX3 : GhoulFireX
 		Stop
 	}
 }
-
 ACTOR GhoulFireX4 : GhoulFireX
 {
 	Speed 15
 }
-
 ACTOR GhoulFireX5 : GhoulFireX
 {
 	Speed 20
 }
-
 ACTOR GhoulsFireSFX
 {
 	+CLIENTSIDEONLY
@@ -82,7 +77,6 @@ ACTOR GhoulsFireSFX
 		Stop
 	}
 }
-
 Actor GFlame1A
 {
 	Height 2
@@ -120,7 +114,6 @@ Actor GFlame1A
 		Stop
 	}
 }
-
 Actor GFlame1B : GFlame1A
 {
 	States
@@ -147,7 +140,6 @@ Actor GFlame1B : GFlame1A
 		Stop
 	}
 }
-
 Actor GFlame2A : GFlame1A
 {
 	States
@@ -174,7 +166,6 @@ Actor GFlame2A : GFlame1A
 		Stop
 	}
 }
-
 Actor GFlame2B : GFlame1A
 {
 	States
@@ -201,7 +192,6 @@ Actor GFlame2B : GFlame1A
 		Stop
 	}
 }
-
 Actor GFlame3A : GFlame1A
 {
 	States
@@ -228,7 +218,6 @@ Actor GFlame3A : GFlame1A
 		Stop
 	}
 }
-
 Actor GFlame3B : GFlame1A
 {
 	States
@@ -255,7 +244,6 @@ Actor GFlame3B : GFlame1A
 		Stop
 	}
 }
-
 ACTOR GhoulsFireSFXWhite
 {
 	+CLIENTSIDEONLY
@@ -293,7 +281,6 @@ ACTOR GhoulsFireSFXWhite
 		Stop
 	}
 }
-
 Actor SmallWhiteFlame
 {
 	+ClientSideOnly
@@ -309,7 +296,6 @@ Actor SmallWhiteFlame
 		Stop
 	}
 }
-
 Actor WFlame1A
 {
 	Height 2
@@ -348,7 +334,6 @@ Actor WFlame1A
 		Stop
 	}
 }
-
 Actor WFlame1B : WFlame1A
 {
 	States
@@ -375,7 +360,6 @@ Actor WFlame1B : WFlame1A
 		Stop
 	}
 }
-
 Actor WFlame2A : WFlame1A
 {
 	States
@@ -402,7 +386,6 @@ Actor WFlame2A : WFlame1A
 		Stop
 	}
 }
-
 Actor WFlame2B : WFlame1A
 {
 	States
@@ -429,7 +412,6 @@ Actor WFlame2B : WFlame1A
 		Stop
 	}
 }
-
 Actor WFlame3A : WFlame1A
 {
 	States
@@ -456,7 +438,6 @@ Actor WFlame3A : WFlame1A
 		Stop
 	}
 }
-
 Actor WFlame3B : WFlame1A
 {
 	States
@@ -483,7 +464,6 @@ Actor WFlame3B : WFlame1A
 		Stop
 	}
 }
-
 actor Darkness
 {
 	Height 1
@@ -510,7 +490,6 @@ actor Darkness
 		stop
 	}
 }
-
 actor DarknessRing
 {
 	-SOLID

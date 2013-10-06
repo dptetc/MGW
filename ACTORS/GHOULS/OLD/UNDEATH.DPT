@@ -1,6 +1,6 @@
 ACTOR Undeath
 {
-	health 4000
+	health 450
 	MONSTER
 	+DROPOFF
 	+LOOKALLAROUND
@@ -77,7 +77,6 @@ ACTOR Undeath
 		Stop
 	}
 }
-
 ACTOR ArenaUndeath : Undeath
 {
 	Obituary "%o got too close to Undeath"

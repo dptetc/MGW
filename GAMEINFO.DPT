@@ -1,4 +1,4 @@
-IWAD = "doom2.wad"
+IWAD = "DOOM2.WAD"
 STARTUPTITLE = "Mysterious Ghoul World"
 STARTUPCOLORS = "FF 00 00", "00 00 00"
 STARTUPSONG= "D_DARK"

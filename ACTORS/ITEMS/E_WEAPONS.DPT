@@ -1,6 +1,4 @@
-
 //***********Wrench***********\\
-
 ACTOR E_Wrench : MGW_Weapon
 {
 	Radius 20
@@ -42,7 +40,6 @@ ACTOR E_Wrench : MGW_Weapon
 		Goto Select
 	}
 }
-
 actor WrenchPuff
 {
 	+NOBLOCKMAP
@@ -68,14 +65,11 @@ actor WrenchPuff
 		stop
 	}
 }
-
 actor WrenchCountStrike : inventory
 { 
 	Inventory.MaxAmount 1 
 }
-
 //***********Pistol***********\\
-
 Actor E_Pistol : MGW_Weapon
 {
 	Weapon.AmmoUse 1
@@ -120,15 +114,12 @@ Actor E_Pistol : MGW_Weapon
 		Goto Ready
 	}
 }
-
 //***********Shotgun***********\\
-
 Actor  E_Shotgun : MGW_Weapon
 {
 	Weapon.AmmoType "Shell"
 	Weapon.AmmoGive 8
 	Weapon.AmmoUse 1
-	Weapon.SelectionOrder 6
 	Inventory.PickupSound "misc/w_pkup"
 	Inventory.PickupMessage "You got a Shotgun"
 	Obituary "%o was ripped to shreads by %k's Shotgun."
@@ -164,12 +155,9 @@ Actor  E_Shotgun : MGW_Weapon
 		Goto LightDone
 	}
 }
-
 //***********SSG***********\\
-
 Actor E_SSG : MGW_Weapon
 {
-	Weapon.SelectionOrder 400
 	Weapon.AmmoUse 2
 	Weapon.AmmoGive 8
 	Weapon.AmmoType "Shell"
@@ -206,9 +194,7 @@ Actor E_SSG : MGW_Weapon
 		Goto LightDone
 	}
 }
-
 //***********MP5***********\\
-
 Actor E_MP5 : MGW_Weapon
 {
 	AttackSound "LR300_SH"
@@ -254,9 +240,7 @@ Actor E_MP5 : MGW_Weapon
 		Goto LightDone
 	}
 }
-
 //***********GrenadeLauncher***********\\
-
 Actor E_GrenadeLauncher : MGW_Weapon
 {
 	Weapon.AmmoType "RocketAmmo"
@@ -267,7 +251,6 @@ Actor E_GrenadeLauncher : MGW_Weapon
 	Inventory.PickupMessage "You got the Grenade Launcher!"
 	Inventory.PickupSound "misc/w_pkup"
 	Weapon.UpSound "WeaponSelect"
-	Weapon.SelectionOrder 2600
 	Weapon.Kickback 600
 	States
 	{
@@ -303,7 +286,6 @@ Actor E_GrenadeLauncher : MGW_Weapon
 		Stop
 	}
 }
-
 Actor E_Grenade
 {
 	Radius 11
@@ -337,7 +319,6 @@ Actor E_Grenade
 		Stop
 	}
 }
-
 Actor GrenadePuff : BulletPuff
 {
 	States
@@ -347,12 +328,9 @@ Actor GrenadePuff : BulletPuff
 		Stop
 	}
 }
-
 //***********Railgun***********\\
-
 Actor E_Railgun : MGW_Weapon
 {
-	Weapon.SelectionOrder 600
 	Weapon.SlotNumber 6
 	Weapon.UpSound "WeaponSelect"
 	Inventory.PickupSound "misc/w_pkup"
@@ -384,7 +362,6 @@ Actor E_Railgun : MGW_Weapon
 		Goto Ready
 	}
 }
-
 Actor LAZOR
 {
 	Damage 16
@@ -405,7 +382,6 @@ Actor LAZOR
 		Stop
 	}
 }
-
 actor LAZORPROJECTILE : LAZOR
 {
 	Translation "0:255=196:198"
@@ -434,7 +410,6 @@ actor LAZORPROJECTILE : LAZOR
 		Stop
 	}
 }
-
 actor LAZORTRAIL 
 {
 	Speed 1
@@ -450,34 +425,27 @@ actor LAZORTRAIL
 		stop
 	}
 }
-
 actor lazortrail2 : lazorTrail
 {
 	Speed 3
 }
-
 actor lazortrail3 : lazorTrail
 {
 	Speed 4
 }
-
 actor lazortrail4 : lazorTrail
 {
 	Speed 5
 }
-
 actor lazortrail5 : lazorTrail
 {
 	Speed 6
 }
-
 actor lazortrail6 : lazorTrail
 {
 	Speed 7
 }
-
 //***********Phasegun***********\\
-
 Actor E_PhaseGun : MGW_Weapon
 {
 	Weapon.AmmoUse 1
@@ -515,7 +483,6 @@ Actor E_PhaseGun : MGW_Weapon
 		stop
 	}
 }
-
 actor RaygunShot
 {
 	Radius 6
@@ -540,7 +507,6 @@ actor RaygunShot
 		stop
 	}
 }
-
 actor RaygunTrail
 {
 	Radius 2
@@ -549,7 +515,6 @@ actor RaygunTrail
 	Scale 0.6
 	+NOINTERACTION
 	+CLIENTSIDEONLY
-
 	States
 	{
 	Spawn:
@@ -558,11 +523,9 @@ actor RaygunTrail
 		stop
 	}
 }
-
 actor RaygunTrail2 : RaygunTrail
 {
 	Scale 0.5
-
 	States
 	{
 	Spawn:
@@ -571,11 +534,9 @@ actor RaygunTrail2 : RaygunTrail
 		stop
 	}
 }
-
 actor RaygunTrail3 : RaygunTrail
 {
 	Scale 0.4
-
 	States
 	{
 	Spawn:
@@ -584,11 +545,9 @@ actor RaygunTrail3 : RaygunTrail
 		stop
 	}
 }
-
 actor RaygunTrail4 : RaygunTrail
 {
 	Scale 0.3
-
 	States
 	{
 	Spawn:
@@ -597,11 +556,9 @@ actor RaygunTrail4 : RaygunTrail
 		stop
 	}
 }
-
 actor RaygunTrail5 : RaygunTrail
 {
 	Scale 0.2
-
 	States
 	{
 	Spawn:
@@ -610,11 +567,9 @@ actor RaygunTrail5 : RaygunTrail
 		stop
 	}
 }
-
 actor RaygunTrail6 : RaygunTrail
 {
 	Scale 0.1
-
 	States
 	{
 	Spawn:
@@ -622,14 +577,11 @@ actor RaygunTrail6 : RaygunTrail
 		stop
 	}
 }
-
 //***********ElectricLauncher***********\\
-
 Actor E_ElectricLauncher : MGW_Weapon
 {
 	Radius 20
 	Height 20
-	Weapon.SelectionOrder 2800
 	Weapon.KickBack 700
 	Weapon.UpSound "WeaponSelect"
 	Weapon.AmmoType1 "Cell"
@@ -659,7 +611,6 @@ Actor E_ElectricLauncher : MGW_Weapon
 		Goto Ready
 	}
 }
-
 Actor ShockMissile 
 {
 	Decal ShockMissileScorchGroup
@@ -696,9 +647,7 @@ Actor ShockMissile
 		Stop
 	}
 }
-
 //***********Nailgun***********\\
-
 ACTOR E_NailGun : MGW_Weapon
 {
 	Weapon.KickBack 122
@@ -748,12 +697,10 @@ ACTOR E_NailGun : MGW_Weapon
 		Goto Ready
 	}
 }	
-
 actor nailgunburst : inventory
 {
 	inventory.Maxamount 1
 }
-
 actor NailGunShard
 {
 	Speed 46
@@ -774,11 +721,8 @@ actor NailGunShard
 		Stop
 	}
 }
-
 Actor NailGunShard2 : NailGunShard { Damage 4 }
-
 //***********NailBombLauncher***********\\
-
 ACTOR E_NailBombLauncher : MGW_Weapon
 {
 	Weapon.KickBack 111
@@ -812,7 +756,6 @@ ACTOR E_NailBombLauncher : MGW_Weapon
 		Goto Ready
 	}
 }
-
 actor NailBomb
 {
 	Speed 34
@@ -837,9 +780,7 @@ actor NailBomb
 		Stop
 	}
 }
-
 //***********NuclearBombLauncher***********\\
-
 Actor E_NuclearBombLauncher : MGW_Weapon
 {
 	Weapon.AmmoUse 100
@@ -877,7 +818,6 @@ Actor E_NuclearBombLauncher : MGW_Weapon
 		Goto LightDone
 	}
 }
-
 Actor NukeMissile : Rocket
 {
 	Speed 45
@@ -892,7 +832,6 @@ Actor NukeMissile : Rocket
 		Stop
 	}
 }
-
 actor NukeNoclipper
 {
 	Radius 24
@@ -951,7 +890,6 @@ Actor Nuke
 		Stop
 	}
 }
-
 Actor NukeFire : Nuke
 {
 	RenderStyle Add
@@ -974,7 +912,6 @@ Actor NukeFire : Nuke
 		Wait
 	}
 }
-
 Actor NukeSmoke : Nuke
 {
 	Scale 3.5
@@ -997,7 +934,6 @@ Actor NukeSmoke : Nuke
 		Wait
 	}
 }
-
 Actor NukeFlare : NukeFire
 {
 	Scale 16
@@ -1009,7 +945,6 @@ Actor NukeFlare : NukeFire
 		Wait
 	}
 }
-
 Actor NukeFloor : Nuke
 {
 	States
@@ -1020,7 +955,6 @@ Actor NukeFloor : Nuke
 		Stop
 	}
 }
-
 Actor NukeSmokeFloor : Nuke
 {
 	States
@@ -1031,7 +965,6 @@ Actor NukeSmokeFloor : Nuke
 		Stop
 	}
 }
-
 Actor NukePillar : Nuke
 {
 	States
@@ -1044,7 +977,6 @@ Actor NukePillar : Nuke
 		Stop
 	}
 }
-
 Actor NukeSmokePillar : Nuke
 {
 	States
@@ -1055,7 +987,6 @@ Actor NukeSmokePillar : Nuke
 		Stop
 	}
 }
-
 Actor NukeMushroom : Nuke
 {
 	States
@@ -1066,7 +997,6 @@ Actor NukeMushroom : Nuke
 		Stop
 	}
 }
-
 Actor NukeSmokeMushroom : Nuke
 {
 	States
@@ -1077,7 +1007,6 @@ Actor NukeSmokeMushroom : Nuke
 		Stop
 	}
 }
-
 Actor NukeSmokering : Nuke
 {
 	States
@@ -1105,9 +1034,7 @@ Actor NukeSmokering : Nuke
 		Stop
 	}
 }
-
 //Hyper nuke=========================================================================================================
-
 Actor HyperNukeMissile : Rocket
 {
 	States
@@ -1118,7 +1045,6 @@ Actor HyperNukeMissile : Rocket
 		Stop
 	}
 }
-
 Actor HyperNuke : Nuke
 {
 	States
@@ -1144,7 +1070,6 @@ Actor HyperNuke : Nuke
 		Stop
 	}
 }
-
 Actor NukeRadiation1 : CSTAFFMISSILE
 {
 	Radius 12
@@ -1168,7 +1093,6 @@ Actor NukeRadiation1 : CSTAFFMISSILE
 		Stop
 	}
 }
-
 Actor NukeRadiation2 : NukeRadiation1
 {
 	States
@@ -1178,7 +1102,6 @@ Actor NukeRadiation2 : NukeRadiation1
 		Stop
 	}
 }
-
 Actor NukeRadiation3 : NukeRadiation1
 {
 	States
@@ -1188,7 +1111,6 @@ Actor NukeRadiation3 : NukeRadiation1
 		Stop
 	}
 }
-
 Actor NukeRadiation4 : NukeRadiation1
 {
 	States
@@ -1198,7 +1120,6 @@ Actor NukeRadiation4 : NukeRadiation1
 		Stop
 	}
 }
-
 Actor NukeHyperFire : Nuke
 {
 	RenderStyle Add
@@ -1221,7 +1142,6 @@ Actor NukeHyperFire : Nuke
 		Wait
 	}
 }
-
 Actor NukeHyperSmoke : Nuke
 {
 	Scale 19
@@ -1244,7 +1164,6 @@ Actor NukeHyperSmoke : Nuke
 		Wait
 	}
 }
-
 Actor NukeHyperFlare : NukeFire
 {
 	Scale 64
@@ -1256,7 +1175,6 @@ Actor NukeHyperFlare : NukeFire
 		Wait
 	}
 }
-
 Actor NukeHyperFloor : Nuke
 {
 	States
@@ -1267,7 +1185,6 @@ Actor NukeHyperFloor : Nuke
 		Stop
 	}
 }
-
 Actor NukeHyperSmokeFloor : Nuke
 {
 	States
@@ -1278,7 +1195,6 @@ Actor NukeHyperSmokeFloor : Nuke
 		Stop
 	}
 }
-
 Actor NukeHyperPillar : Nuke
 {
 	States
@@ -1291,7 +1207,6 @@ Actor NukeHyperPillar : Nuke
 		Stop
 	}
 }
-
 Actor NukeHyperSmokePillar : Nuke
 {
 	States
@@ -1302,7 +1217,6 @@ Actor NukeHyperSmokePillar : Nuke
 		Stop
 	}
 }
-
 Actor NukeHyperMushroom : Nuke
 {
 	States
@@ -1313,7 +1227,6 @@ Actor NukeHyperMushroom : Nuke
 		Stop
 	}
 }
-
 Actor NukeHyperSmokeMushroom : Nuke
 {
 	States
@@ -1324,7 +1237,6 @@ Actor NukeHyperSmokeMushroom : Nuke
 		Stop
 	}
 }
-
 Actor NukeHyperSmokering : Nuke
 {
 	States
@@ -1370,7 +1282,6 @@ Actor NukeHyperSmokering : Nuke
 		Stop
 	}
 }
-
 Actor RadiationQuanity : Ammo
 {
 	Inventory.MaxAmount 100

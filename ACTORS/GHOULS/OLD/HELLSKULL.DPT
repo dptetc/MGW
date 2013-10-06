@@ -1,6 +1,6 @@
 Actor HellSkull
 {
-	health 4000
+	health 420
 	Radius 26
 	Height 60
 	Speed 15
@@ -67,7 +67,6 @@ Actor HellSkull
 		stop
 	}
 }
-
 Actor ArenaHellskull : Hellskull
 {
 	Obituary "%o found the Hell's Skull"

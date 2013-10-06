@@ -1,16 +1,11 @@
-
-//***********Global***********\\
-
 actor Healthpacks : ammo
 {
 	inventory.maxamount 20
 	+Inventory.ignoreskill
 }
-
 actor HealthPack : MGW_Weapon 
 {		
 	obituary "%o caught %k's medkit lol." 
-	weapon.selectionorder 756 
 	weapon.ammotype "Healthpacks" 
 	weapon.ammouse 1
 	scale 0.15
@@ -42,12 +37,10 @@ actor HealthPack : MGW_Weapon
 		stop
 	}
 }
-
 ACTOR SpecialMedkit : Medikit
 {
 	Inventory.Amount 50
 }
-
 ACTOR MedkitSpawn
 {
 	obituary "%o caught %k's medkit lol." 
@@ -70,9 +63,6 @@ ACTOR MedkitSpawn
 		Stop
 	}
 }
-
-//***********Healing Gun***********\\
-
 actor "Curing Cannon" : MGW_Weapon 
 {
 	Weapon.AmmoUse1 1
@@ -83,11 +73,11 @@ actor "Curing Cannon" : MGW_Weapon
 	Weapon.UpSound "WeaponSelect"
 	states
 	{
-	ready:
+	Ready:
 		REP4 A 0
 		REP4 A 1 A_weaponready
 		loop
-	fire:
+	Fire:
 		REP4 A 0 A_JumpIfTargetInLOS ("AltFire")
 		goto Ready
 	AltFire:
@@ -104,33 +94,31 @@ actor "Curing Cannon" : MGW_Weapon
 		loop
 	}
 }
-
 Actor HealthMissile 
 {
-Radius 4
-Speed 12
-Damage -1
-PROJECTILE
-+NOTIMEFREEZE
-+MISSILE
-Scale 0.1
-RenderStyle Translucent
-Alpha 0.75
-States
-{
- Spawn: 
-   HEAL A 20
-   Goto Death
-   Death:
-   HEAL A 1 A_SpawnItemEx("HealthRestoring",0)
-   Stop
- }
+	Radius 4
+	Speed 12
+	Damage -1
+	PROJECTILE
+	+NOTIMEFREEZE
+	+MISSILE
+	Scale 0.1
+	RenderStyle Translucent
+	Alpha 0.75
+	States
+	{
+	Spawn: 
+		HEAL A 20
+		Goto Death
+	Death:
+		HEAL A 1 A_SpawnItemEx("HealthRestoring",0)
+		Stop
+	}
 }
-
 ACTOR HealthRestoring : PowerupGiver
 {
-        Radius 11
-        Height 10
+	Radius 11
+	Height 10
 	Inventory.Amount 1
 	powerup.duration 15
 	Inventory.PickupMessage ""
@@ -139,149 +127,136 @@ ACTOR HealthRestoring : PowerupGiver
 	Powerup.Color Red 0.8
 	+INVENTORY.AUTOACTIVATE
 	+INVENTORY.ALWAYSPICKUP
-       states
-       {
-     Spawn:
-     TNT1 A 4
-     Stop
-    }
+	states
+	{
+	Spawn:
+		TNT1 A 4
+		Stop
+	}
 }
-
-//***********Knife***********\\
-
 Actor H_Knife : MGW_Weapon
 {
-+NOAUTOFIRE
-+WEAPON.MELEEWEAPON
-+NOALERT
-Weapon.UpSound "IMPORTANTITEMS" 
-Weapon.KickBack 170
-states
-{
-     Ready:
-     KNIS G 1 A_WeaponReady
-     Loop
-     Select:
-     KNIS F 0 A_Raise 
-     KNIS F 1 A_Raise
-     Loop
-     Deselect:
-      KNIS F 0 A_lower 
-     KNIS F 1 A_lower
-     Loop
-     Fire:
-     KNIS ABCDE 2 A_CustomPunch (4,0,0)
-     AltFire:
-     KNIS G 1 A_JumpIfCloser(111,"ActualAltFire")
-     Goto Ready
-     ActualAltFire:
-     KNIS ABCDE 1 A_CustomPunch (7,0,0,"FatalityPuff")
-    Goto ready
+	+NOAUTOFIRE
+	+WEAPON.MELEEWEAPON
+	+NOALERT
+	Weapon.UpSound "IMPORTANTITEMS" 
+	Weapon.KickBack 170
+	states
+	{
+	Ready:
+		KNIS G 1 A_WeaponReady
+		Loop
+	Select:
+		KNIS F 0 A_Raise 
+		KNIS F 1 A_Raise
+		Loop
+	Deselect:
+		KNIS F 0 A_lower 
+		KNIS F 1 A_lower
+		Loop
+	Fire:
+		KNIS ABCDE 2 A_CustomPunch (4,0,0)
+	AltFire:
+		KNIS G 1 A_JumpIfCloser(111,"ActualAltFire")
+		Goto Ready
+	ActualAltFire:
+		KNIS ABCDE 1 A_CustomPunch (7,0,0,"FatalityPuff")
+		Goto ready
+	}
 }
-}
-
 actor FatalityPuff : BulletPuff
 {
- DamageType "FatalityPuff"
+	DamageType "FatalityPuff"
 }
-
-//***********Pistol***********\\
-
 Actor H_PhaseGun : MGW_Weapon
 {
-  Weapon.AmmoUse 1
-  Weapon.AmmoGive 20
-  Weapon.AmmoType "Cell"
-  Obituary "%o was vapourised by %k's raygun."
-  Inventory.Pickupmessage "Picked up a raygun!"
-  Weapon.SlotNumber 2
-  Inventory.PickupSound "Raygun/Pickup"
+	Weapon.AmmoUse 1
+	Weapon.AmmoGive 20
+	Weapon.AmmoType "Cell"
+	Obituary "%o was vapourised by %k's raygun."
+	Inventory.Pickupmessage "Picked up a raygun!"
+	Weapon.SlotNumber 2
+	Inventory.PickupSound "Raygun/Pickup"
 	Weapon.UpSound "WeaponSelect"
-  States
-  {
-  Ready:
-    RAYG A 1 A_WeaponReady
-    Loop
-  Deselect:
-    RAYG A 1 A_Lower
-    Loop
-  Select:
-    RAYG A 1 A_Raise
-    Loop
-  Fire:
-    RAYG A 2
-    RAYG B 2 bright A_FireCustomMissile ("RaygunShot")
-    RAYG B 2 bright A_GunFlash
-    RAYG CD 2 bright
-    RAYG EF 2
-    RAYG A 6
-    RAYG A 4 A_ReFire
-    Goto Ready
-  Flash:
-    TNT1 A 2 bright A_Light1
-    TNT1 B 3 bright A_Light2
-    TNT1 A 0 bright A_Light0
-    stop
-  }
+	States
+	{
+	Ready:
+		RAYG A 1 A_WeaponReady
+		Loop
+	Deselect:
+		RAYG A 1 A_Lower
+		Loop
+	Select:
+		RAYG A 1 A_Raise
+		Loop
+	Fire:
+		RAYG A 2
+		RAYG B 2 bright A_FireCustomMissile ("RaygunShot")
+		RAYG B 2 bright A_GunFlash
+		RAYG CD 2 bright
+		RAYG EF 2
+		RAYG A 6
+		RAYG A 4 A_ReFire
+		Goto Ready
+	Flash:
+		TNT1 A 2 bright A_Light1
+		TNT1 B 3 bright A_Light2
+		TNT1 A 0 bright A_Light0
+		stop
+	}
 }
-
-//***********Shotgun***********\\
-
 actor H_Shotgun : MGW_Weapon
 {
-Weapon.KickBack 75
-Weapon.Ammouse 1 
-Weapon.AmmoType "shell"
-Weapon.Ammouse2 1 
-Weapon.AmmoType2 "shell"
-Weapon.UpSound "WeaponSelect"
-Weapon.AmmoGive 24
-states
-{
-Ready:
-SAWD A 1 A_WeaponReady
-Loop
-Deselect: 
- SAWD A 0 A_lower
- SAWD A 1 A_lower
-Loop
- Select: 
-  SAWD A 0 A_raise
- SAWD A 1 A_raise 
-Loop
-Fire: 
- SAWD B 3 A_GunFlash
-  SAWD B 0 A_PlaySound("MedicShotgun/Fire")
- SAWD C 3 A_FireBULLETS(5,2,4,6)
- SAWD DE 2
- SAWD FG 5
- SAWD H 6
- SAWD GF 5
- SAWD A 1
- Goto READY
-AltFire:  
- SAWD B 3 A_GunFlash
-  SAWD B 0 A_PlaySound("MedicShotgun/Fire")
- SAWD C 3 A_FireBULLETS(7,5,4,6) 
-SAWD A 3
- SAWD B 3 A_GunFlash
-  SAWD B 0 A_PlaySound("MedicShotgun/Fire")
- SAWD C 3 A_FireBULLETS(7,5,4,6)
- SAWD A 3
- SAWD B 3 A_GunFlash
-  SAWD B 0 A_PlaySound("MedicShotgun/Fire")
- SAWD C 3 A_FireBULLETS(5,7,4,6)
- SAWD DE 2
- SAWD FG 9
- SAWD H 7
- SAWD GF 9
- SAWD A 1
- Goto READY
+	Weapon.KickBack 75
+	Weapon.Ammouse 1 
+	Weapon.AmmoType "shell"
+	Weapon.Ammouse2 1 
+	Weapon.AmmoType2 "shell"
+	Weapon.UpSound "WeaponSelect"
+	Weapon.AmmoGive 24
+	states
+	{
+	Ready:
+		SAWD A 1 A_WeaponReady
+		Loop
+	Deselect: 
+		SAWD A 0 A_lower
+		SAWD A 1 A_lower
+		Loop
+	Select: 
+		SAWD A 0 A_raise
+		SAWD A 1 A_raise 
+		Loop
+	Fire: 
+		SAWD B 3 A_GunFlash
+		SAWD B 0 A_PlaySound("MedicShotgun/Fire")
+		SAWD C 3 A_FireBULLETS(5,2,4,6)
+		SAWD DE 2
+		SAWD FG 5
+		SAWD H 6
+		SAWD GF 5
+		SAWD A 1
+		Goto READY
+	AltFire:  
+		SAWD B 3 A_GunFlash
+		SAWD B 0 A_PlaySound("MedicShotgun/Fire")
+		SAWD C 3 A_FireBULLETS(7,5,4,6) 
+		SAWD A 3
+		SAWD B 3 A_GunFlash
+		SAWD B 0 A_PlaySound("MedicShotgun/Fire")
+		SAWD C 3 A_FireBULLETS(7,5,4,6)
+		SAWD A 3
+		SAWD B 3 A_GunFlash
+		SAWD B 0 A_PlaySound("MedicShotgun/Fire")
+		SAWD C 3 A_FireBULLETS(5,7,4,6)
+		SAWD DE 2
+		SAWD FG 9
+		SAWD H 7
+		SAWD GF 9
+		SAWD A 1
+		Goto READY
+	}
 }
-}
-
-//***********SSG***********\\
-
 actor H_SSG : MGW_Weapon
 {
 	Weapon.AmmoUse 2
@@ -289,45 +264,41 @@ actor H_SSG : MGW_Weapon
 	Weapon.AmmoType "Shell"
 	Inventory.PickupMessage "$GOTSHOTGUN2"
 	Obituary "$OB_MPSSHOTGUN"
-	Tag "$TAG_SUPERSHOTGUN"
 	Weapon.UpSound "WeaponSelect"
 	States
 	{
-		Ready:
-			SSG3 A 1 A_WeaponReady
-			Loop
-		Select:
-			SSG3 A 1 A_Raise
-			Loop
-		Deselect:
-			SSG3 A 1 A_Lower
-			Loop
-		Fire:
-			SSG3 K 4 Bright A_FireShotgun2
-			SSG3 L 4 A_PlaySound("weapons/sshotf",CHAN_WEAPON)
-			SSG3 A 4 A_CheckReload
-			SSG3 B 4
-			SSG3 C 4 A_PlaySoundEx("weapons/sshoto","Weapon")
-			SSG3 D 16
-			SSG3 EFG 2
-			SSG3 H 4 A_PlaySoundEx("weapons/sshotl","Weapon")
-			SSG3 D 5
-			SSG3 I 4 A_PlaySoundEx("weapons/sshotc","Weapon")
-			SSG3 A 5
-			Goto Ready
-		Flash:
-			TNT1 A 1 A_Light1
-			TNT1 A 1 A_Light2
-			TNT1 A 1 A_Light0
-			Stop
-		Spawn:
-			SGN2 A -1
-			Stop
-		}
+	Ready:
+		SSG3 A 1 A_WeaponReady
+		Loop
+	Select:
+		SSG3 A 1 A_Raise
+		Loop
+	Deselect:
+		SSG3 A 1 A_Lower
+		Loop
+	Fire:
+		SSG3 K 4 Bright A_FireShotgun2
+		SSG3 L 4 A_PlaySound("weapons/sshotf",CHAN_WEAPON)
+		SSG3 A 4 A_CheckReload
+		SSG3 B 4
+		SSG3 C 4 A_PlaySoundEx("weapons/sshoto","Weapon")
+		SSG3 D 16
+		SSG3 EFG 2
+		SSG3 H 4 A_PlaySoundEx("weapons/sshotl","Weapon")
+		SSG3 D 5
+		SSG3 I 4 A_PlaySoundEx("weapons/sshotc","Weapon")
+		SSG3 A 5
+		Goto Ready
+	Flash:
+		TNT1 A 1 A_Light1
+		TNT1 A 1 A_Light2
+		TNT1 A 1 A_Light0
+		Stop
+	Spawn:
+		SGN2 A -1
+		Stop
+	}
 }
-
-//***********UZI***********\\
-
 actor H_UZI : MGW_Weapon
 {
 	Weapon.AmmoUse 1
@@ -365,29 +336,26 @@ actor H_UZI : MGW_Weapon
 		Goto Ready
 	}
 }
-
-//***********Ripper***********\\
-
 actor H_Ripper : MGW_Weapon
 {
-    Weapon.KickBack 500
+	Weapon.KickBack 500
 	Weapon.Ammogive 36
 	Weapon.Ammotype "Clip"
 	Weapon.AmmoUse 1
 	Weapon.UpSound "WeaponSelect"
 	States
 	{
-	deselect:
+	Deselect:
 		SNGU A 1 A_Lower
 		Loop
-	select:
+	Select:
 		SNGU A 1 A_Raise
 		Loop
-	ready:
-	    SNGU A 0 A_TakeInventory("Started",1)
+	Ready:
+		SNGU A 0 A_TakeInventory("Started",1)
 		SNGU A 1 A_WeaponReady
 		Loop
-	fire:
+	Fire:
 		SNGU A 5
 		Goto Hold
 	Hold:
@@ -404,25 +372,21 @@ actor H_Ripper : MGW_Weapon
 		SNGU D 1 
 		SNGU D 0 A_ReFire
 		Goto Ready
-                 AltFire:
+	AltFire:
 		SNGU B 0 A_PlaySound("ZZZ")
 		SNGU B 4 A_FireBullets(3,1,1,10,"RipperPuff")
 		SNGU C 4 A_FireBullets(3,1,1,10,"RipperPuff")
-                              SNGU B 4 A_FireBullets(3,1,1,10,"RipperPuff")
+		SNGU B 4 A_FireBullets(3,1,1,10,"RipperPuff")
 		SNGU C 2 A_PlayWeaponSound("RIPPERCANNONDOWN")
 		SNGU D 1 
 		SNGU D 0 A_ReFire
 		Goto Ready
 	}
 }
-
 actor Started : inventory
 {
-Inventory.MaxAmount 1
+	Inventory.MaxAmount 1
 }
-
-//***********Flaregun***********\\
-
 ACTOR H_FlareGun : MGW_Weapon
 {
 	Weapon.KickBack 250
@@ -448,10 +412,10 @@ ACTOR H_FlareGun : MGW_Weapon
 		FLRG DCB 1 A_Raise
 		Goto Select+1
 	Fire:
-	    FLRF A 0 A_PlaySound("FlareGunner")
+		FLRF A 0 A_PlaySound("FlareGunner")
 		FLRF A 2
 		FLRF B 3 A_FireCustomMissile("FlareMissile",0,1,0,0)
-	    FLRG B 1 OffSet(0,12)
+		FLRG B 1 OffSet(0,12)
 		FLRG C 1 OffSet(0,14)
 		FLRG D 1 OffSet(0,16)
 		FLRG D 1 OffSet(0,18)
@@ -477,143 +441,133 @@ ACTOR H_FlareGun : MGW_Weapon
 		Goto Select+1
 	}
 }
-
 actor FlareMissile
 {
-Radius 4
-Height 4
-Speed 65
-Scale 1.25
-Damage 14
-ExplosionDamage 67
-ExplosionRadius 56
-SeeSound "Flare/Shot"
-DeathSound "Imp/ShotX"
-PROJECTILE
--NOGRAVITY
-+BLOODSPLATTER
-+MISSILE
-Gravity 0.4
-states
-{
-Spawn:
-    MISL A 2 A_CustomMissile("FlareTrail",0,0,0,0)
-    Loop
-Death:
-	MISL AAAAAAAA 0 A_CustomMissile("FlareSmoke",3,0,random(0,360),2,random(0,360))
-	TNT1 A 1 A_Explode
-	Stop
+	Radius 4
+	Height 4
+	Speed 65
+	Scale 1.25
+	Damage 14
+	ExplosionDamage 67
+	ExplosionRadius 56
+	SeeSound "Flare/Shot"
+	DeathSound "Imp/ShotX"
+	PROJECTILE
+	-NOGRAVITY
+	+BLOODSPLATTER
+	+MISSILE
+	Gravity 0.4
+	states
+	{
+	Spawn:
+		MISL A 2 A_CustomMissile("FlareTrail",0,0,0,0)
+		Loop
+	Death:
+		MISL AAAAAAAA 0 A_CustomMissile("FlareSmoke",3,0,random(0,360),2,random(0,360))
+		TNT1 A 1 A_Explode
+		Stop
+	}
 }
-}
-
-
 ACTOR RipperPuff
 {
-   RenderStyle Add
-  Alpha 0.99
-  Scale 0.4
-  Vspeed -0.1
-  PROJECTILE
-  States
-  {
-  Spawn:
-    FX57 ABCDEFGHIJ 2 bright
-    Stop
-    }
+	RenderStyle Add
+	Alpha 0.99
+	Scale 0.4
+	Vspeed -0.1
+	PROJECTILE
+	States
+	{
+	Spawn:
+		FX57 ABCDEFGHIJ 2 bright
+		Stop
+	}
 }
-
 ACTOR FlareTrail
 {
-   RenderStyle Translucent
-  Alpha 0.46
-  Speed 0.11
-  Scale 0.56
-  PROJECTILE
-  States
-  {
-  Spawn:
-    RPUF ABCD 4
-    Stop
-    }
+	RenderStyle Translucent
+	Alpha 0.46
+	Speed 0.11
+	Scale 0.56
+	PROJECTILE
+	States
+	{
+	Spawn:
+		RPUF ABCD 4
+		Stop
+	}
 }
-
 ACTOR FlareSmoke
 {
-   RenderStyle Translucent
-   Radius 3
-Height 3
-  Alpha 0.9
-  Speed 1.94
-  Scale 2
-  +NOTDMATCH
-  +NOINTERACTION
-   +CLIENTSIDEONLY
-  States
-  {
-  Spawn:
-    RPUF ABCD 5
-    Stop
-    }
+	RenderStyle Translucent
+	Radius 3
+	Height 3
+	Alpha 0.9
+	Speed 1.94
+	Scale 2
+	+NOTDMATCH
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		RPUF ABCD 5
+		Stop
+	}
 }
-
-//***********Grenades***********\\
-
 ACTOR H_Grenades : MGW_Weapon 25099
 {
-   Inventory.PickupMessage "You got a hand grenade!"
-   Weapon.AmmoType "RocketAmmo"
-   Weapon.AmmoGive 1
-   Weapon.AmmoUse 1
-   +NOALERT
-   States
-   {
-   Spawn:
-      PGRN D -1
-      Loop
-   Ready: 
-      HNDG A 1 A_WeaponReady
-      Loop
-   Deselect:
-      HNDG A 1 A_Lower 
-      Loop
-   Select:
-      HNDG A 1 A_Raise
-      Loop
-   Fire:
-      HNDG BCD 1
-      HNDG E 1 A_PlaySound("weapons/grnpullpin")
-      HNDG FGHH 1
-      HNDG J 0 A_FireCustomMissile("ThrownGrenade",0,1,0,0)
-      HNDG J 0 A_PlaySound("weapons/grntoss")
-      HNDG JKLMNOPQ 1
-      TNT1 A 12 A_CheckReload
-      HNDG XWVUTS 1
-      Goto Ready
-   
-   }
+	Inventory.PickupMessage "You got a hand grenade!"
+	Weapon.AmmoType "RocketAmmo"
+	Weapon.AmmoGive 1
+	Weapon.AmmoUse 1
+	+NOALERT
+	States
+	{
+	Spawn:
+		PGRN D -1
+		Loop
+	Ready: 
+		HNDG A 1 A_WeaponReady
+		Loop
+	Deselect:
+		HNDG A 1 A_Lower 
+		Loop
+	Select:
+		HNDG A 1 A_Raise
+		Loop
+	Fire:
+		HNDG BCD 1
+		HNDG E 1 A_PlaySound("weapons/grnpullpin")
+		HNDG FGHH 1
+		HNDG J 0 A_FireCustomMissile("ThrownGrenade",0,1,0,0)
+		HNDG J 0 A_PlaySound("weapons/grntoss")
+		HNDG JKLMNOPQ 1
+		TNT1 A 12 A_CheckReload
+		HNDG XWVUTS 1
+		Goto Ready
+	}
 }
-
 ACTOR ThrownGrenade
 {
-   Radius 5
-   Height 5
-   Speed 30
-   Damage 10
-   Scale 0.3
-   PROJECTILE
-   -NOGRAVITY
-   +HEXENBOUNCE
-   +LOWGRAVITY
-   SeeSound "weapons/grnbounce"
-  Deathsound "Weapons/RockLX"
-   States
-   {
-   Spawn:
-      HGRN A 0
-      HGRN A 4 A_AlertMonsters
-      HGRN BCDEFABCDEFABCDEF 4
-      Goto Death
-   Death:
+	Radius 5
+	Height 5
+	Speed 30
+	Damage 10
+	Scale 0.3
+	PROJECTILE
+	-NOGRAVITY
+	+HEXENBOUNCE
+	+LOWGRAVITY
+	SeeSound "weapons/grnbounce"
+	Deathsound "Weapons/RockLX"
+	States
+	{
+	Spawn:
+		HGRN A 0
+		HGRN A 4 A_AlertMonsters
+		HGRN BCDEFABCDEFABCDEF 4
+		Goto Death
+	Death:
 		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
 		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
 		PR1E A 0 Bright A_CustomMissile("RocketExplosion",3,0,random(0,360),2,random(0,360))
@@ -622,406 +576,380 @@ ACTOR ThrownGrenade
 		MISL C 0 Bright A_Explode(12,15)
 		MISL CDEFG 4 Bright
 		Stop
-   }
+	}
 }
-
-//***********Shockgun***********\\
-
 Actor H_ShockGun : MGW_Weapon
 {
-  Radius 20
-  Height 20
-  Weapon.SelectionOrder 2800
-  Weapon.KickBack 1
-  Weapon.AmmoType "Cell"
-  Weapon.AmmoGive 150
-  Weapon.AmmoUse 1
-  Decal ShockGunScorch
-  Inventory.PickupMessage "You got the shockGun."
-Weapon.UpSound "WeaponSelect"
- States
-  {
-  Ready:
- DTRY A 5 A_WeaponReady
-    Loop
-  Deselect:
-    DTRY A 1 A_Lower
-    Loop
-  Select:
-    DTRY A 1 A_Raise
-    Loop
-  Fire:
- DTRY B 2 A_PlayWeaponSound("ShockGun/Fire")
- DTRY C 0 A_RailAttack(0,0,0, none, "blue", 3,7)
- DTRY C 1 A_FireBullets(2,2,1,6,"ShockPuff")
-    DTRY A 0 A_ReFire
-    Goto Ready
-  }
+	Radius 20
+	Height 20
+	Weapon.KickBack 1
+	Weapon.AmmoType "Cell"
+	Weapon.AmmoGive 150
+	Weapon.AmmoUse 1
+	Decal ShockGunScorch
+	Inventory.PickupMessage "You got the shockGun."
+	Weapon.UpSound "WeaponSelect"
+	States
+	{
+	Ready:
+		DTRY A 5 A_WeaponReady
+		Loop
+	Deselect:
+		DTRY A 1 A_Lower
+		Loop
+	Select:
+		DTRY A 1 A_Raise
+		Loop
+	Fire:
+		DTRY B 2 A_PlayWeaponSound("ShockGun/Fire")
+		DTRY C 0 A_RailAttack(0,0,0, none, "blue", 3,7)
+		DTRY C 1 A_FireBullets(2,2,1,6,"ShockPuff")
+		DTRY A 0 A_ReFire
+		Goto Ready
+	}
 }
-
 Actor ShockPuff
 {
-  Obituary "%o was electrocutted by %k's shockGun."
-  Radius 13
-  Height 8
-  DamageType "ElectricBomb"
-  Renderstyle Add
-  Alpha 0.91
-  +NOGRAVITY
-  +NOBLOCKMAP
-  +RANDOMIZE
-  +PUFFONACTORS
-  States
-  {
-  Spawn:
-    DTFX ABCDE 3 bright
-    DTFX FEDC 3 bright A_CustomMissile("ShockPuffSpark",3,0,random(0,360),2,random(0,360))
- DTFX BA 2 bright
-    Stop
+	Obituary "%o was electrocutted by %k's shockGun."
+	Radius 13
+	Height 8
+	DamageType "ElectricBomb"
+	Renderstyle Add
+	Alpha 0.91
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+RANDOMIZE
+	+PUFFONACTORS
+	States
+	{
+	Spawn:
+		DTFX ABCDE 3 bright
+		DTFX FEDC 3 bright A_CustomMissile("ShockPuffSpark",3,0,random(0,360),2,random(0,360))
+		DTFX BA 2 bright
+		Stop
+	}
 }
-}
-
 Actor ShockPuffSpark
 {
-  Radius 3
-  Height 3
-  Speed 2.5
-  RenderStyle Add
-  Alpha 0.86
-  Scale 0.25
-  +NOTDMATCH
-  +NOINTERACTION
-  +CLIENTSIDEONLY
-  States
-  {
-  Spawn:
-    DTFX ABCDEFEDCBA 4 bright A_FadeOut(0.15)
- Loop
+	Radius 3
+	Height 3
+	Speed 2.5
+	RenderStyle Add
+	Alpha 0.86
+	Scale 0.25
+	+NOTDMATCH
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		DTFX ABCDEFEDCBA 4 bright A_FadeOut(0.15)
+		Loop
+	}
 }
-}
-
-//***********Shockgun***********\\
-
 Actor H_Protogun : MGW_Weapon
 {
-   Inventory.PickupMessage "You got the Ionspray"
-   Obituary "%o was ionized by %k"
-   Inventory.PickupSound "misc/w_pkup"
-Weapon.UpSound "WeaponSelect"
-   Weapon.Kickback 1
-   Weapon.AmmoType "Cell"
-   Weapon.AmmoGive 40
-   Weapon.AmmoUse 1
-   States
-   {
-   Ready:
-      ISPG A 0 A_StopSoundEx("SoundSlot7")
-      ISPG A 1 A_WeaponReady
-      Loop
-   Deselect:
-      ISPG A 0 A_StopSoundEx("SoundSlot7")
-      ISPG A 1 A_Lower
-      Loop
-   Select: 
-      ISPG A 1 A_Raise
-      Loop
-   Fire:
-      ISPG B 0 A_GunFlash
-      ISPG B 0 A_PlaySoundEx("Weapons/IonFire", "SoundSlot7", 1)
-      ISPG B 0 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
-      ISPG B 1 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
-      ISPG B 0 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
-      ISPG B 1 A_FireCustomMissile("IonBall", Random(-2, 2), 1, Random(-6, 6), Random(-4, 4))
-   Hold:
-      ISPG B 0 A_GunFlash
-      ISPG C 0 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
-      ISPG C 1 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
-      ISPG C 0 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
-      ISPG C 1 A_FireCustomMissile("IonBall", Random(-2, 2), 1, Random(-6, 6), Random(-4, 4))
-      ISPG C 0 A_ReFire
-      ISPG C 4 A_StopSoundEx("SoundSlot7")
-      ISPG B 3 A_PlaySoundEx("Weapons/IonCool", "SoundSlot7", 0)
-      ISPG A 20
-      Goto Ready
-   Flash:
-      TNT1 A 2 bright A_Light1
-      TNT1 A 2 bright A_Light0
-      Stop
-   }
+	Inventory.PickupMessage "You got the Ionspray"
+	Obituary "%o was ionized by %k"
+	Inventory.PickupSound "misc/w_pkup"
+	Weapon.UpSound "WeaponSelect"
+	Weapon.Kickback 1
+	Weapon.AmmoType "Cell"
+	Weapon.AmmoGive 40
+	Weapon.AmmoUse 1
+	States
+	{
+	Ready:
+		ISPG A 0 A_StopSoundEx("SoundSlot7")
+		ISPG A 1 A_WeaponReady
+		Loop
+	Deselect:
+		ISPG A 0 A_StopSoundEx("SoundSlot7")
+		ISPG A 1 A_Lower
+		Loop
+	Select: 
+		ISPG A 1 A_Raise
+		Loop
+	Fire:
+		ISPG B 0 A_GunFlash
+		ISPG B 0 A_PlaySoundEx("Weapons/IonFire", "SoundSlot7", 1)
+		ISPG B 0 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
+		ISPG B 1 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
+		ISPG B 0 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
+		ISPG B 1 A_FireCustomMissile("IonBall", Random(-2, 2), 1, Random(-6, 6), Random(-4, 4))
+	Hold:
+		ISPG B 0 A_GunFlash
+		ISPG C 0 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
+		ISPG C 1 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
+		ISPG C 0 A_FireCustomMissile("IonBall", Random(-2, 2), 0, Random(-6, 6), Random(-4, 4))
+		ISPG C 1 A_FireCustomMissile("IonBall", Random(-2, 2), 1, Random(-6, 6), Random(-4, 4))
+		ISPG C 0 A_ReFire
+		ISPG C 4 A_StopSoundEx("SoundSlot7")
+		ISPG B 3 A_PlaySoundEx("Weapons/IonCool", "SoundSlot7", 0)
+		ISPG A 20
+		Goto Ready
+	Flash:
+		TNT1 A 2 bright A_Light1
+		TNT1 A 2 bright A_Light0
+		Stop
+	}
 }
-
 Actor IonBall
 {
-  Radius 13
-  Height 8
-  Speed 26
-  Damage (Random(3, 6))
-  Projectile
-  RenderStyle Add
-  Alpha 0.45
-  Scale 1
-  Decal RailScorchLower
-  States
-  {
-  Spawn:
-    IONB A 1 Bright
-    Loop
-  Death:
-    IONB BCDEFGHIJKL 2 Bright
-    stop
-  }
+	Radius 13
+	Height 8
+	Speed 26
+	Damage (Random(3, 6))
+	Projectile
+	RenderStyle Add
+	Alpha 0.45
+	Scale 1
+	Decal RailScorchLower
+	States
+	{
+	Spawn:
+		IONB A 1 Bright
+		Loop
+	Death:
+		IONB BCDEFGHIJKL 2 Bright
+		stop
+	}
 }
-
-//***********Healing Cannon***********\\
-
 Actor H_HealingCannon : MGW_Weapon
 {
-  Radius 20
-  Height 20
-  Weapon.SelectionOrder 2800
-  Weapon.KickBack 3
-  Weapon.AmmoType1 "CELL"
-  Weapon.AmmoGive 150
-  Weapon.AmmoUse1 5
-  Weapon.AmmoType2 "CELL"
-  weapon.Ammouse2 10
-  Inventory.PickupMessage "You got the Arch cannon from da HELL."
-Weapon.UpSound "WeaponSelect"
- States
-  {
-  Ready:
- CHLY A 5 A_WeaponReady
-    Loop
-  Deselect:
-    CHLY A 1 A_Lower
-    Loop
-  Select:
-    CHLY A 1 A_Raise
-    Loop
-	    Fire:
-  CHLY B 2 bright
-  CHLY C 2 bright
-  CHLY D 2 bright
-  CHLY E 3 bright
- CHLY C 0 A_GiveInventory("Flash",1)
- CHLY C 0 DamageThing(99)
- CHLY F 5 bright A_FireCustomMissile("WakeMissile",0,1,0,0)
-    CHLY A 12 
-    Goto Ready
-  AltFire:
-   CHLY B 2 bright
-  CHLY C 2 bright
-  CHLY D 2 bright
-  CHLY E 4 bright
- CHLY C 0 A_GiveInventory("Flash",1)
- CHLY C 0 DamageThing(99)
- CHLY F 8 A_FireBullets(52,52,65,255,"Hellishpuff",1)
-    CHLY A 12 
-    Goto Ready
-  }
+	Radius 20
+	Height 20
+	Weapon.KickBack 3
+	Weapon.AmmoType1 "CELL"
+	Weapon.AmmoGive 150
+	Weapon.AmmoUse1 5
+	Weapon.AmmoType2 "CELL"
+	weapon.Ammouse2 10
+	Inventory.PickupMessage "You got the Arch cannon from da HELL."
+	Weapon.UpSound "WeaponSelect"
+	States
+	{
+	Ready:
+		CHLY A 5 A_WeaponReady
+		Loop
+	Deselect:
+		CHLY A 1 A_Lower
+		Loop
+	Select:
+		CHLY A 1 A_Raise
+		Loop
+	Fire:
+		CHLY B 2 bright
+		CHLY C 2 bright
+		CHLY D 2 bright
+		CHLY E 3 bright
+		CHLY C 0 A_GiveInventory("Flash",1)
+		CHLY C 0 DamageThing(99)
+		CHLY F 5 bright A_FireCustomMissile("WakeMissile",0,1,0,0)
+		CHLY A 12 
+		Goto Ready
+	AltFire:
+		CHLY B 2 bright
+		CHLY C 2 bright
+		CHLY D 2 bright
+		CHLY E 4 bright
+		CHLY C 0 A_GiveInventory("Flash",1)
+		CHLY C 0 DamageThing(99)
+		CHLY F 8 A_FireBullets(52,52,65,255,"Hellishpuff",1)
+		CHLY A 12 
+		Goto Ready
+	}
 }
-
 actor hellishpuff : bulletpuff
 {
-Vspeed 0
-DamageType "HellishStrike"
-states
-{
-Spawn:
- TNT1 A 1 
-  stop
+	Vspeed 0
+	DamageType "HellishStrike"
+	states
+	{
+	Spawn:
+		TNT1 A 1 
+		stop
+	}
 }
-}
-
 actor WakeMissile 
 {
-Scale 0.25
-Radius 4
-Height 4
-speed 7
-PROJECTILE
-+FRIENDLY
-+NOGRAVITY
-+NOCLIP
-states
-{
-Spawn:
-   HEAL A 2 A_VileChase
-  Loop
- Death:
-   TNT1 A 1
-   STop
- Heal:
-   TNT1 A 1
-   Stop
+	Scale 0.25
+	Radius 4
+	Height 4
+	speed 7
+	PROJECTILE
+	+FRIENDLY
+	+NOGRAVITY
+	+NOCLIP
+	states
+	{
+	Spawn:
+		HEAL A 2 A_VileChase
+		Loop
+	Death:
+		TNT1 A 1
+		STop
+	Heal:
+		TNT1 A 1
+		Stop
+	}
 }
-}
-
 actor Flash : powerupgiver
 {
-Inventory.MaxAmount 1 
-Powerup.duration 14
-Powerup.color "0f 0f 0f", 0.2
-Powerup.type "ironfeet"
-+INVENTORY.AUTOACTIVATE
-+INVENTORY.ALWAYSPICKUP
+	Inventory.MaxAmount 1 
+	Powerup.duration 14
+	Powerup.color "0f 0f 0f", 0.2
+	Powerup.type "ironfeet"
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
 }
-
-//***********ArchvileSpawner***********\\
-
 Actor H_ArchvileSpawner : MGW_Weapon
 {
-Weapon.UpSound "GNTPOW"
-+WEAPON.NOAUTOFIRE
-+INVENTORY.UNDROPPABLE
-states
-{
-   Ready:
-   ICHN ABCD 9 bright A_weaponReady
-   Loop
-   Select:
-   ICHN A 0 A_Raise
-   ICHN A 1 A_Raise
-   Loop
-   Deselect:
-   ICHN A 0 A_Lower
-  ICHN A 1 A_Lower
- Loop
-   Fire:
-  ICHN E 3 bright
-  ICHN F 3 bright DamageThing(16)
-  ICHN G 3 bright A_FireCustomMissile("SpawnerModule",random(-1,1),0,0,0)
-  ICHN H 3 bright
-  ICHN I 2 
-  ICHN I 1 OffSet(0,6)
-  ICHN I 1 OffSet(0,12)
-  ICHN I 1 OffSet(0,14)
-  ICHN I 1 OffSet(0,17)
-  ICHN I 1 OffSet(0,19)
-  Goto Select
-   Altfire:  
-     ICHN E 4 bright
-  ICHN F 4 bright DamageThing(32)
-  ICHN G 4 bright A_FireCustomMissile("TurningMissile",random(-1,1),0,0,0)
-  ICHN H 4 bright
-  ICHN I 3 
-  ICHN I 1 OffSet(0,6)
-  ICHN I 1 OffSet(0,12)
-  ICHN I 1 OffSet(0,14)
-  ICHN I 1 OffSet(0,17)
-  ICHN I 1 OffSet(0,19)
-  TNT1 A 20 
-  Goto Select
+	Weapon.UpSound "GNTPOW"
+	+WEAPON.NOAUTOFIRE
+	+INVENTORY.UNDROPPABLE
+	states
+	{
+	Ready:
+		ICHN ABCD 9 bright A_weaponReady
+		Loop
+	Select:
+		ICHN A 0 A_Raise
+		ICHN A 1 A_Raise
+		Loop
+	Deselect:
+		ICHN A 0 A_Lower
+		ICHN A 1 A_Lower
+		Loop
+	Fire:
+		ICHN E 3 bright
+		ICHN F 3 bright DamageThing(16)
+		ICHN G 3 bright A_FireCustomMissile("SpawnerModule",random(-1,1),0,0,0)
+		ICHN H 3 bright
+		ICHN I 2 
+		ICHN I 1 OffSet(0,6)
+		ICHN I 1 OffSet(0,12)
+		ICHN I 1 OffSet(0,14)
+		ICHN I 1 OffSet(0,17)
+		ICHN I 1 OffSet(0,19)
+		Goto Select
+	Altfire:  
+		ICHN E 4 bright
+		ICHN F 4 bright DamageThing(32)
+		ICHN G 4 bright A_FireCustomMissile("TurningMissile",random(-1,1),0,0,0)
+		ICHN H 4 bright
+		ICHN I 3 
+		ICHN I 1 OffSet(0,6)
+		ICHN I 1 OffSet(0,12)
+		ICHN I 1 OffSet(0,14)
+		ICHN I 1 OffSet(0,17)
+		ICHN I 1 OffSet(0,19)
+		TNT1 A 20 
+		Goto Select
+	}
 }
-}
-
 actor TurningMissile 
 {
-PROJECTILE
-DamageType "Morpher"
-Speed 25
-seesound "SORATK"
-Damage 1
-states
-{
-    Spawn:
-     CPFX ABCD 3 bright
-     Loop
-     Death:
-    CPFX EFGHIJKLMNO 2 bright
-     Stop
- }
+	PROJECTILE
+	DamageType "Morpher"
+	Speed 25
+	seesound "SORATK"
+	Damage 1
+	states
+	{
+	Spawn:
+		CPFX ABCD 3 bright
+		Loop
+	Death:
+		CPFX EFGHIJKLMNO 2 bright
+		Stop
+	}
 }
-
 Actor ArchVile1 : archvile replaces archvile
 {
-PainChance 255
-states
-{
-   Pain.Morpher:
-	ARE2 A 1 A_ChangeFlag("NOPAIN",1)
-    TNT1 A 60 
-   ARE2 A 1 A_SpawnItemEx("LittleTornadoDemon",0)
-   Stop
-   Death.Morpher:
-   Goto Pain.Morpher
+	PainChance 255
+	states
+	{
+		Pain.Morpher:
+		ARE2 A 1 A_ChangeFlag("NOPAIN",1)
+		TNT1 A 60 
+		ARE2 A 1 A_SpawnItemEx("LittleTornadoDemon",0)
+		Stop
+		Death.Morpher:
+		Goto Pain.Morpher
+	}
 }
-}
-
-
 actor ArchVileturnedintoLittletornadoDemon 
 {
-+NOGRAVITY
--SOLID
-RenderStyle Translucent
-states
-  {
-Spawn:
-  ARE2 ABCDEABCDEABCDEABCDE 3 A_FadeIn(0.2)
-  Stop
+	+NOGRAVITY
+	-SOLID
+	RenderStyle Translucent
+	states
+	{
+	Spawn:
+		ARE2 ABCDEABCDEABCDEABCDE 3 A_FadeIn(0.2)
+		Stop
+	}
 }
-}
-
 Actor LittleTornadoDemon 14099
 {
-Speed 20
-FastSpeed 40
-Height 56
-Radius 16
-Health 1000
-Scale 0.25
-+SHOOTABLE // IS IT EVEN SHOOTABLE?
--NONSHOOTABLE // Два противоречия ))))
-+FRIENDLY
-+FLOORCLIP
-+LOOKALLAROUND
-+NOPAIN
-RenderStyle Translucent
-Alpha 0.666
-BloodColor "White"
-PainChance 0
-MeleeDamage 6
-Health 100
-States
-{
-Spawn:
-	 ARE2 ABCDE 3 A_Look
-                 Loop
-  See:
-	ARE2 ABCDE 0 A_FastChase
-	ARE2 ABCDE 0 A_FastChase
-               ARE2 ABCDE 3 A_FastChase
- 	Loop
-             Melee:
-               ARE2 A 2 A_MeleeAttack
-               ARE2 B 2 A_MeleeAttack
-               ARE2 C 2 A_MeleeAttack    
-               ARE2 D 2 A_MeleeAttack
-               ARE2 E 2 A_MeleeAttack
- 	Goto See
-XDeath:
-Death:
-	ARE2 ABCDEABCDE 3 A_FadeOut(0.1)
-	Stop
+	Speed 20
+	FastSpeed 40
+	Height 56
+	Radius 16
+	Health 1000
+	Scale 0.25
+	+SHOOTABLE
+	-NONSHOOTABLE
+	+FRIENDLY
+	+FLOORCLIP
+	+LOOKALLAROUND
+	+NOPAIN
+	RenderStyle Translucent
+	Alpha 0.666
+	BloodColor "White"
+	PainChance 0
+	MeleeDamage 6
+	Health 100
+	States
+	{
+	Spawn:
+		ARE2 ABCDE 3 A_Look
+		Loop
+	See:
+		ARE2 ABCDE 0 A_FastChase
+		ARE2 ABCDE 0 A_FastChase
+		ARE2 ABCDE 3 A_FastChase
+		Loop
+	Melee:
+		ARE2 A 2 A_MeleeAttack
+		ARE2 B 2 A_MeleeAttack
+		ARE2 C 2 A_MeleeAttack    
+		ARE2 D 2 A_MeleeAttack
+		ARE2 E 2 A_MeleeAttack
+		Goto See
+	XDeath:
+	Death:
+		ARE2 ABCDEABCDE 3 A_FadeOut(0.1)
+		Stop
+	}
 }
-}
-
 actor SpawnerModule 
 {
-PROJECTILE
--NOGRAVITY
-Gravity 0.36
-Speed 17
-Scale 0.75
-seesound "SORATK"
-states
-{
-    Spawn:
-     CPFX ABCD 3 bright
-      Loop
-     Death:
-   CPFX E 0 A_SpawnItemEx("LittleTornadoDemon",0)
-    CPFX EFGHIJKLMNO 2 bright
-     Stop
- }
+	PROJECTILE
+	-NOGRAVITY
+	Gravity 0.36
+	Speed 17
+	Scale 0.75
+	seesound "SORATK"
+	states
+	{
+	Spawn:
+		CPFX ABCD 3 bright
+		Loop
+	Death:
+		CPFX E 0 A_SpawnItemEx("LittleTornadoDemon",0)
+		CPFX EFGHIJKLMNO 2 bright
+		Stop
+	}
 }

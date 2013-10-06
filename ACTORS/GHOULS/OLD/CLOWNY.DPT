@@ -1,6 +1,6 @@
 Actor Clowny
 {
-	health 4000
+	health 900
 	radius 31
 	height 120
 	Speed 18
@@ -107,7 +107,6 @@ Actor Clowny
 		stop
 	}
 }
-
 Actor ArenaClowny : Clowny
 {
 	Obituary "%o thought he saw Clowny"

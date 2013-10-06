@@ -1,6 +1,6 @@
 ACTOR Sjasface
 {
-	health 4000
+	health 750
 	floatspeed 15
 	Speed 17
 	MONSTER
@@ -104,7 +104,6 @@ ACTOR Sjasface
 		Stop
 	}
 }
-
 ACTOR Sjasvanish
 {
 	-SOLID
@@ -121,7 +120,6 @@ ACTOR Sjasvanish
 		stop
 	}
 }
-
 ACTOR SjasVapor
 {
 	Speed 0
@@ -164,7 +162,6 @@ ACTOR SjasVapor
 		stop
 	}
 }
-
 ACTOR SjasVapor1
 {
 	Speed 6
@@ -187,53 +184,43 @@ ACTOR SjasVapor1
 		Stop
 	} 
 }
-
 ACTOR SjasVapor2 : SjasVapor1
 {
 	translation "80:111=[255,224,224]:[0,0,0]"
 }
-
 ACTOR SjasVapor3 : SjasVapor1
 {
 	translation "80:111=[255,192,192]:[0,0,0]"
 }
-
 ACTOR SjasVapor4 : SjasVapor1
 {
 	translation "80:111=[255,160,160]:[0,0,0]"
 }
-
 ACTOR SjasVapor5 : SjasVapor1
 {
 	translation "80:111=[255,128,128]:[0,0,0]"
 }
-
 ACTOR SjasVapor6 : SjasVapor1
 {
 	translation "80:111=[224,96,96]:[0,0,0]"
 }
-
 ACTOR SjasVapor7 : SjasVapor1
 {
 	translation "80:111=[192,64,64]:[0,0,0]"
 }
-
 ACTOR SjasVapor8 : SjasVapor1
 {
 	translation "80:111=[160,32,32]:[0,0,0]"
 }
-
 ACTOR SjasVapor9 : SjasVapor1
 {
 	translation "80:111=[128,0,0]:[0,0,0]"
 }
-
 Actor ArenaSjas : SjasFace
 {
 	health 850
 	Obituary "%o was spooked by Sjas"
 }
-
 Actor ClipSjas : SjasFace
 {
 	+SOLID

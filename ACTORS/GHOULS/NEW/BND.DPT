@@ -3,7 +3,7 @@ ACTOR BND
 	floatspeed 30
 	Speed 8
 	MONSTER
-	Health 4000
+	Health 400
 	Radius 20
 	Height 32
 	Mass 9999999999999999
@@ -42,7 +42,6 @@ ACTOR BND
 		Stop
 	}
 }
-
 Actor ArenaBND : BND
 {
 	Obituary "%o found the Ostankino, lol."

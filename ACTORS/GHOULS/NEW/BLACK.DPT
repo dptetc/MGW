@@ -1,6 +1,6 @@
 ACTOR Black
 {
-	Health 4000
+	Health 450
 	floatspeed 30
 	Speed 8
 	MONSTER
@@ -55,7 +55,6 @@ ACTOR Black
 		Stop
 	}
 }
-
 Actor ArenaBlack : Black
 {
 	Obituary "%o darkned by Black."

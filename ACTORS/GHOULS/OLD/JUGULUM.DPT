@@ -1,6 +1,6 @@
 actor Jugulum
 {
-	health 4000
+	health 580
 	obituary "%o found the Ghoul"
 	hitobituary "%o found the Ghoul"
 	Radius 16
@@ -65,12 +65,10 @@ actor Jugulum
 		Stop
 	}
 }
-
 actor CorpseBloodDrip2 : CorpseBloodDrip
 {
 	+DONTSPLASH
 }
-
 actor JuggyBall
 {
 	Radius 12
@@ -109,7 +107,6 @@ actor JuggyBall
 		Stop
 	}
 }
-
 actor ArenaJugulum : Jugulum
 {
 	obituary "%o was burned alive by the Jugulum."

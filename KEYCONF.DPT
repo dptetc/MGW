@@ -15,11 +15,7 @@ setslot 6 D_PlasmaRifle E_RailGun H_Shockgun D_ZeroGun E_PhaseGun H_Protogun
 setslot 7 D_BFG9000 E_ElectricLauncher H_HealingCannon D_BFG10K E_NuclearBombLauncher H_ArchvileSpawner
 setslot 8 Lighter FlashLight
 
-alias Zoom "fov 10; m_pitch .125;m_yaw .2; set autoaim 0; crosshairgrow 10; echo Zoom in; rebind Zoom_out;"
-alias Zoom_out "fov 90; m_pitch 1;m_yaw 1; set autoaim 5000; crosshairgrow 1; echo Zoom out; rebind Zoom;"
-
 defaultbind f "use Flashlight"
 
 addkeysection "Mysterious Ghoul World" MGW_Weapons
 addmenukey "Flashlight" "use Flashlight"
-addmenukey "Zoom" "Zoom"
